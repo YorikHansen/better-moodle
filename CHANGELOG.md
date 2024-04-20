@@ -8,7 +8,7 @@
 
 ### Bug Fixes
 
-* **semesterzeiten:** fix multi language support ([2995c6c](https://github.com/YorikHansen/better-moodle/commit/2995c6c9af34cfba94435e51456863c52e2937a2))
+* **semesterzeiten:** fix multi language support ([2995c6c](https://github.com/YorikHansen/better-moodle/commit/2995c6c9af34cfba94435e51456863c52e2937a2), [eb8d9ac](https://github.com/YorikHansen/better-moodle/commit/eb8d9ace15a5f7c378ade83326c555a728a21ed4))
 * **semesterzeiten:** fix tooltips looking ugly ([9c09f94](https://github.com/YorikHansen/better-moodle/commit/9c09f944107339c08518ca771a6fd64b772d6c55))
 
 
