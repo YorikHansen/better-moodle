@@ -4,7 +4,7 @@
 
 ### Features
 
-* **semesterzeiten:** allow to click through all available semesters [#112](https://github.com/YorikHansen/better-moodle/issues/112) ([d233bff](https://github.com/YorikHansen/better-moodle/commit/d233bfff2a1d2e3e91843346e261c509dc4961f3))
+* **semesterzeiten:** allow to click through all available semesters [#112](https://github.com/jxn-30/better-moodle/issues/112) ([d233bff](https://github.com/YorikHansen/better-moodle/commit/d233bfff2a1d2e3e91843346e261c509dc4961f3))
 
 ### Bug Fixes
 
@@ -17,7 +17,7 @@
 
 ### Bug Fixes
 
-* **settings:** Add transparency to disabled slider settings ([#144](https://github.com/YorikHansen/better-moodle/issues/144)) ([c4568ab](https://github.com/YorikHansen/better-moodle/commit/c4568ab97b62418d30727c9002048a2eb7c71f9d))
+* **settings:** Add transparency to disabled slider settings ([#144](https://github.com/jxn-30/better-moodle/issues/144)) ([c4568ab](https://github.com/YorikHansen/better-moodle/commit/c4568ab97b62418d30727c9002048a2eb7c71f9d))
 * **settings:** fix initial disabled state of settings being wrong when dependent of select ([70d4eb6](https://github.com/YorikHansen/better-moodle/commit/70d4eb62f5f9b954e58837dc0323a984e396e100))
 
 ## [1.27.2](https://github.com/YorikHansen/better-moodle/compare/1.27.1...1.27.2) (2024-04-19)
@@ -69,7 +69,7 @@
 
 ### Features
 
-* implement darkmode ([#136](https://github.com/YorikHansen/better-moodle/issues/136)) ([9b3fd41](https://github.com/YorikHansen/better-moodle/commit/9b3fd41d6d1dd5372aca218e9fcdbd749241e962))
+* implement darkmode ([#136](https://github.com/jxn-30/better-moodle/issues/136)) ([9b3fd41](https://github.com/YorikHansen/better-moodle/commit/9b3fd41d6d1dd5372aca218e9fcdbd749241e962))
 
 ## [1.25.2](https://github.com/YorikHansen/better-moodle/compare/1.25.1...1.25.2) (2024-04-10)
 
