@@ -3182,7 +3182,7 @@ ${Array.from(shownBars)
     /**
      * @return {Promise<{ recurringHolidays: string[], semesters: Semester[] }>}
      */
-    const getSemesterzeiten = () =>
+    const getSemesterzeiten = () => // TODO: WiSe 2024/25 invalid date, // TODO: arrows start at old semester, // TODO: semester bar 100%, // TODO: unterrichtsfrei color
         new Promise(resolve =>
             GM_xmlhttpRequest({
                 url: 'https://www.uni-kiel.de/gf-praesidium/de/termine/semesterzeiten',
@@ -3297,6 +3297,7 @@ ${Array.from(shownBars)
                         additional: additionals,
                     });
                 }
+                console.log(semesters)
                 return {
                     recurringHolidays: [], // TODO: Implement holidays
                     semesters,
