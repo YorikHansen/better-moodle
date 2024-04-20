@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.28.0](https://github.com/YorikHansen/better-moodle/compare/1.27.3...1.28.0) (2024-04-20)
+
+
+### Features
+
+* **semesterzeiten:** allow to click through all available semesters [#112](https://github.com/YorikHansen/better-moodle/issues/112) ([d233bff](https://github.com/YorikHansen/better-moodle/commit/d233bfff2a1d2e3e91843346e261c509dc4961f3))
+
 ## [1.27.3](https://github.com/YorikHansen/better-moodle/compare/1.27.2...1.27.3) (2024-04-20)
 
 
