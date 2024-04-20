@@ -3183,7 +3183,7 @@ ${Array.from(shownBars)
     /**
      * @return {Promise<{ recurringHolidays: string[], semesters: Semester[] }>}
      */
-    const getSemesterzeiten = () => // TODO: WiSe 2024/25 invalid date, // TODO: arrows start at old semester, // TODO: semester bar 100%, // TODO: unterrichtsfrei color
+    const getSemesterzeiten = () =>
         new Promise(resolve =>
             GM_xmlhttpRequest({
                 url: 'https://www.uni-kiel.de/gf-praesidium/de/termine/semesterzeiten',
@@ -3211,7 +3211,7 @@ ${Array.from(shownBars)
             })
             .then(table => {
                 const germanDate = date => {
-                    const [day, month, year] = date.split('.');
+                    const [day, month, year] = date.replaceAll(':', '.').split('.');
                     return `${year}-${month}-${day}`;
                 };
                 const semesters = [];
@@ -3280,10 +3280,13 @@ ${Array.from(shownBars)
                                 additionals.push({
                                     name,
                                     storage,
-                                    color:
-                                        name === 'Vorlesungszeit' ? 'info' : (
-                                            'success'
-                                        ),
+                                    color: ((id)=>{
+                                        switch (id) {
+                                            case 'vorlesungszeit': return 'success';
+                                            case 'unterrichtsfrei': return 'info';
+                                            default: return 'warning';
+                                        }
+                                    })(storage),
                                     start,
                                     end,
                                 });
@@ -3371,8 +3374,9 @@ ${Array.from(shownBars)
         ].forEach(content => (row.insertCell().textContent = content));
 
         const lastCell = row.insertCell();
-        if (storage) lastCell.append(getToggle(storage));
-        else {
+        if (storage) {
+            lastCell.append(getToggle(storage));
+        } else {
             row.classList.add('font-weight-bold');
             lastCell.classList.add('py-0', 'align-middle');
 
@@ -3486,6 +3490,7 @@ ${Array.from(shownBars)
 
         if (isCurrentSemester) {
             progressStops.set(now, { start: [], end: [] });
+            semesterDiv.dataset.isCurrentSemester = true;
         }
 
         const bars = [];
@@ -3538,7 +3543,7 @@ ${Array.from(shownBars)
             }
         };
 
-        const semesterName = semester[`name:${MOODLE_LANG}`] ?? semester.name;
+        const semesterName = semester[`name:${MOODLE_LANG}`] ?? semester.name; // TODO: Translate with $t
 
         // add bar and row for semester Zeit
         addBar(semesterStart, semesterEnd, 'primary', semesterName, 'semester');
@@ -3610,7 +3615,7 @@ ${Array.from(shownBars)
 
             let title = '';
 
-            if (isCurrentSemester && date >= now) {
+            if (date >= now) { // Why was there an isCurrentSemester check?
                 bar.style.setProperty('opacity', '0.25');
             }
 
@@ -3661,7 +3666,7 @@ ${Array.from(shownBars)
             createSemester(semester, recurringHolidays)
         );
         cardContent
-            .querySelector(':scope > div:first-child')
+            .querySelector(':scope > div[data-is-current-semester="true"]')
             ?.classList.remove('hidden');
         cardContent
             .querySelector(':scope > div:first-child nav li:first-child')
