@@ -2,7 +2,7 @@
 // @name            🎓️ CAU: better-moodle
 // @namespace       https://better-moodle.yorik.dev
 // @                x-release-please-start-version
-// @version         1.28.0
+// @version         1.28.1
 // @                x-release-please-end
 // @author          Jan (jxn_30), Yorik (YorikHansen)
 // @description:de  Verbessert dieses seltsame Design, das Moodle 4 mit sich bringt
@@ -3171,7 +3171,8 @@ ${Array.from(shownBars)
 
     /**
      * @typedef {Object} AdditionalSemesterzeit
-     * @property {string} name
+     * @property {string} name:de
+     * @property {string} name:en
      * @property {string} storage
      * @property {'success'|'info'|'warning'|'danger'} color
      * @property {string} start
@@ -3504,10 +3505,11 @@ ${Array.from(shownBars)
             );
             bars.push({
                 color,
-                name:
+                name,
+                dateString:
                     start === end ?
-                        `${name} (${dateToString(start, true, true)})`
-                    :   `${name} (${dateToString(start)} - ${dateToString(end)})`,
+                        dateToString(start, true, true)
+                    :   `${dateToString(start)} - ${dateToString(end)}`,
                 storage,
             });
         };
@@ -3536,30 +3538,21 @@ ${Array.from(shownBars)
             }
         };
 
+        const semesterName = semester[`name:${MOODLE_LANG}`] ?? semester.name;
+
         // add bar and row for semester Zeit
-        addBar(
-            semesterStart,
-            semesterEnd,
-            'primary',
-            semester.name,
-            'semester'
-        );
-        addRow(tbody, semester.name, semesterStart, semesterEnd, 'primary');
+        addBar(semesterStart, semesterEnd, 'primary', semesterName, 'semester');
+        addRow(tbody, semesterName, semesterStart, semesterEnd, 'primary');
 
         semester.additional.forEach(additional => {
             const start = new Date(additional.start);
             const end = new Date(additional.end);
+            const name = additional[`name:${MOODLE_LANG}`] ?? additional.name;
 
-            addBar(
-                start,
-                end,
-                additional.color,
-                additional.name,
-                additional.storage
-            );
+            addBar(start, end, additional.color, name, additional.storage);
             addRow(
                 tbody,
-                additional.name,
+                name,
                 start,
                 end,
                 additional.color,
@@ -3630,7 +3623,7 @@ ${Array.from(shownBars)
             // one bar => full height with color
             else if (currentIndexes.size === 1) {
                 const currentBar = bars[Array.from(currentIndexes)[0]];
-                title += currentBar.name;
+                title += `<p><b>${currentBar.name}</b><br>${currentBar.dateString}</p>`;
                 bar.classList.add(`bg-${currentBar.color}`);
                 bar.dataset.storage = currentBar.storage;
             }
@@ -3642,13 +3635,13 @@ ${Array.from(shownBars)
                     const currentBar = bars[barId];
                     subBar.classList.add(`bg-${currentBar.color}`);
                     subBar.dataset.storage = currentBar.storage;
-                    title += `${currentBar.name}\n`;
+                    title += `<p><b>${currentBar.name}</b><br>${currentBar.dateString}</p>`;
                     bar.append(subBar);
                 });
             }
-            bar.dataset.originalTitle = title.trim().replace(/\n/g, '<br>');
+            bar.dataset.originalTitle = title;
             bar.dataset.toggle = 'tooltip';
-            bar.dataset.placement = 'top';
+            bar.dataset.placement = 'bottom';
             bar.dataset.html = 'true';
         });
 

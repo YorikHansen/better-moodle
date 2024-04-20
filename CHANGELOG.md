@@ -2,10 +2,15 @@
 
 ## [1.28.0](https://github.com/YorikHansen/better-moodle/compare/1.27.3...1.28.0) (2024-04-20)
 
-
 ### Features
 
 * **semesterzeiten:** allow to click through all available semesters [#112](https://github.com/YorikHansen/better-moodle/issues/112) ([d233bff](https://github.com/YorikHansen/better-moodle/commit/d233bfff2a1d2e3e91843346e261c509dc4961f3))
+
+### Bug Fixes
+
+* **semesterzeiten:** fix multi language support ([2995c6c](https://github.com/YorikHansen/better-moodle/commit/2995c6c9af34cfba94435e51456863c52e2937a2))
+* **semesterzeiten:** fix tooltips looking ugly ([9c09f94](https://github.com/YorikHansen/better-moodle/commit/9c09f944107339c08518ca771a6fd64b772d6c55))
+
 
 ## [1.27.3](https://github.com/YorikHansen/better-moodle/compare/1.27.2...1.27.3) (2024-04-20)
 
