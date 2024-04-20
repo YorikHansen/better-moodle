@@ -98,6 +98,20 @@ const TRANSLATIONS = {
                 show: 'Im Balken anzeigen?',
                 holiday: 'Feiertag',
             },
+            category: {
+                semester: {
+                    summer: 'SoSe {{year}}',
+                    winter: 'WiSe {{year}}',
+                },
+                period: {
+                    lecture: 'Vorlesungszeit',
+                    exam: {
+                        1: '1. Prüfungszeitraum des aktuellen Semesters',
+                        2: '2. Prüfungszeitraum des Vorsemesters',
+                    },
+                    break: 'Unterrichtsfrei',
+                },
+            },
         },
         modals: {
             settings: {
@@ -439,6 +453,20 @@ Viele Grüße
                 finished: 'Progress',
                 show: 'Show in Progress bar?',
                 holiday: 'Public Holiday',
+            },
+            category: {
+                semester: {
+                    summer: 'Summer semester {{year}}',
+                    winter: 'Winter semester {{year}}',
+                },
+                period: {
+                    lecture: 'Lecture period',
+                    exam: {
+                        1: '1. exam period of the current semester',
+                        2: '2. exam period of the last semester',
+                    },
+                    break: 'Break',
+                },
             },
         },
         modals: {
@@ -3211,7 +3239,9 @@ ${Array.from(shownBars)
             })
             .then(table => {
                 const germanDate = date => {
-                    const [day, month, year] = date.replaceAll(':', '.').split('.');
+                    const [day, month, year] = date
+                        .replaceAll(':', '.')
+                        .split('.');
                     return `${year}-${month}-${day}`;
                 };
                 const semesters = [];
@@ -3262,29 +3292,41 @@ ${Array.from(shownBars)
                     const additionals = [];
                     for (const attribute in attributes) {
                         if (Object.hasOwn(attributes, attribute)) {
-                            let name = attribute
-                                .replaceAll(/\s+/gi, ' ')
-                                .trim();
-                            if (name !== 'Semester') {
-                                name =
-                                    name === 'Vorlesungs' ? 'Vorlesungszeit' : (
-                                        name
-                                    );
-                                const storage = name
+                            const storage = (key => {
+                                switch (key) {
+                                    case 'vorlesungs':
+                                        return 'period.lecture';
+                                    case 'unterrichtsfrei':
+                                        return 'period.break';
+                                    case '1-prfungszeitraum-des-aktuellen-semesters':
+                                        return 'period.exam.1';
+                                    case '2-prfungszeitraum-des-vorsemesters':
+                                        return 'period.exam.2';
+                                }
+                                return key;
+                            })(
+                                attribute
+                                    .trim()
                                     .toLowerCase()
                                     .replaceAll(/\s+/gi, '-')
-                                    .replaceAll(/[^\da-z-]/gi, '');
+                                    .replaceAll(/[^\da-z-]/gi, '')
+                            );
+                            if (storage !== 'semester') {
+                                const name = $t(`semesterzeiten.category.${storage}`).toString();
                                 const start = attributes[attribute].start;
                                 const end = attributes[attribute].end;
 
                                 additionals.push({
                                     name,
                                     storage,
-                                    color: ((id)=>{
+                                    color: (id => {
                                         switch (id) {
-                                            case 'vorlesungszeit': return 'success';
-                                            case 'unterrichtsfrei': return 'info';
-                                            default: return 'warning';
+                                            case 'period.lecture':
+                                                return 'success';
+                                            case 'period.break':
+                                                return 'info';
+                                            default:
+                                                return 'warning';
                                         }
                                     })(storage),
                                     start,
@@ -3294,14 +3336,18 @@ ${Array.from(shownBars)
                         }
                     }
 
+                    let [season, year] = semester.split(' ');
+                    season = season === 'SoSe' ? 'summer' : 'winter';
+
                     semesters.push({
-                        name: semester,
+                        name: $t(`semesterzeiten.category.semester.${season}`, {
+                            year: year,
+                        }).toString(),
                         start: attributes.Semester.start,
                         end: attributes.Semester.end,
                         additional: additionals,
                     });
                 }
-                console.log(semesters)
                 return {
                     recurringHolidays: [], // TODO: Implement holidays
                     semesters,
@@ -3615,7 +3661,8 @@ ${Array.from(shownBars)
 
             let title = '';
 
-            if (date >= now) { // Why was there an isCurrentSemester check?
+            if (date >= now) {
+                // Why was there an isCurrentSemester check?
                 bar.style.setProperty('opacity', '0.25');
             }
 
