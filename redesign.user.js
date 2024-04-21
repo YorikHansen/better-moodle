@@ -3332,7 +3332,9 @@ span.${nowAdditionsClass} {
                                     .replaceAll(/[^\da-z-]/gi, '')
                             );
                             if (storage !== 'semester') {
-                                const name = $t(`semesterzeiten.category.${storage}`).toString();
+                                const name = $t(
+                                    `semesterzeiten.category.${storage}`
+                                ).toString();
                                 const start = attributes[attribute].start;
                                 const end = attributes[attribute].end;
 
@@ -3716,29 +3718,26 @@ span.${nowAdditionsClass} {
         semesterDiv.append(topBar, additionalTable);
         cardContent.append(semesterDiv);
 
-        if (isCurrentSemester) {
-            const nowPercentage =
-                ((now - semesterStart) / semesterDuration) * 100;
-            const nowBar = document.createElement('div');
-            nowBar.classList.add(
-                'progress-bar',
-                'bg-transparent',
-                'progress-bar-striped',
-                nowAdditionsClass
-            );
-            nowBar.style.setProperty('width', `${nowPercentage}%`);
+        const nowPercentage = ((now - semesterStart) / semesterDuration) * 100;
+        const nowBar = document.createElement('div');
+        nowBar.classList.add(
+            'progress-bar',
+            'bg-transparent',
+            'progress-bar-striped',
+            nowAdditionsClass
+        );
+        nowBar.style.setProperty('width', `${nowPercentage}%`);
 
-            const todaySpan = document.createElement('span');
-            todaySpan.classList.add(nowAdditionsClass);
-            todaySpan.textContent = dateToString(now);
-            todaySpan.style.setProperty(
-                'margin-left',
-                `calc(${nowPercentage}% + 16px + .5rem)`
-            );
+        const todaySpan = document.createElement('span');
+        todaySpan.classList.add(nowAdditionsClass);
+        todaySpan.textContent = dateToString(now);
+        todaySpan.style.setProperty(
+            'margin-left',
+            `calc(${nowPercentage}% + 16px + .5rem)`
+        );
 
-            progressWrapper.prepend(nowBar);
-            progressWrapper.before(todaySpan);
-        }
+        progressWrapper.prepend(nowBar);
+        progressWrapper.before(todaySpan);
     };
 
     getSemesterzeiten().then(({ recurringHolidays, semesters }) => {
