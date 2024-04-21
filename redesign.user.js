@@ -1318,12 +1318,12 @@ const isDashboard =
 const MOODLE_LANG = document.documentElement.lang.toLowerCase();
 const DARK_MODE_SELECTOR = 'html[data-darkreader-scheme="dark"]';
 
-const $t = (key, args = {}) => {
+const $t = (key, args = {}) => { // If an argument starts with an underscore, it will not be escaped
     const escapeHTML = x =>
         x ?
             x
                 .toString()
-                .replaceAll('&', '&amp;') // TODO: Don't escape '&' for Links
+                .replaceAll('&', '&amp;')
                 .replaceAll('<', '&lt;')
                 .replaceAll('>', '&gt;')
                 .replaceAll('"', '&quot;')
@@ -1342,7 +1342,7 @@ const $t = (key, args = {}) => {
         );
     }
     return Object.entries(args).reduce(
-        (t, [key, value]) => t.replaceAll(`{{${key}}}`, escapeHTML(value)),
+        (t, [key, value]) => key[0] === '_' ? t.replaceAll(`{{${key.slice(1)}}}`, value) : t.replaceAll(`{{${key}}}`, escapeHTML(value)),
         t
     );
 };
@@ -4902,18 +4902,18 @@ ready(() => {
                     title: $t('modals.help.title'),
                     body: mdToHtml(
                         $t('modals.help.content', {
-                            faqLink: githubPath('#faq'),
+                            _faqLink: githubPath('#faq'),
                             mailAdress: cntctAdr,
-                            mailLinkHelp: getEmail(
+                            _mailLinkHelp: getEmail(
                                 `Better Moodle: ${$t(
                                     'modals.help.mails.help.subject'
                                 )}`,
                                 $t('modals.help.mails.help.content')
                             ),
-                            githubIssueBug: githubPath(
+                            _githubIssueBug: githubPath(
                                 '/issues/new?labels=bug&template=bug.yml&title=%5BBUG%5D%3A+'
                             ),
-                            mailLinkBug: getEmail(
+                            _mailLinkBug: getEmail(
                                 `Better Moodle: ${$t(
                                     'modals.help.mails.bug.subject'
                                 )}`,
@@ -4922,10 +4922,10 @@ ready(() => {
                                         currentScriptVersion.join('.'),
                                 })
                             ),
-                            githubIssueFeature: githubPath(
+                            _githubIssueFeature: githubPath(
                                 '/issues/new?labels=&template=feature.yml&title=%5BFeature+request%5D%3A+'
                             ),
-                            mailLinkFeature: getEmail(
+                            _mailLinkFeature: getEmail(
                                 `Better Moodle: ${$t(
                                     'modals.help.mails.feature.subject'
                                 )}`,
