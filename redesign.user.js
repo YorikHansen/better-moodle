@@ -1323,12 +1323,12 @@ const $t = (key, args = {}) => {
         x ?
             x
                 .toString()
-                .replaceAll('&', '&amp;')
+                .replaceAll('&', '&amp;') // TODO: Don't escape '&' for Links
                 .replaceAll('<', '&lt;')
                 .replaceAll('>', '&gt;')
                 .replaceAll('"', '&quot;')
                 .replaceAll("'", '&#039;')
-        :   ''; // TODO: Don't escape '&' for E-Mail-Links
+        :   '';
     const t =
         key
             .split('.')
@@ -3728,16 +3728,18 @@ span.${nowAdditionsClass} {
         );
         nowBar.style.setProperty('width', `${nowPercentage}%`);
 
-        const todaySpan = document.createElement('span');
-        todaySpan.classList.add(nowAdditionsClass);
-        todaySpan.textContent = dateToString(now);
-        todaySpan.style.setProperty(
-            'margin-left',
-            `calc(${nowPercentage}% + 16px + .5rem)`
-        );
+        if (isCurrentSemester) {
+            const todaySpan = document.createElement('span');
+            todaySpan.classList.add(nowAdditionsClass);
+            todaySpan.textContent = dateToString(now);
+            todaySpan.style.setProperty(
+                'margin-left',
+                `calc(${nowPercentage}% + 16px + .5rem)`
+            );
 
-        progressWrapper.prepend(nowBar);
-        progressWrapper.before(todaySpan);
+            progressWrapper.prepend(nowBar);
+            progressWrapper.before(todaySpan);
+        }
     };
 
     getSemesterzeiten().then(({ recurringHolidays, semesters }) => {
