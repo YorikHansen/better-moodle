@@ -3611,7 +3611,7 @@ span.${nowAdditionsClass} {
             }
         };
 
-        const semesterName = semester[`name:${MOODLE_LANG}`] ?? semester.name; // TODO: Translate with $t
+        const semesterName = semester[`name:${MOODLE_LANG}`] ?? semester.name;
 
         // add bar and row for semester Zeit
         addBar(semesterStart, semesterEnd, 'primary', semesterName, 'semester');
