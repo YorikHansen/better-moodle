@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.28.2](https://github.com/YorikHansen/better-moodle/compare/1.28.1...1.28.2) (2024-04-21)
+
+### Bug Fixes
+
+* **semesterzeiten:** fix visibility of progress bar of past semesters ([7b9454d](https://github.com/YorikHansen/better-moodle/commit/7b9454db9d10ca2fdd031d6b9546d5d9c5a04e95))
+
 ## [1.28.1](https://github.com/YorikHansen/better-moodle/compare/1.28.0...1.28.1) (2024-04-21)
 
 ### Bug Fixes
