@@ -2,8 +2,6 @@
 
 ## [1.28.1](https://github.com/YorikHansen/better-moodle/compare/1.28.0...1.28.1) (2024-04-21)
 
-* **semesterzeiten:** allow to click through all available semesters [#112](https://github.com/jxn-30/better-moodle/issues/112) ([d233bff](https://github.com/YorikHansen/better-moodle/commit/d233bfff2a1d2e3e91843346e261c509dc4961f3))
-
 ### Bug Fixes
 
 * **semesterzeiten:** fix visibility of progress bar of current semester ([3d0b089](https://github.com/jxn-30/better-moodle/commit/3d0b08908bfbcbb11a643ac6da4a3f54a4328af0))
