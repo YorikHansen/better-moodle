@@ -2409,8 +2409,20 @@ if (getSetting('general.bookmarkManager')) {
         bookmarksIcon.role = 'img';
         bookmarksBtn.append(bookmarksIcon);
 
+        const dropdownClass = PREFIX('bookmarks-dropdown');
+        GM_addStyle(`
+            @media (max-width: 767.98px) {
+                .${dropdownClass} {
+                    max-width: 100vw;
+                    overflow-x: auto;
+                    position: fixed !important;
+                    top: 60px;
+                    right: 0;
+                }
+            }
+        `);
         const dropdown = document.createElement('div');
-        dropdown.classList.add('dropdown-menu', 'dropdown-menu-right');
+        dropdown.classList.add('dropdown-menu', 'dropdown-menu-right', dropdownClass);
 
         const bookmarksWrapper = document.createElement('div');
         bookmarksWrapper.id = PREFIX('bookmarks-dropdown-bookmarks');
