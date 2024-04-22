@@ -1318,7 +1318,8 @@ const isDashboard =
 const MOODLE_LANG = document.documentElement.lang.toLowerCase();
 const DARK_MODE_SELECTOR = 'html[data-darkreader-scheme="dark"]';
 
-const $t = (key, args = {}) => { // If an argument starts with an underscore, it will not be escaped
+const $t = (key, args = {}) => {
+    // If an argument starts with an underscore, it will not be escaped
     const escapeHTML = x =>
         x ?
             x
@@ -1342,7 +1343,10 @@ const $t = (key, args = {}) => { // If an argument starts with an underscore, it
         );
     }
     return Object.entries(args).reduce(
-        (t, [key, value]) => key[0] === '_' ? t.replaceAll(`{{${key.slice(1)}}}`, value) : t.replaceAll(`{{${key}}}`, escapeHTML(value)),
+        (t, [key, value]) =>
+            key[0] === '_' ?
+                t.replaceAll(`{{${key.slice(1)}}}`, value)
+            :   t.replaceAll(`{{${key}}}`, escapeHTML(value)),
         t
     );
 };
@@ -3534,6 +3538,17 @@ span.${nowAdditionsClass} {
                 .forEach(table => table.classList.toggle('hidden'));
         });
 
+        const additionalTableDivClass = PREFIX('semesterzeiten-table-div');
+        const additionalTableDiv = document.createElement('div');
+        additionalTableDiv.classList.add(additionalTableDivClass);
+        GM_addStyle(`
+            .${additionalTableDivClass} {
+                overflow-x: auto;
+            }
+            .${additionalTableDivClass} .pagination {
+                flex-wrap: nowrap;
+            }
+        `);
         const additionalTable = document.createElement('table');
         additionalTable.classList.add(
             'table',
@@ -3715,7 +3730,8 @@ span.${nowAdditionsClass} {
         });
 
         topBar.append(infoLink, progressWrapper);
-        semesterDiv.append(topBar, additionalTable);
+        additionalTableDiv.append(additionalTable);
+        semesterDiv.append(topBar, additionalTableDiv);
         cardContent.append(semesterDiv);
 
         const nowPercentage = ((now - semesterStart) / semesterDuration) * 100;
