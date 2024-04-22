@@ -3743,6 +3743,7 @@ span.${nowAdditionsClass} {
             nowAdditionsClass
         );
         nowBar.style.setProperty('width', `${nowPercentage}%`);
+        progressWrapper.prepend(nowBar);
 
         if (isCurrentSemester) {
             const todaySpan = document.createElement('span');
@@ -3753,7 +3754,6 @@ span.${nowAdditionsClass} {
                 `calc(${nowPercentage}% + 16px + .5rem)`
             );
 
-            progressWrapper.prepend(nowBar);
             progressWrapper.before(todaySpan);
         }
     };
