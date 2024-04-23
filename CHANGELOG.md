@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.29.0](https://github.com/YorikHansen/better-moodle/compare/1.28.2...1.29.0) (2024-04-23)
+
+
+### Features
+
+* **googlyEyes:** closing the eyes when entering a password ([8ae331b](https://github.com/YorikHansen/better-moodle/commit/8ae331b8ac59b6c168065616605aaa860c8ac720))
+* **settings:** make slider inputs look more moodle-like ([f25c611](https://github.com/YorikHansen/better-moodle/commit/f25c6115c3c16023923749d2a83f2dd12810c567))
+
+
+### Bug Fixes
+
+* **semesterzeiten:** fix current day being visible in previous semesters ([8574ec0](https://github.com/YorikHansen/better-moodle/commit/8574ec0dc2a43834c907030c7b177a1a9bb7f378))
+* **semesterzeiten:** fix semesterzeiten table on smaller screens ([142fca9](https://github.com/YorikHansen/better-moodle/commit/142fca98e8c6739127717f4fff0967676bdaf1a9))
+* **bookmarks:** fix bookmark dialog being too big on mobile ([ec44714](https://github.com/YorikHansen/better-moodle/commit/ec447145dde9290a9ef062cc0935264ffa626454))
+* **translation:** fix too much escaping in links ([00f4376](https://github.com/YorikHansen/better-moodle/commit/00f43762b101510c3ddb96cef3ea2371c47658eb))
+
+
 ## [1.28.2](https://github.com/YorikHansen/better-moodle/compare/1.28.1...1.28.2) (2024-04-21)
 
 ### Bug Fixes
