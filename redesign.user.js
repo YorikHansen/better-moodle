@@ -2,7 +2,7 @@
 // @name            🎓️ CAU: better-moodle
 // @namespace       https://better-moodle.yorik.dev
 // @                x-release-please-start-version
-// @version         1.28.2
+// @version         1.29.0
 // @                x-release-please-end
 // @author          Jan (jxn_30), Yorik (YorikHansen)
 // @description:de  Verbessert dieses seltsame Design, das Moodle 4 mit sich bringt
@@ -2054,6 +2054,7 @@ class SliderSetting extends NumberSetting {
         super(id, defaultValue, min, max, step);
 
         super.formControl.type = 'range';
+        super.formControl.classList.add('custom-range');
         super.formControl.classList.replace(
             'form-control',
             'form-control-range'
@@ -3073,6 +3074,7 @@ if (
 }
 
 .eye {
+  position: relative;
   background-color: white;
   border: var(--eye-border-width) solid black;
   border-radius: 43%;
@@ -3101,6 +3103,22 @@ if (
   min-height: var(--pupil-height);
   max-width: var(--pupil-width);
   max-height: var(--pupil-height);
+}
+
+/* Hey, don't look while I enter a password! Wait, are you peeking? 😨 */
+.eye::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.5s linear;
+  background: linear-gradient(0deg, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 35%, rgb(255, 255, 255) 49%, rgb(255, 255, 255) 51%, rgb(0, 0, 0) 65%, rgb(0, 0, 0) 100%);
+}
+body:has(input[type="password"]:focus) .eye::before {
+  opacity: 1;
 }
 `);
 
@@ -3462,14 +3480,20 @@ span.${nowAdditionsClass} {
             lastCell.append(getToggle(storage));
         } else {
             row.classList.add('font-weight-bold');
-            lastCell.classList.add('py-0', 'align-middle');
+            lastCell.classList.add('p-0', 'px-md-3', 'align-middle');
 
             const paging = document.createElement('nav');
             const pagingUl = document.createElement('ul');
-            pagingUl.classList.add('pagination', 'mb-0');
+            pagingUl.classList.add(
+                'pagination',
+                'mb-0',
+                'flex-nowrap',
+                'justify-content-center',
+                'justify-content-md-end'
+            );
 
             const prevBtn = document.createElement('li');
-            prevBtn.classList.add('page-item', 'ml-auto');
+            prevBtn.classList.add('page-item');
             const prevLink = document.createElement('a');
             prevLink.classList.add('page-link');
             prevLink.href = '#';
@@ -3550,23 +3574,11 @@ span.${nowAdditionsClass} {
                 .forEach(table => table.classList.toggle('hidden'));
         });
 
-        const additionalTableDivClass = PREFIX('semesterzeiten-table-div');
-        const additionalTableDiv = document.createElement('div');
-        additionalTableDiv.classList.add(additionalTableDivClass);
-        GM_addStyle(`
-            .${additionalTableDivClass} {
-                overflow-x: auto;
-            }
-            .${additionalTableDivClass} .pagination {
-                flex-wrap: nowrap;
-            }
-        `);
         const additionalTable = document.createElement('table');
         additionalTable.classList.add(
             'table',
             'table-striped',
             'table-hover',
-            'table-responsive-xs',
             'hidden'
         );
         const tableHead = additionalTable.createTHead();
@@ -3741,9 +3753,12 @@ span.${nowAdditionsClass} {
             bar.dataset.html = 'true';
         });
 
+        const tableWrapper = document.createElement('div');
+        tableWrapper.classList.add('table-responsive');
+
         topBar.append(infoLink, progressWrapper);
-        additionalTableDiv.append(additionalTable);
-        semesterDiv.append(topBar, additionalTableDiv);
+        tableWrapper.append(additionalTable);
+        semesterDiv.append(topBar, tableWrapper);
         cardContent.append(semesterDiv);
 
         const nowPercentage = ((now - semesterStart) / semesterDuration) * 100;
