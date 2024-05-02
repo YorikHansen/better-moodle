@@ -2,7 +2,7 @@
 // @name            🎓️ CAU: better-moodle
 // @namespace       https://better-moodle.yorik.dev
 // @                x-release-please-start-version
-// @version         1.29.0
+// @version         1.29.1
 // @                x-release-please-end
 // @author          Jan (jxn_30), Yorik (YorikHansen)
 // @description:de  Verbessert dieses seltsame Design, das Moodle 4 mit sich bringt
@@ -22,7 +22,7 @@
 // @grant           GM_info
 // @grant           GM_xmlhttpRequest
 // @connect         studentenwerk.sh
-// @require         https://unpkg.com/darkreader@4.9.83/darkreader.js#sha512=4b9a2010f7fd05609bf3372cbfdede407b736bd467396d33a8a0922b373244e03fb20c2f1be61be0b5a998561c3068f53788bad82f71ceab1fce3f9fc818ece8
+// @require         https://unpkg.com/darkreader@4.9.84/darkreader.js#sha512=5994805601e9df9f8c1afbb0c15b4512143db3ea4c9ab93aaa4bf6f0a4816c2956f6c0854f7a34d1eda64d966fd193077227d025b3b6ac0cab2abaa0e816e20c
 // @connect         cloud.rz.uni-kiel.de
 // @connect         www.uni-kiel.de
 // ==/UserScript==
@@ -911,8 +911,10 @@ const updateAvailable = () =>
 
             return (
                 latestMajor > currentMajor || // major update
-                latestMinor > currentMinor || // minor update
-                latestPatch > currentPatch // patch update
+                (latestMajor === currentMajor && latestMinor > currentMinor) || // minor update
+                (latestMajor === currentMajor && // patch update
+                    latestMinor === currentMinor &&
+                    latestPatch > currentPatch)
             );
         });
 
@@ -4718,15 +4720,15 @@ ready(() => {
     /** @type {string} */
     let changelogHtml;
 
+    const changelogCache = 1000 * 60 * 5; // Cache for 5 minutes
+
     /** @type {() => Promise<string>} */
     const getChangelogHtml = () =>
         changelogHtml ?
             Promise.resolve(changelogHtml)
         :   fetch(
                 rawGithubPath(
-                    `CHANGELOG.md?_=${
-                        Math.floor(Date.now() / (1000 * 60 * 5)) // Cache for 5 minutes
-                    }`
+                    `CHANGELOG.md?_=${Math.floor(Date.now() / changelogCache)}`
                 )
             )
                 .then(res => res.text())
@@ -4736,7 +4738,11 @@ ready(() => {
                         .replace(/(?<=\n)(?=^##\s)/gm, '---\n\n')
                 )
                 .then(md => mdToHtml(md, 3))
-                .then(html => (changelogHtml = html));
+                .then(html => {
+                    changelogHtml = html;
+                    setTimeout(() => (changelogHtml = ''), changelogCache);
+                    return html;
+                });
 
     document
         .querySelector('#usernavigation .usermenu-container')
