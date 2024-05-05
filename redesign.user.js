@@ -1241,7 +1241,7 @@ const addMarqueeItems = (() => {
                         // TODO: Add attach url as link with icon.
                         event: event.title,
                         date: new Date(event.start).toLocaleDateString(
-                            MOODLE_LANG,
+                            BETTER_MOODLE_LANG,
                             {
                                 weekday: 'long',
                                 year: 'numeric',
@@ -1250,7 +1250,7 @@ const addMarqueeItems = (() => {
                             }
                         ),
                         start: new Date(event.start).toLocaleTimeString(
-                            MOODLE_LANG,
+                            BETTER_MOODLE_LANG,
                             { hour: '2-digit', minute: '2-digit' }
                         ),
                         location: event.location,
