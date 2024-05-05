@@ -396,6 +396,15 @@ Viele Grüße
                         3: 'Mensa Gaarden',
                     },
                 },
+                language: {
+                    name: 'Sprache',
+                    description: 'Wähle die Sprache des Speiseplans aus.',
+                    options: {
+                        auto: '🌐 Auto (Better-Moodle Sprache)',
+                        de: '🇩🇪 Deutsch',
+                        en: '🇬🇧 Englisch',
+                    },
+                },
             },
         },
     },
@@ -758,6 +767,15 @@ Best regards
                         1: 'Mensa I',
                         2: 'Mensa II',
                         3: 'Mensa Gaarden',
+                    },
+                },
+                language: {
+                    name: 'Language',
+                    description: 'Select the language of the canteen menu.',
+                    options: {
+                        auto: '🌐 Auto (Better-Moodle language)',
+                        de: '🇩🇪 German',
+                        en: '🇬🇧 English',
                     },
                 },
             },
@@ -1661,6 +1679,12 @@ const getSpeiseplan = async () => {
         return speisen;
     };
 
+    const SPEISEPLAN_LANG = (() => {
+        const savedLanguage = getSetting('speiseplan.language');
+        if (savedLanguage === 'auto') return BETTER_MOODLE_LANG;
+        return savedLanguage;
+    })();
+
     const localizedPath = {
         de: 'mensen-in-kiel',
         en: 'food-overview',
@@ -1676,8 +1700,8 @@ const getSpeiseplan = async () => {
     const getDoc = (nextWeek = false) =>
         new Promise(resolve =>
             GM_xmlhttpRequest({
-                url: `https://studentenwerk.sh/${BETTER_MOODLE_LANG}/${
-                    localizedPath[BETTER_MOODLE_LANG]
+                url: `https://studentenwerk.sh/${SPEISEPLAN_LANG}/${
+                    localizedPath[SPEISEPLAN_LANG]
                 }?ort=1&mensa=${getSetting('speiseplan.canteen')}${nextWeek ? '&nw=1' : ''}`,
                 onload: ({ responseText }) =>
                     resolve(
@@ -2347,6 +2371,10 @@ const SETTINGS = [
     ]),
     $t('settings.speiseplan._title'),
     new SelectSetting('speiseplan.canteen', '1', ['1', '2', '3']),
+    new SelectSetting('speiseplan.language', 'auto', [
+        'auto',
+        ...Object.keys(TRANSLATIONS),
+    ]),
 ];
 const settingsById = Object.fromEntries(
     SETTINGS.filter(s => typeof s !== 'string').map(s => [s.id, s])
@@ -2456,7 +2484,11 @@ if (getSetting('general.bookmarkManager')) {
             }
         `);
         const dropdown = document.createElement('div');
-        dropdown.classList.add('dropdown-menu', 'dropdown-menu-right', dropdownClass);
+        dropdown.classList.add(
+            'dropdown-menu',
+            'dropdown-menu-right',
+            dropdownClass
+        );
 
         const bookmarksWrapper = document.createElement('div');
         bookmarksWrapper.id = PREFIX('bookmarks-dropdown-bookmarks');
@@ -3063,7 +3095,9 @@ ${DARK_MODE_SELECTOR} .${artenClass} img[src*="iconprop_bio"] {
 
                 const studiwerkLink = document.createElement('a');
                 studiwerkLink.href = `https://studentenwerk.sh/${BETTER_MOODLE_LANG}/${
-                    { de: 'mensen-in-kiel', en: 'food-overview' }[BETTER_MOODLE_LANG]
+                    { de: 'mensen-in-kiel', en: 'food-overview' }[
+                        BETTER_MOODLE_LANG
+                    ]
                 }?ort=1&mensa=${getSetting('speiseplan.canteen')}`;
                 studiwerkLink.textContent = $t('speiseplan.toStudiwerkPage');
                 studiwerkLink.target = '_blank';
