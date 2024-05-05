@@ -2,7 +2,7 @@
 // @name            🎓️ CAU: better-moodle
 // @namespace       https://better-moodle.yorik.dev
 // @                x-release-please-start-version
-// @version         1.29.1
+// @version         1.29.2
 // @                x-release-please-end
 // @author          Jan (jxn_30), Yorik (YorikHansen)
 // @description:de  Verbessert dieses seltsame Design, das Moodle 4 mit sich bringt
@@ -2143,7 +2143,7 @@ class SelectSetting extends Setting {
         super(id, defaultValue);
 
         this.#input.id = this.inputId;
-        this.#input.classList.add('custom-select');
+        this.#input.classList.add('custom-select', 'col-12', 'col-md-auto');
         this.#input.dataset.initialValue = this.value;
 
         const optionsPromise =
@@ -4590,7 +4590,12 @@ ready(() => {
     form.classList.add('mform');
 
     const helpBtn = document.createElement('a');
-    helpBtn.classList.add('ml-auto', 'font-weight-normal', 'z-index-1');
+    helpBtn.classList.add(
+        'ml-auto',
+        'font-weight-normal',
+        'z-index-1',
+        'text-right'
+    );
     helpBtn.style.setProperty('font-size', 'small');
     helpBtn.href = '#';
     const helpIcon = document.createElement('i');
@@ -4768,7 +4773,7 @@ ready(() => {
             const updateCheck = () =>
                 updateAvailable().then(available => {
                     if (available) {
-                        versionSpan.after(updateBtn);
+                        versionSpan.before(updateBtn);
                         // region Feature: general.updateNotification
                         if (getSetting('general.updateNotification')) {
                             settingsBtn.append(updateBadge);
@@ -4832,7 +4837,7 @@ ready(() => {
             // region version span & update btn
             // add a small note about current and latest script version
             const versionSpan = document.createElement('span');
-            versionSpan.classList.add('small', 'ml-2');
+            versionSpan.classList.add('small', 'text-right');
 
             const currentCode = document.createElement('code');
             currentCode.textContent = currentScriptVersion.join('.');
@@ -4848,7 +4853,7 @@ ready(() => {
             );
 
             const updateBtn = document.createElement('a');
-            updateBtn.classList.add('btn-primary', 'btn-sm', 'ml-auto');
+            updateBtn.classList.add('btn-primary', 'btn-sm');
             updateBtn.href = '#';
             updateBtn.textContent = $t('modals.settings.updateBtn').toString();
 
@@ -4891,12 +4896,15 @@ ready(() => {
 
             updateCheck().then();
 
-            modal
+            const updateSetting = modal
                 .getBody()[0]
                 .querySelector(
                     '.felement[data-setting="general.updateNotification"]'
-                )
-                ?.append(versionSpan);
+                );
+            if (updateSetting) {
+                updateSetting.classList.add('justify-content-between');
+                updateSetting.append(versionSpan);
+            }
             // endregion
 
             const footerBtnGroup = document.createElement('div');
