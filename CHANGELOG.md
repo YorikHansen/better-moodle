@@ -5,7 +5,7 @@
 
 ### Features
 
-* **better-moodle-language:** added a setting to force better-moodles language [#158](https://github.com/jxn-30/better-moodle/issues/158) ([#159](https://github.com/jxn-30/better-moodle/issues/159)) ([32cac89](https://github.com/YorikHansen/better-moodle/commit/32cac89bf975bf6d209379f8c9d22a6c3473809d))
+* **better-moodle-language:** added a setting to force better-moodles language [#158](https://github.com/jxn-30/better-moodle/issues/158) ([#159](https://github.com/jxn-30/better-moodle/issues/159)) ([32cac89](https://github.com/YorikHansen/better-moodle/commit/32cac89bf975bf6d209379f8c9d22a6c3473809d), [3f63b69](https://github.com/YorikHansen/better-moodle/commit/3f63b69b692621991e481c094185c51a48abfef2))
 
 ## [1.29.2](https://github.com/YorikHansen/better-moodle/compare/1.29.1...1.29.2) (2024-05-05)
 
