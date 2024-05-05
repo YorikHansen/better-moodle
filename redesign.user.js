@@ -2,7 +2,7 @@
 // @name            🎓️ CAU: better-moodle
 // @namespace       https://better-moodle.yorik.dev
 // @                x-release-please-start-version
-// @version         1.29.2
+// @version         1.30.0
 // @                x-release-please-end
 // @author          Jan (jxn_30), Yorik (YorikHansen)
 // @description:de  Verbessert dieses seltsame Design, das Moodle 4 mit sich bringt
@@ -253,6 +253,15 @@ Viele Grüße
                     name: 'Semesterzeiten',
                     description:
                         'Zeigt im Dashboard ein neues Feld mit einem Fortschrittsbalken des aktuellen Semester an. Ebenfalls dabei: Informationen über wichtige Zeiträume im Semester.',
+                },
+                language: {
+                    name: 'Better-Moodle Sprache',
+                    description: 'Wähle die Sprache von Better-Moodle aus.',
+                    options: {
+                        auto: '🌐 Auto (Moodle Sprache)',
+                        de: '🇩🇪 Deutsch',
+                        en: '🇬🇧 Englisch',
+                    },
                 },
             },
             darkmode: {
@@ -612,6 +621,15 @@ Best regards
                     name: 'Semester times',
                     description:
                         'Displays a new field in the dashboard with a progress bar of the current semester. Also included: information about important periods in the semester.',
+                },
+                language: {
+                    name: 'Better-Moodle Language',
+                    description: 'Choose the language of Better-Moodle.',
+                    options: {
+                        auto: '🌐 Auto (Moodle language)',
+                        de: '🇩🇪 German',
+                        en: '🇬🇧 English',
+                    },
                 },
             },
             darkmode: {
@@ -1318,6 +1336,14 @@ const isDashboard =
     window.location.pathname === '/my/index.php';
 
 const MOODLE_LANG = document.documentElement.lang.toLowerCase();
+const BETTER_MOODLE_LANG = (() => {
+    const savedLanguage = GM_getValue(
+        getSettingKey('general.language'),
+        'auto'
+    );
+    if (savedLanguage === 'auto') return MOODLE_LANG;
+    return savedLanguage;
+})();
 const DARK_MODE_SELECTOR = 'html[data-darkreader-scheme="dark"]';
 
 const $t = (key, args = {}) => {
@@ -1336,12 +1362,13 @@ const $t = (key, args = {}) => {
         key
             .split('.')
             .reduce(
-                (prev, current) => (prev || TRANSLATIONS[MOODLE_LANG])[current],
-                TRANSLATIONS[MOODLE_LANG]
+                (prev, current) =>
+                    (prev || TRANSLATIONS[BETTER_MOODLE_LANG])[current],
+                TRANSLATIONS[BETTER_MOODLE_LANG]
             ) ?? key;
     if (t === key) {
         console.warn(
-            `Better-Moodle: Translation for key "${key}" on locale ${MOODLE_LANG} not found!`
+            `Better-Moodle: Translation for key "${key}" on locale ${BETTER_MOODLE_LANG} not found!`
         );
     }
     return Object.entries(args).reduce(
@@ -1649,8 +1676,8 @@ const getSpeiseplan = async () => {
     const getDoc = (nextWeek = false) =>
         new Promise(resolve =>
             GM_xmlhttpRequest({
-                url: `https://studentenwerk.sh/${MOODLE_LANG}/${
-                    localizedPath[MOODLE_LANG]
+                url: `https://studentenwerk.sh/${BETTER_MOODLE_LANG}/${
+                    localizedPath[BETTER_MOODLE_LANG]
                 }?ort=1&mensa=${getSetting('speiseplan.canteen')}${nextWeek ? '&nw=1' : ''}`,
                 onload: ({ responseText }) =>
                     resolve(
@@ -1717,7 +1744,7 @@ const debounce = (fn, delay = 100) => {
  * @param {boolean} [weekday=false]
  */
 const dateToString = (date, year = true, weekday = false) =>
-    date.toLocaleDateString(MOODLE_LANG, {
+    date.toLocaleDateString(BETTER_MOODLE_LANG, {
         weekday: weekday ? 'long' : undefined,
         year: year ? 'numeric' : undefined,
         month: '2-digit',
@@ -2087,7 +2114,7 @@ class SliderSetting extends NumberSetting {
         ) {
             const option = document.createElement('option');
             option.value = currentStep.toString();
-            option.label = currentStep.toLocaleString(MOODLE_LANG);
+            option.label = currentStep.toLocaleString(BETTER_MOODLE_LANG);
             labelDatalist.append(option);
         }
         labelDatalist.style.setProperty('--label-count', labelCount.toString());
@@ -2097,7 +2124,7 @@ class SliderSetting extends NumberSetting {
         const setOutput = () => {
             const val = super.inputValue;
             const percentageValue = ((val - min) / (max - min)) * 100;
-            outputEl.textContent = val.toLocaleString(MOODLE_LANG);
+            outputEl.textContent = val.toLocaleString(BETTER_MOODLE_LANG);
             // see https://css-tricks.com/value-bubbles-for-range-inputs/
             outputEl.style.setProperty(
                 'left',
@@ -2235,6 +2262,10 @@ class SelectSetting extends Setting {
 const SETTINGS = [
     $t('settings.general._title'),
     new BooleanSetting('general.updateNotification', true),
+    new SelectSetting('general.language', 'auto', [
+        'auto',
+        ...Object.keys(TRANSLATIONS),
+    ]),
     new BooleanSetting('general.fullwidth', true),
     new BooleanSetting('general.externalLinks', true),
     new BooleanSetting('general.truncatedTexts', true),
@@ -2986,7 +3017,7 @@ ${DARK_MODE_SELECTOR} .${artenClass} img[src*="iconprop_bio"] {
             preiseCell.classList.add(preiseClass);
             speise.preise.forEach(preis => {
                 const preisEl = document.createElement('span');
-                preisEl.textContent = preis.toLocaleString(MOODLE_LANG, {
+                preisEl.textContent = preis.toLocaleString(BETTER_MOODLE_LANG, {
                     style: 'currency',
                     currency: 'EUR',
                 });
@@ -3031,8 +3062,8 @@ ${DARK_MODE_SELECTOR} .${artenClass} img[src*="iconprop_bio"] {
                 modal.getBody()[0].classList.add('mform');
 
                 const studiwerkLink = document.createElement('a');
-                studiwerkLink.href = `https://studentenwerk.sh/${MOODLE_LANG}/${
-                    { de: 'mensen-in-kiel', en: 'food-overview' }[MOODLE_LANG]
+                studiwerkLink.href = `https://studentenwerk.sh/${BETTER_MOODLE_LANG}/${
+                    { de: 'mensen-in-kiel', en: 'food-overview' }[BETTER_MOODLE_LANG]
                 }?ort=1&mensa=${getSetting('speiseplan.canteen')}`;
                 studiwerkLink.textContent = $t('speiseplan.toStudiwerkPage');
                 studiwerkLink.target = '_blank';
@@ -3471,7 +3502,7 @@ span.${nowAdditionsClass} {
             name,
             dateToString(start),
             dateToString(end),
-            finishedBy.toLocaleString(MOODLE_LANG, {
+            finishedBy.toLocaleString(BETTER_MOODLE_LANG, {
                 style: 'percent',
                 maximumFractionDigits: 2,
             }),
@@ -3652,7 +3683,8 @@ span.${nowAdditionsClass} {
             }
         };
 
-        const semesterName = semester[`name:${MOODLE_LANG}`] ?? semester.name;
+        const semesterName =
+            semester[`name:${BETTER_MOODLE_LANG}`] ?? semester.name;
 
         // add bar and row for semester Zeit
         addBar(semesterStart, semesterEnd, 'primary', semesterName, 'semester');
@@ -3661,7 +3693,8 @@ span.${nowAdditionsClass} {
         semester.additional.forEach(additional => {
             const start = new Date(additional.start);
             const end = new Date(additional.end);
-            const name = additional[`name:${MOODLE_LANG}`] ?? additional.name;
+            const name =
+                additional[`name:${BETTER_MOODLE_LANG}`] ?? additional.name;
 
             addBar(start, end, additional.color, name, additional.storage);
             addRow(
