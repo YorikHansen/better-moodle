@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.30.1](https://github.com/YorikHansen/better-moodle/compare/1.30.0...1.30.1) (2024-05-05)
+
+
+### Features
+
+* **speiseplan:** Add language setting to canteen menu ([a4c105b](https://github.com/YorikHansen/better-moodle/commit/a4c105b73540a8dde046c59a38606228a7557130))
+
 ## [1.30.0](https://github.com/YorikHansen/better-moodle/compare/1.29.2...1.30.0) (2024-05-05)
 
 
