@@ -1,7 +1,7 @@
 {
     "name": "uzl-better-moodle",
     "description": "Improves the new weird Moodle 4 UI on UzL-Moodle",
-    "version": "1.30.0",
+    "version": "1.30.1",
     "packageManager": "yarn@4.2.1",
     "type": "module",
     "private": true,
@@ -10,11 +10,11 @@
         "prettier:write": "prettier --write --cache --cache-strategy content ."
     },
     "devDependencies": {
-        "@eslint/js": "9.1.1",
+        "@eslint/js": "9.2.0",
         "@types/eslint": "8.56.10",
         "@types/tampermonkey": "5.0.2",
         "darkreader": "4.9.84",
-        "eslint": "9.1.1",
+        "eslint": "9.2.0",
         "eslint-config-prettier": "9.1.0",
         "eslint-plugin-userscripts": "0.5.2",
         "globals": "15.1.0",

@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.30.2](https://github.com/YorikHansen/better-moodle/compare/1.30.1...1.30.2) (2024-05-08)
+
+
+### Bug Fixes
+
+* **bookmarks:** fix long texts causing dropdown overflow [#166](https://github.com/jxn-30/better-moodle/issues/166) ([6b23101](https://github.com/YorikHansen/better-moodle/commit/6b2310141537654b795130e0c7ec63a3651200f5))
+* **sidebar:** fix tooltip placement of sidebar button ([7d63df2](https://github.com/YorikHansen/better-moodle/commit/7d63df2d440192089b5b725f7e1b5490484e551d))
+
+
 ## [1.30.1](https://github.com/YorikHansen/better-moodle/compare/1.30.0...1.30.1) (2024-05-05)
 
 
