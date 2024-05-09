@@ -2479,7 +2479,7 @@ if (getSetting('general.bookmarkManager')) {
                     max-width: 100vw;
                     overflow-x: auto;
                     position: fixed !important;
-                    top: 60px;
+                    top: var(--navbar-height);
                     right: 0;
                 }
             }
