@@ -3140,6 +3140,17 @@ ${DARK_MODE_SELECTOR} .${artenClass} img[src*="iconprop_bio"] {
         return fieldset;
     };
 
+    const SPEISEPLAN_LANG = (() => {
+        const savedLanguage = getSetting('speiseplan.language');
+        if (savedLanguage === 'auto') return BETTER_MOODLE_LANG;
+        return savedLanguage;
+    })();
+
+    const localizedPath = {
+        de: 'mensen-in-kiel',
+        en: 'food-overview',
+    };
+
     const openSpeiseplan = e => {
         e.preventDefault();
 
@@ -3173,10 +3184,8 @@ ${DARK_MODE_SELECTOR} .${artenClass} img[src*="iconprop_bio"] {
                 modal.getBody()[0].classList.add('mform');
 
                 const studiwerkLink = document.createElement('a');
-                studiwerkLink.href = `https://studentenwerk.sh/${BETTER_MOODLE_LANG}/${
-                    { de: 'mensen-in-kiel', en: 'food-overview' }[
-                        BETTER_MOODLE_LANG
-                    ]
+                studiwerkLink.href = `https://studentenwerk.sh/${SPEISEPLAN_LANG}/${
+                    localizedPath[SPEISEPLAN_LANG]
                 }?ort=1&mensa=${getSetting('speiseplan.canteen')}`;
                 studiwerkLink.textContent = $t('speiseplan.toStudiwerkPage');
                 studiwerkLink.target = '_blank';
