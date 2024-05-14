@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.30.3](https://github.com/YorikHansen/better-moodle/compare/1.30.2...1.30.3) (2024-05-14)
+
+
+### Bug Fixes
+
+* **settings:** slider labels overlapping eachother ([591287d](https://github.com/YorikHansen/better-moodle/commit/591287d29e168264d10449ac5e67659a344c7e77))
+* **settings:** slider labels should not grow ([59e714c](https://github.com/YorikHansen/better-moodle/commit/59e714ca1b04521646f68e966412d965dbb1fca2))
+* **sidebar:** allow multiple sidebars on the same side ([#170](https://github.com/jxn-30/better-moodle/issues/170)) ([42acb3a](https://github.com/YorikHansen/better-moodle/commit/42acb3aa0aec40d3263ae9caba491f91317722d5))
+* **release:** fix description of release artifacts are switched ([2a906d9](https://github.com/YorikHansen/better-moodle/commit/2a906d942eac2a5fdccedc114380ec6e1e6801ed))
+
+
 ## [1.30.2](https://github.com/YorikHansen/better-moodle/compare/1.30.1...1.30.2) (2024-05-08)
 
 

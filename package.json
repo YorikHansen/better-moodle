@@ -1,8 +1,8 @@
 {
     "name": "uzl-better-moodle",
     "description": "Improves the new weird Moodle 4 UI on UzL-Moodle",
-    "version": "1.30.1",
-    "packageManager": "yarn@4.2.1",
+    "version": "1.30.4",
+    "packageManager": "yarn@4.2.2",
     "type": "module",
     "private": true,
     "scripts": {
@@ -17,7 +17,7 @@
         "eslint": "9.2.0",
         "eslint-config-prettier": "9.1.0",
         "eslint-plugin-userscripts": "0.5.2",
-        "globals": "15.1.0",
+        "globals": "15.2.0",
         "prettier": "3.2.5",
         "userscript-meta": "1.0.1"
     }

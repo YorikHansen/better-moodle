@@ -11,6 +11,7 @@
 -   [FAQ \[UzL\]][faq]
 -   [Alte Bilder und Impressionen \[UzL\]][impressions]
 -   [Better-Moodle ohne Userscript-Manager nutzen \[UzL\]][use-without-userscript-manager]
+-   [Verlauf der GitHub Stars](#verlauf-der-github-stars)
 
 Better-Moodle ist ein Userscript, um das Design vom [Informatik Moodle der Uni Kiel][kiel-moodle] zu verbessern und zusätzliche, coole Features hinzuzufügen. Es basiert auf [Better-Moodle der UzL][better-moodle-uzl] von [Jan](https://github.com/jxn-30).
 
@@ -148,21 +149,10 @@ see [Better-Moodle of the UzL][impressions]
 
 </details>
 
-## Better-Moodle ohne Userscript-Manager nutzen
+## Verlauf der GitHub Stars
 
-siehe [Better-Moodle der UzL][use-without-userscript-manager]
-
-<details>
-<summary>🇬🇧 Use Better-Moodle without Userscript-Manager</summary>
-
-see [Better-Moodle of the UzL][use-without-userscript-manager]
-
-</details>
-
-[better-moodle-uzl]: https://github.com/jxn-30/better-moodle 
-[faq]: https://github.com/jxn-30/better-moodle#faq
-[features]: https://github.com/jxn-30/better-moodle#features
-[impressions]: https://github.com/jxn-30/better-moodle#alte-bilder-und-impressionen
-[installation]: https://github.com/YorikHansen/better-moodle/raw/main/redesign.user.js
-[kiel-moodle]: https://elearn.informatik.uni-kiel.de/
-[use-without-userscript-manager]: https://github.com/jxn-30/better-moodle#better-moodle-ohne-userscript-manager-nutzen
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=YorikHansen%2Fbetter-moodle&type=Date&theme=dark" />
+  <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=YorikHansen%2Fbetter-moodle&type=Date" />
+  <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=YorikHansen%2Fbetter-moodle&type=Date" />
+</picture>

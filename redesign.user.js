@@ -2,7 +2,7 @@
 // @name            🎓️ CAU: better-moodle
 // @namespace       https://better-moodle.yorik.dev
 // @                x-release-please-start-version
-// @version         1.30.2
+// @version         1.30.3
 // @                x-release-please-end
 // @author          Jan (jxn_30), Yorik (YorikHansen)
 // @description:de  Verbessert dieses seltsame Design, das Moodle 4 mit sich bringt
@@ -869,7 +869,7 @@ const createSidebar = (id, position, icon, callback) => {  // TODO: Add in div f
     toggleBtn.dataset.action = 'toggle';
     toggleBtn.dataset.target = sidebar.id;
     toggleBtn.dataset.toggle = 'tooltip';
-    toggleBtn.dataset.placement = position === 'left' ? 'right' : 'left'; // Yeah, moodle. IDK what that means and why
+    toggleBtn.dataset.placement = position === 'left' ? 'right' : 'left'; // See above
     toggleBtn.title = $t('sidebar.open');
     toggleBtn.dataset.originalTitle = toggleBtn.title;
     const toggleBtnSRSpan = document.createElement('span');
@@ -898,13 +898,66 @@ const createSidebar = (id, position, icon, callback) => {  // TODO: Add in div f
         document.getElementById('page')?.before(sidebar);
 
         // append the toggle button
-        document
-            .querySelector('#page .drawer-toggles')
-            ?.append(toggleBtnWrapper);
+        const togglesDiv =
+            document.getElementById(PREFIX(`drawer-toggles-${position}`)) ||
+            (() => {
+                const togglesDiv = document.createElement('div');
+                togglesDiv.id = PREFIX(`drawer-toggles-${position}`);
+                document
+                    .querySelectorAll(`.drawer-${position}-toggle`)
+                    .forEach(toggler => {
+                        togglesDiv.append(toggler);
+                    });
+                document
+                    .querySelector('#page .drawer-toggles')
+                    .append(togglesDiv);
+                return togglesDiv;
+            })();
+        togglesDiv.append(toggleBtnWrapper);
 
         callback(content, header);
     });
 };
+
+GM_addStyle(`
+    /* Sidebars */
+    .drawer-toggles {
+        position: fixed;
+        top: var(--navbar-height);
+        left: 0;
+        width: 100vw;
+        margin-top: 0.7rem;
+        margin-bottom: 0.7rem;
+        z-index: 100;
+    }
+    #${PREFIX('drawer-toggles-right')},
+    #${PREFIX('drawer-toggles-left')} {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        gap: 0.7rem;
+    }
+    #${PREFIX('drawer-toggles-right')} {
+        right: 0;
+    }
+    #${PREFIX('drawer-toggles-left')} {
+        left: 0;
+    }
+    .drawer-toggler {
+        position: initial !important;
+    }
+    .drawer-toggles .drawer-toggler .btn .icon.fa-fw {
+        width: 16px; /* Reset to .icon default */
+    }
+    @media (max-width: 767.98px) {
+        #${PREFIX('drawer-toggles-right')},
+        #${PREFIX('drawer-toggles-left')} {
+            top: auto;
+            bottom: calc(2.7rem + 36px);
+            flex-direction: column-reverse;
+        }
+    }
+`);
 
 /** @type {[number, number, number]} */
 const currentScriptVersion = [];
@@ -2060,10 +2113,15 @@ GM_addStyle(`
 /* Some style to show tick-mark labels on range inputs */
 datalist[style*="--label-count"] {
     display: grid;
-    grid-template-columns: repeat(var(--label-count), 1fr);
+    grid-template-columns: repeat(var(--label-count), minmax(0, 1fr));
     text-align: center;
     /* WTF? idk how and why but it seems to work. It positions the labels almost correctly */
     margin: 0 calc(50% - 0.5 * calc((1 + 1 / (var(--label-count) - 1)) * (100% - 1em)));
+}
+/* overlapping text is bad => hide with ellipsis */
+datalist[style*="--label-count"] > option {
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* style to show a bubble with current range input value */
@@ -2138,7 +2196,8 @@ class SliderSetting extends NumberSetting {
         ) {
             const option = document.createElement('option');
             option.value = currentStep.toString();
-            option.label = currentStep.toLocaleString(BETTER_MOODLE_LANG);
+            option.title = option.label =
+                currentStep.toLocaleString(BETTER_MOODLE_LANG);
             labelDatalist.append(option);
         }
         labelDatalist.style.setProperty('--label-count', labelCount.toString());
