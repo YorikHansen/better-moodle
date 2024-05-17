@@ -2,7 +2,7 @@
 // @name            🎓️ CAU: better-moodle
 // @namespace       https://better-moodle.yorik.dev
 // @                x-release-please-start-version
-// @version         1.31.1
+// @version         1.31.2
 // @                x-release-please-end
 // @author          Jan (jxn_30), Yorik (YorikHansen)
 // @description:de  Verbessert dieses seltsame Design, das Moodle 4 mit sich bringt
@@ -948,8 +948,8 @@ GM_addStyle(`
     #${PREFIX('drawer-toggles-left')} .drawer-toggler {
         position: initial !important;
     }
-    #${PREFIX('drawer-toggles-right')} .drawer-toggles .drawer-toggler .btn .icon.fa-fw,
-    #${PREFIX('drawer-toggles-left')} .drawer-toggles .drawer-toggler .btn .icon.fa-fw {
+    #${PREFIX('drawer-toggles-right')} .drawer-toggler .btn .icon.fa-fw,
+    #${PREFIX('drawer-toggles-left')} .drawer-toggler .btn .icon.fa-fw {
         width: 16px; /* Reset to .icon default */
     }
     @media (max-width: 767.98px) {
