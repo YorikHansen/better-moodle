@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.31.0](https://github.com/YorikHansen/better-moodle/compare/1.30.4...1.31.0) (2024-05-17)
+
+
+### Features
+
+* **userscript:** use URLs from releases instead of raw link of main branch ([b320f40](https://github.com/YorikHansen/better-moodle/commit/b320f400c4e55f2a16a3a0be2382e3543b1264e2))
+
+
+### Bug Fixes
+
+* **updateCheck:** use download URL instead of update URL for update btn ([8047cc8](https://github.com/YorikHansen/better-moodle/commit/8047cc88ef6af5592232af2289c6572858457563))
+
+
 ## [1.30.3](https://github.com/YorikHansen/better-moodle/compare/1.30.2...1.30.3) (2024-05-14)
 
 
@@ -18,7 +31,6 @@
 
 * **bookmarks:** fix long texts causing dropdown overflow [#166](https://github.com/jxn-30/better-moodle/issues/166) ([6b23101](https://github.com/YorikHansen/better-moodle/commit/6b2310141537654b795130e0c7ec63a3651200f5))
 * **sidebar:** fix tooltip placement of sidebar button ([7d63df2](https://github.com/YorikHansen/better-moodle/commit/7d63df2d440192089b5b725f7e1b5490484e551d))
-
 
 ## [1.30.1](https://github.com/YorikHansen/better-moodle/compare/1.30.0...1.30.1) (2024-05-05)
 

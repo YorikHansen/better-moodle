@@ -161,6 +161,6 @@ see [Better-Moodle of the UzL][impressions]
 [faq]: https://github.com/jxn-30/better-moodle#faq
 [features]: https://github.com/jxn-30/better-moodle#features
 [impressions]: https://github.com/jxn-30/better-moodle#alte-bilder-und-impressionen
-[installation]: https://github.com/YorikHansen/better-moodle/raw/main/redesign.user.js
+[installation]: https://github.com/YorikHansen/better-moodle/releases/latest/download/better-moodle.user.js
 [kiel-moodle]: https://elearn.informatik.uni-kiel.de/
 [use-without-userscript-manager]: https://github.com/jxn-30/better-moodle#better-moodle-ohne-userscript-manager-nutzen
