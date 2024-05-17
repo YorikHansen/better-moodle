@@ -2,7 +2,7 @@
 // @name            🎓️ CAU: better-moodle
 // @namespace       https://better-moodle.yorik.dev
 // @                x-release-please-start-version
-// @version         1.31.0
+// @version         1.31.1
 // @                x-release-please-end
 // @author          Jan (jxn_30), Yorik (YorikHansen)
 // @description:de  Verbessert dieses seltsame Design, das Moodle 4 mit sich bringt
@@ -921,7 +921,8 @@ const createSidebar = (id, position, icon, callback) => {  // TODO: Add in div f
 
 GM_addStyle(`
     /* Sidebars */
-    .drawer-toggles {
+    .drawer-toggles:has(#${PREFIX('drawer-toggles-right')}),
+    .drawer-toggles:has(#${PREFIX('drawer-toggles-left')}) {
         position: fixed;
         top: var(--navbar-height);
         left: 0;
@@ -943,10 +944,12 @@ GM_addStyle(`
     #${PREFIX('drawer-toggles-left')} {
         left: 0;
     }
-    .drawer-toggler {
+    #${PREFIX('drawer-toggles-right')} .drawer-toggler,
+    #${PREFIX('drawer-toggles-left')} .drawer-toggler {
         position: initial !important;
     }
-    .drawer-toggles .drawer-toggler .btn .icon.fa-fw {
+    #${PREFIX('drawer-toggles-right')} .drawer-toggles .drawer-toggler .btn .icon.fa-fw,
+    #${PREFIX('drawer-toggles-left')} .drawer-toggles .drawer-toggler .btn .icon.fa-fw {
         width: 16px; /* Reset to .icon default */
     }
     @media (max-width: 767.98px) {
