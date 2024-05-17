@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.31.0](https://github.com/YorikHansen/better-moodle/compare/1.30.4...1.31.0) (2024-05-17)
+## [1.31.0](https://github.com/YorikHansen/better-moodle/compare/1.30.3...1.31.0) (2024-05-17)
 
 
 ### Features
@@ -11,6 +11,7 @@
 ### Bug Fixes
 
 * **updateCheck:** use download URL instead of update URL for update btn ([8047cc8](https://github.com/YorikHansen/better-moodle/commit/8047cc88ef6af5592232af2289c6572858457563))
+* **speiseplan:** link is now pointing to the speiseplan language ([93f44f4](https://github.com/YorikHansen/better-moodle/commit/93f44f4c706b0fa428d81bf3b80d264e3b05354f))
 
 
 ## [1.30.3](https://github.com/YorikHansen/better-moodle/compare/1.30.2...1.30.3) (2024-05-14)
