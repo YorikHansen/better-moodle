@@ -2,7 +2,7 @@
 // @name            🎓️ CAU: better-moodle
 // @namespace       https://better-moodle.yorik.dev
 // @                x-release-please-start-version
-// @version         1.32.1
+// @version         1.33.2
 // @                x-release-please-end
 // @author          Jan (jxn_30), Yorik (YorikHansen)
 // @description:de  Verbessert dieses seltsame Design, das Moodle 4 mit sich bringt
@@ -425,6 +425,15 @@ Viele Grüße
             },
             clock: {
                 _title: 'Uhr',
+                clock: {
+                    name: 'Uhr',
+                    description: 'Eine ganz normale Digitaluhr',
+                    seconds: {
+                        name: 'Sekunden anzeigen',
+                        description:
+                            'Sollen die Sekunden in der Digitaluhr angezeigt werden?',
+                    },
+                },
                 fuzzyClock: {
                     name: 'Umgangssprachliche Uhr',
                     description:
@@ -871,6 +880,15 @@ Best regards
             },
             clock: {
                 _title: 'Clock',
+                clock: {
+                    name: 'Clock',
+                    description: 'A completely normal digital clock',
+                    seconds: {
+                        name: 'Show seconds',
+                        description:
+                            'Should the seconds be displayed in the digital clock?',
+                    },
+                },
                 fuzzyClock: {
                     name: 'Fuzzy Clock',
                     description: 'A fuzzy clock, known from KDE Plasma.',
@@ -1988,12 +2006,14 @@ const timeToString = (date, seconds = true) =>
  * @param {CallableFunction} callback
  */
 const animationInterval = (delay, callback) => {
-    let last = Date.now();
+    let last = 0;
     let currentId;
-    const intervalCallback = () => {
+    /**
+     * @param {DOMHighResTimeStamp} now
+     */
+    const intervalCallback = now => {
         currentId = requestAnimationFrame(intervalCallback);
 
-        const now = Date.now();
         const elapsed = now - last;
 
         if (elapsed >= delay) {
@@ -2638,6 +2658,10 @@ const SETTINGS = [
     new BooleanSetting('courses.imageZoom', true),
     new BooleanSetting('courses.hideSelfEnrolHint', false),
     $t('settings.clock._title'),
+    new BooleanSetting('clock.clock', false),
+    new BooleanSetting('clock.clock.seconds', true).setDisabledFn(
+        settings => !settings['clock.clock'].inputValue
+    ),
     new BooleanSetting('clock.fuzzyClock', false),
     new SliderSetting('clock.fuzzyClock.fuzziness', 10, 10, 50, 10, [
         '5min',
@@ -4894,15 +4918,25 @@ if (getSetting('courses.hideSelfEnrolHint')) {
 }
 // endregion
 
-// region Feature: clock.fuzzyClock
-if (getSetting('clock.fuzzyClock')) {
-    /** @type {number} */
-    const fuzziness = getSetting('clock.fuzzyClock.fuzziness');
+// region Feature: clock.clock && clock.fuzzyClock
+const clockEnabled = getSetting('clock.clock');
+const fuzzyClockEnabled = getSetting('clock.fuzzyClock');
+if (clockEnabled || fuzzyClockEnabled) {
+    if (fuzzyClockEnabled) {
+        /** @type {number} */
+        const fuzziness = getSetting('clock.fuzzyClock.fuzziness');
+        const fuzzyClockSpan = document.createElement('span');
+        fuzzyClockSpan.dataset.clockFuzziness = fuzziness.toString();
 
-    const clockSpan = document.createElement('span');
-    clockSpan.dataset.clockFuzziness = fuzziness.toString();
+        addMarqueeItems(fuzzyClockSpan);
+    }
+    if (clockEnabled) {
+        const clockSpan = document.createElement('span');
+        clockSpan.dataset.clockFuzziness =
+            getSetting('clock.clock.seconds') ? '0' : '1';
 
-    addMarqueeItems(clockSpan);
+        addMarqueeItems(clockSpan);
+    }
 
     /** @type {Map<number, string>} */
     const timeStrings = new Map();
@@ -4917,6 +4951,7 @@ if (getSetting('clock.fuzzyClock')) {
         const exactMinutes = minutes + now.getSeconds() / 60;
 
         timeStrings.set(0, timeToString(now, true));
+        timeStrings.set(1, timeToString(now, false));
 
         document
             .querySelectorAll('[data-clock-fuzziness]')
@@ -4930,7 +4965,8 @@ if (getSetting('clock.fuzzyClock')) {
                 const timeString = [];
 
                 switch (fuzziness) {
-                    case 0: // 1 second, "normal" clock
+                    case 0: // 1 second, "normal" clock with seconds
+                    case 1: // 1 second, "normal" clock without seconds
                         clockSpan.textContent = timeStrings.get(fuzziness);
                         break;
                     case 10: // 5 minutes

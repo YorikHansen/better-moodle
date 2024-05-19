@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.33.0](https://github.com/YorikHansen/better-moodle/compare/1.32.1...1.33.0) (2024-05-19)
+
+
+### Features
+
+* **clock:** add a normal clock ([096e47a](https://github.com/YorikHansen/better-moodle/commit/096e47a0bf1c712f37e6ce685986d547c7b3dc9d))
+
+
+### Bug Fixes
+
+* **settings:** remove accidental empty item ([9249382](https://github.com/YorikHansen/better-moodle/commit/9249382102f4824d695cb97467db69e1bc89b7b0))
+* **clock:** fix clock not showing at all ([c221eed](https://github.com/YorikHansen/better-moodle/commit/c221eedb8524e9fc9475ccb5e3b5467d0d0be65f))
+
 ## [1.32.1](https://github.com/YorikHansen/better-moodle/compare/1.32.0...1.32.1) (2024-05-19)
 
 
