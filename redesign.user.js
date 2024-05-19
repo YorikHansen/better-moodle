@@ -2,7 +2,7 @@
 // @name            🎓️ CAU: better-moodle
 // @namespace       https://better-moodle.yorik.dev
 // @                x-release-please-start-version
-// @version         1.32.0
+// @version         1.32.1
 // @                x-release-please-end
 // @author          Jan (jxn_30), Yorik (YorikHansen)
 // @description:de  Verbessert dieses seltsame Design, das Moodle 4 mit sich bringt
@@ -4982,7 +4982,7 @@ if (getSetting('clock.fuzzyClock')) {
                         const weekString =
                             dayOfWeek === 1 ?
                                 0 // Monday
-                            : dayOfWeek <= 3 ?
+                            : dayOfWeek >= 2 && dayOfWeek <= 3 ?
                                 1 // Tuesday, Wednesday
                             : dayOfWeek <= 5 ?
                                 2 // Thursday, Friday
