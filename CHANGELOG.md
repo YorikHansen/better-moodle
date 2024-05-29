@@ -1,4 +1,11 @@
 # Changelog
+## [1.34.0](https://github.com/YorikHansen/better-moodle/compare/1.33.0...1.34.0) (2024-05-29)
+
+
+### Features
+
+* **settings:** add option to highlight new settings ([#152](https://github.com/jxn-30/better-moodle/issues/152)) ([#196](https://github.com/jxn-30/better-moodle/issues/196)) ([552037e](https://github.com/YorikHansen/better-moodle/commit/552037eee095566437c1f3c594acd7036f1514ce))
+
 
 ## [1.33.0](https://github.com/YorikHansen/better-moodle/compare/1.32.1...1.33.0) (2024-05-19)
 
