@@ -2,7 +2,7 @@
 // @name            🎓️ CAU: better-moodle
 // @namespace       https://better-moodle.yorik.dev
 // @                x-release-please-start-version
-// @version         1.34.0
+// @version         1.34.1
 // @                x-release-please-end
 // @author          Jan (jxn_30), Yorik (YorikHansen)
 // @description:de  Verbessert dieses seltsame Design, das Moodle 4 mit sich bringt
@@ -2798,7 +2798,7 @@ form .fitem label .${newSettingBadgeClass} {
 /* nice effects on the \`New!\`-Badge, but only if user allows animations */
 @media (prefers-reduced-motion: no-preference) {
     .${newSettingBadgeClass} {
-        position: relative;    
+        position: relative;
         /* add a shining effect */
         background-image: linear-gradient(-75deg, transparent 0%, rgba(255, 255, 255, 75%) 15%, transparent 30%, transparent 100%);
         animation: ${newSettingBadgeAnimations.shining} 5s ease-in-out infinite;
@@ -3264,7 +3264,7 @@ if (getSetting('general.bookmarkManager')) {
 /* this will allow the bookmarks dropdown menu to be aligned to right viewport side and fullwidth on mobile devices */
 @media (max-width: 576px) {
     #${bookmarkBtnWrapper.id} {
-        position: inherit;   
+        position: inherit;
     }
     #${bookmarkBtnWrapper.id} .dropdown-menu {
         max-width: 100%;
@@ -3828,8 +3828,9 @@ ${DARK_MODE_SELECTOR} .${nowAdditionsClass}.progress-bar {
 
 span.${nowAdditionsClass} {
     position: absolute;
-    transform: translateX(-50%) translateY(-100%);
-    font-size: .703125rem;
+    top: 0;
+    transform: translateX(-50%) translateY(calc(-1lh + 3px)); /* these numbers have been carefully */
+    font-size: .703125rem; /* this is font size of progress bars */
 }
 `);
 
@@ -4155,7 +4156,9 @@ span.${nowAdditionsClass} {
 
         const progressWrapper = document.createElement('div');
         progressWrapper.classList.add('progress', 'w-100', 'position-relative');
-        progressWrapper.id = PREFIX('general-semesterzeiten-progress');
+        progressWrapper.id = PREFIX(
+            `general-semesterzeiten-progress-${cardContent.childElementCount}`
+        );
 
         const infoLink = document.createElement('a');
         infoLink.classList.add('mr-2');
@@ -4359,7 +4362,7 @@ span.${nowAdditionsClass} {
         semesterDiv.append(topBar, tableWrapper);
         cardContent.append(semesterDiv);
 
-        const nowPercentage = ((now - semesterStart) / semesterDuration) * 100;
+        const nowPercentage = (now - semesterStart) / semesterDuration;
         const nowBar = document.createElement('div');
         nowBar.classList.add(
             'progress-bar',
@@ -4367,19 +4370,24 @@ span.${nowAdditionsClass} {
             'progress-bar-striped',
             nowAdditionsClass
         );
-        nowBar.style.setProperty('width', `${nowPercentage}%`);
+        nowBar.style.setProperty('width', `${nowPercentage * 100}%`);
+
         progressWrapper.prepend(nowBar);
 
         if (isCurrentSemester) {
+            const todaySpanWrapper = document.createElement('div');
+            todaySpanWrapper.classList.add('position-relative');
             const todaySpan = document.createElement('span');
             todaySpan.classList.add(nowAdditionsClass);
             todaySpan.textContent = dateToString(now);
             todaySpan.style.setProperty(
                 'margin-left',
-                `calc(${nowPercentage}% + 16px + .5rem)`
+                // 16px icon width and .5rem right margin. This calculation ensures that the correct position is calculated
+                `calc(${nowPercentage} * (100% - (16px + .5rem)) + 16px + .5rem)`
             );
 
-            progressWrapper.before(todaySpan);
+            todaySpanWrapper.append(todaySpan);
+            topBar.before(todaySpanWrapper);
         }
     };
 
@@ -5906,7 +5914,9 @@ ready(() => {
             exportBtn.addEventListener('click', e => {
                 e.preventDefault();
                 const config = Object.fromEntries(
-                    GM_listValues().map(key => [key, GM_getValue(key)])
+                    GM_listValues()
+                        .toSorted()
+                        .map(key => [key, GM_getValue(key)])
                 );
                 const blob = new Blob([JSON.stringify(config)], {
                     type: 'application/json',
