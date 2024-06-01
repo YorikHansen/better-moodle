@@ -2,11 +2,11 @@
 // @name            🎓️ CAU: better-moodle
 // @namespace       https://better-moodle.yorik.dev
 // @                x-release-please-start-version
-// @version         1.34.1
+// @version         1.35.0
 // @                x-release-please-end
 // @author          Jan (jxn_30), Yorik (YorikHansen)
-// @description:de  Verbessert dieses seltsame Design, das Moodle 4 mit sich bringt
-// @description:en  Improves this weird design that Moodle 4 brings with it
+// @description:de  Verbessert Moodle durch coole Features und Designverbesserungen.
+// @description:en  Improves Moodle by cool features and design improvements.
 // @homepage        https://github.com/YorikHansen/better-moodle
 // @homepageURL     https://github.com/YorikHansen/better-moodle
 // @icon            https://www.uni-kiel.de/favicon.ico
@@ -358,6 +358,12 @@ Viele Grüße
                     name: 'Sepia',
                     description:
                         'Stelle einen Sepia-Wert für den Darkmodes ein.',
+                },
+                preview: {
+                    name: 'Vorschau',
+                    description:
+                        'Teste hier die aktuellen Einstellungen des Darkmodes bei geschlossenen Einstellungen aus. Vorsicht: Beim nächsten Neuladen oder Wechseln der Seite sind die Einstellungen zurückgesetzt.',
+                    btn: 'Einstellungen zur Vorschau ausblenden',
                 },
             },
             dashboard: {
@@ -825,6 +831,12 @@ Best regards
                 sepia: {
                     name: 'Sepia',
                     description: 'Set the sepia value of the dark mode.',
+                },
+                preview: {
+                    name: 'Preview',
+                    description:
+                        'Test the current dark mode settings here with the settings closed. Caution: The next time you reload or change the page, the settings will be reset.',
+                    btn: 'Hide settings for preview',
                 },
             },
             dashboard: {
@@ -2105,6 +2117,7 @@ class Setting {
      * @param {ValueType} defaultValue
      */
     constructor(id, defaultValue) {
+        // this makes this class an abstract class
         if (this.constructor === Setting) {
             throw new TypeError(
                 'Cannot create instance of abstract class Setting'
@@ -2374,7 +2387,7 @@ input[type="range"] + output {
     border-radius: 4px;
     font-weight: bold;
     z-index: 1;
-    
+
     /* position the label correctly */
     left: calc(1% * var(--percentage));
     transform: translateX(calc(-1% * var(--percentage)));
@@ -2600,6 +2613,76 @@ class SelectSetting extends Setting {
     }
 }
 
+/** @extends {Setting<void>} */
+class ActionSetting extends Setting {
+    constructor(id) {
+        super(id, void 0);
+        // this makes this class an abstract class
+        if (this.constructor === ActionSetting) {
+            throw new TypeError(
+                'Cannot create instance of abstract class ActionSetting'
+            );
+        }
+    }
+}
+
+/** @extends {ActionSetting} */
+class BtnActionSetting extends ActionSetting {
+    /** @type {HTMLButtonElement} */
+    #btn = document.createElement('button');
+
+    constructor(id) {
+        super(id);
+
+        this.#btn.classList.add('btn', 'btn-primary');
+    }
+
+    get formControl() {
+        return this.#btn;
+    }
+
+    /**
+     * @param {Record<string, Setting>} settings
+     * @returns {boolean}
+     */
+    toggleDisabled(settings) {
+        const disabled = super.toggleDisabled(settings);
+        this.#btn.disabled = disabled;
+        if (disabled) {
+            this.#btn.classList.add('disabled');
+        } else {
+            this.#btn.classList.remove('disabled');
+        }
+        return disabled;
+    }
+
+    /**
+     * @param {string | HTMLElement} content
+     * @returns {this}
+     */
+    setContent(content) {
+        this.#btn.replaceChildren();
+        if (typeof content === 'string') {
+            this.#btn.textContent = content;
+        } else {
+            this.#btn.append(content);
+        }
+        return this;
+    }
+
+    /**
+     * @param {function(MouseEvent, BtnActionSetting): void} listener
+     * @returns {this}
+     */
+    setAction(listener) {
+        this.#btn.addEventListener('click', e => {
+            e.preventDefault();
+            listener(e, this);
+        });
+        return this;
+    }
+}
+
 /** @type {Array<Setting | string>} */
 const SETTINGS = [
     'general',
@@ -2650,6 +2733,16 @@ const SETTINGS = [
             settings => settings['darkmode.mode'].inputValue === 'off'
         )
         .onInput(debounce(() => updateDarkReaderMode(true))),
+    new BtnActionSetting('darkmode.preview')
+        .setContent($t('settings.darkmode.preview.btn'))
+        .setDisabledFn(
+            settings => settings['darkmode.mode'].inputValue === 'off'
+        )
+        .setAction((_, { formControl }) => {
+            formControl.dispatchEvent(
+                new Event(SETTINGS_PREVIEW_EVENT, { bubbles: true })
+            );
+        }),
     'dashboard',
     // {Layout anpassen}
     new StringSetting(
@@ -2721,6 +2814,7 @@ const settingsById = Object.fromEntries(
 const allSettingsIds = new Set(Object.keys(settingsById));
 const SEEN_SETTINGS_KEY = PREFIX('seen-settings');
 const EVER_OPENED_SETTINGS_KEY = PREFIX('ever-opened-settings');
+const SETTINGS_PREVIEW_EVENT = PREFIX('settings:preview');
 const newSettingBadgeClass = PREFIX('new-setting-badge');
 let settingsBtnNewTooltip;
 // these are the settings that existed before "highlight new settings" was introduced
@@ -2801,11 +2895,11 @@ form .fitem label .${newSettingBadgeClass} {
         position: relative;
         /* add a shining effect */
         background-image: linear-gradient(-75deg, transparent 0%, rgba(255, 255, 255, 75%) 15%, transparent 30%, transparent 100%);
-        animation: ${newSettingBadgeAnimations.shining} 5s ease-in-out infinite;
+        animation: ${newSettingBadgeAnimations.shining} 5s ease-in-out;
         background-size: 200%;
         background-repeat: no-repeat
     }
-    
+
     /* add fancy sparkles ✨ to the \`New!\`-Badge */
     .${newSettingBadgeClass}::before {
         display: inline-block;
@@ -5550,6 +5644,7 @@ ready(() => {
         }).then(modal => {
             updateDisabledStates();
 
+            let ignoreNextModalHide = false;
             const updateBadge = document.createElement('div');
             updateBadge.classList.add('count-container');
 
@@ -5716,6 +5811,8 @@ ready(() => {
             // region save & cancel
             // handle the save & cancel buttons
             modal.getRoot().on(ModalEvents.save, () => {
+                ignoreNextModalHide = true;
+
                 SETTINGS.forEach(setting => {
                     if (typeof setting === 'string') return;
 
@@ -5726,7 +5823,7 @@ ready(() => {
 
                 window.location.reload();
             });
-            modal.getRoot().on(ModalEvents.cancel, () => {
+            const cancelSettings = () => {
                 SETTINGS.forEach(setting => {
                     if (!setting.id) return;
 
@@ -5734,6 +5831,24 @@ ready(() => {
                 });
                 markAllSettingsAsSeen();
                 updateDarkReaderMode();
+            };
+            modal.getRoot().on(ModalEvents.cancel, () => {
+                ignoreNextModalHide = true;
+                cancelSettings();
+            });
+            // endregion
+
+            // region modal hide via x btn
+            modal.getRoot().on(ModalEvents.hidden, () => {
+                if (ignoreNextModalHide) return (ignoreNextModalHide = false);
+                cancelSettings();
+            });
+            // endregion
+
+            // region hide modal for preview
+            modal.getRoot()[0].addEventListener(SETTINGS_PREVIEW_EVENT, () => {
+                ignoreNextModalHide = true;
+                modal.hide();
             });
             // endregion
 
