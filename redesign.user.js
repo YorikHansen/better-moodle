@@ -2,7 +2,7 @@
 // @name            🎓️ CAU: better-moodle
 // @namespace       https://better-moodle.yorik.dev
 // @                x-release-please-start-version
-// @version         1.35.0
+// @version         1.36.0
 // @                x-release-please-end
 // @author          Jan (jxn_30), Yorik (YorikHansen)
 // @description:de  Verbessert Moodle durch coole Features und Designverbesserungen.
@@ -325,6 +325,10 @@ Viele Grüße
                         de: '🇩🇪 Deutsch',
                         en: '🇬🇧 Englisch',
                     },
+                },
+                prideLogo: {
+                    name: 'Pride-Logo',
+                    description: '🏳️‍🌈',
                 },
             },
             darkmode: {
@@ -800,6 +804,10 @@ Best regards
                         de: '🇩🇪 German',
                         en: '🇬🇧 English',
                     },
+                },
+                prideLogo: {
+                    name: 'Pride-Logo',
+                    description: '🏳️‍🌈',
                 },
             },
             darkmode: {
@@ -2708,6 +2716,7 @@ const SETTINGS = [
     new BooleanSetting('general.speiseplan', false),
     new BooleanSetting('general.googlyEyes', true),
     new BooleanSetting('general.semesterzeiten', false),
+    new BooleanSetting('general.prideLogo', true),
     'darkmode',
     $t('settings.darkmode._description'),
     new SelectSetting('darkmode.mode', 'off', ['off', 'on', 'auto']).onInput(
@@ -4506,6 +4515,42 @@ span.${nowAdditionsClass} {
             ?.classList.add('disabled');
 
         updateBarTypeStyle();
+    });
+}
+// endregion
+
+// region Feature: general.prideLogo
+if (getSetting('general.prideLogo')) {
+    ready(() => {
+        const logoImg =
+            document.querySelector('.navbar.fixed-top .navbar-brand img') ??
+            document.querySelector('#logoimage');
+        const logoUrl = new URL(logoImg.src);
+
+        GM_addStyle(`
+            /* make the Logo rainbow colored */
+            .navbar.fixed-top .navbar-brand .logo,
+            #logoimage {
+                background-image: linear-gradient(-220deg,
+                    #FE0000 16.66%, 
+                    #FD8C00 16.66%, 33.33%, 
+                    #FFD000 33.33%, 50%, 
+                    #119F0B 50%, 66.66%, 
+                    #457CDF 66.66%, 83.33%, 
+                    #C22EDC 83.33%
+                  );
+                filter: brightness(0.8) contrast(1.5);
+                
+                object-position: -99999px -99999px; /* hide original image */
+                mask: url(${logoUrl.href}) center/contain no-repeat;
+                mask-origin: content-box;
+            }
+
+            ${DARK_MODE_SELECTOR} .navbar.fixed-top .navbar-brand .logo,
+            ${DARK_MODE_SELECTOR} #logoimage {
+                filter: saturate(2) !important;
+            }
+        `);
     });
 }
 // endregion
