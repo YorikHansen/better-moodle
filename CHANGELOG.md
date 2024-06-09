@@ -7,6 +7,10 @@
 
 * **expandedPrideLogo:** Adds more customization options to the moodle logo ([#208](https://github.com/jxn-30/better-moodle/issues/208)) ([bcd37f5](https://github.com/YorikHansen/better-moodle/commit/bcd37f52aed3402c5c7d59208c2695549f94c4b7))
 
+### Fix
+
+* **dashboardRightSidebar:** Remove second sidebar ([117be6a](https://github.com/YorikHansen/better-moodle/commit/117be6adf54da0450a23ad520905ab09d86aa717))
+
 ## [1.36.0](https://github.com/YorikHansen/better-moodle/compare/1.35.0...1.36.0) (2024-06-02)
 
 
