@@ -22,7 +22,7 @@
 // @grant           GM_info
 // @grant           GM_xmlhttpRequest
 // @connect         studentenwerk.sh
-// @require         https://unpkg.com/darkreader@4.9.86/darkreader.js#sha512=6792b51c55273b96edc7d87f1180832cc321561d7f885004da58e660f53a7684f69e63d0aef1e2c5cc3313949ef1e16963ad420cec8595de391152156dc75b69
+// @require         https://unpkg.com/darkreader@4.9.86/darkreader.js#sha512=8dc63b1a2fc647c5658f06566bde24dd9454b34ed3dc4cc50f71035b9500a92d523249579fdabde1a0769ad9e53c0987f3c4321d107df98dab2d39db9fbd453b
 // @connect         cloud.rz.uni-kiel.de
 // @connect         www.uni-kiel.de
 // ==/UserScript==
@@ -4226,7 +4226,7 @@ ${Array.from(shownBars)
 
                     semesters.push({
                         name: $t(`semesterzeiten.category.semester.${season}`, {
-                            year: year,
+                            year,
                         }).toString(),
                         start: attributes.Semester.start,
                         end: attributes.Semester.end,
