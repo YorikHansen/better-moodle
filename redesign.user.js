@@ -4935,13 +4935,13 @@ updateDarkReaderMode();
 
 // region Feature: Dashboard right sidebar
 // add a right sidebar with timeline and upcoming events on Dashboard
-if (isDashboard) {
-    createSidebar('dashboard-right', 'right', 'calendar', content => {
-        // move blocks into sidebar
-        content.append(document.querySelector('.block_timeline'));
-        content.append(document.querySelector('.block_calendar_upcoming'));
-    });
-}
+// if (isDashboard) {
+//     createSidebar('dashboard-right', 'right', 'calendar', content => {
+//         // move blocks into sidebar
+//         content.append(document.querySelector('.block_timeline'));
+//         content.append(document.querySelector('.block_calendar_upcoming'));
+//     });
+// }
 // endregion
 
 // region Feature: myCourses.boxesPerRow
