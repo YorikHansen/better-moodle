@@ -3,6 +3,13 @@
 ## [1.37.1](https://github.com/YorikHansen/better-moodle/compare/1.37.0...1.37.1) (2024-06-09)
 
 
+### Bug Fixes
+
+* **darkmode:** fix wrong require url ([7dd8a08](https://github.com/YorikHansen/better-moodle/commit/7dd8a084cf14d4ba319de887d87cd94b2c3c6255))
+
+## [1.37.1](https://github.com/YorikHansen/better-moodle/compare/1.37.0...1.37.1) (2024-06-09)
+
+
 ### Fix
 
 * **darkmode:** fix wrong require url ([7dd8a08](https://github.com/YorikHansen/better-moodle/commit/7dd8a084cf14d4ba319de887d87cd94b2c3c6255))
