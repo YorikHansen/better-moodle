@@ -2,7 +2,7 @@
 // @name            🎓️ CAU: better-moodle
 // @namespace       https://better-moodle.yorik.dev
 // @                x-release-please-start-version
-// @version         1.37.1
+// @version         1.37.2
 // @                x-release-please-end
 // @author          Jan (jxn_30), Yorik (YorikHansen)
 // @description:de  Verbessert Moodle durch coole Features und Designverbesserungen.
@@ -4653,7 +4653,9 @@ const prideLogoSetting = settingsById['general.prideLogo'];
 if (typeof prideLogoSetting.value === 'boolean') {
     prideLogoSetting.value = prideLogoSetting.value ? 'rotated' : 'off';
 }
+let prideLogoStyle = '';
 if (prideLogoSetting.value !== 'off') {
+    const prideLogoSelector = `data-${PREFIX('pride-logo')}`;
     ready(() => {
         const logoImg =
             document.querySelector('.navbar.fixed-top .navbar-brand img') ??
@@ -4678,219 +4680,163 @@ if (prideLogoSetting.value !== 'off') {
             }
         `);
 
+        logoImg.setAttribute(
+            prideLogoSelector,
+            getSetting('general.prideLogo')
+        );
         // set the flag style for the chosen setting
-        switch (getSetting('general.prideLogo')) {
-            case 'rotated': // 11 % margin-top-left
-                GM_addStyle(css`
-                    .navbar.fixed-top .navbar-brand .logo,
-                    #logoimage {
-                        background-image: linear-gradient(
-                            140deg,
-                            #fe0000 25.83%,
-                            #fd8c00 25.83% 40.67%,
-                            #ffd000 40.67% 55.5%,
-                            #119f0b 55.5% 70.33%,
-                            #457cdf 70.33% 85.17%,
-                            #c22edc 85.17%
-                        );
-                    }
-                `);
-                break;
-            case 'horizontal':
-                GM_addStyle(css`
-                    .navbar.fixed-top .navbar-brand .logo,
-                    #logoimage {
-                        background-image: linear-gradient(
-                            #fe0000 16.67%,
-                            #fd8c00 16.67% 33.33%,
-                            #ffd000 33.33% 50%,
-                            #119f0b 50% 66.67%,
-                            #457cdf 66.67% 83.33%,
-                            #c22edc 83.33%
-                        );
-                    }
-                `);
-                break;
-            case 'agender':
-                GM_addStyle(css`
-                    .navbar.fixed-top .navbar-brand .logo,
-                    #logoimage {
-                        background-image: linear-gradient(
-                            #000000 14.29%,
-                            #a3aaaf 14.29% 28.57%,
-                            #f3f3f3 28.57% 44.57%,
-                            #9ee261 44.57% 57.14%,
-                            #f3f3f3 57.14% 71.43%,
-                            #a3aaaf 71.43% 85.71%,
-                            #000000 85.71%
-                        );
-                    }
-                `);
-                break;
-            case 'aro':
-                GM_addStyle(css`
-                    .navbar.fixed-top .navbar-brand .logo,
-                    #logoimage {
-                        background-image: linear-gradient(
-                            #008800 20%,
-                            #6dc049 20% 40%,
-                            #f3f3f3 40% 60%,
-                            #868686 60% 80%,
-                            #000000 80%
-                        );
-                    }
-                `);
-                break;
-            case 'ace':
-                GM_addStyle(css`
-                    .navbar.fixed-top .navbar-brand .logo,
-                    #logoimage {
-                        background-image: linear-gradient(
-                            #000000 25%,
-                            #75005f 25% 50%,
-                            #f3f3f3 50% 75%,
-                            #868686 75%
-                        );
-                    }
-                `);
-                break;
-            case 'aroace':
-                GM_addStyle(css`
-                    .navbar.fixed-top .navbar-brand .logo,
-                    #logoimage {
-                        background-image: linear-gradient(
-                            #ce6600 20%,
-                            #dbb600 20% 40%,
-                            #f3f3f3 40% 60%,
-                            #3592ca 60% 80%,
-                            #000529 80%
-                        );
-                    }
-                `);
-                break;
-            case 'bi':
-                GM_addStyle(css`
-                    .navbar.fixed-top .navbar-brand .logo,
-                    #logoimage {
-                        background-image: linear-gradient(
-                            #d60270 33.33%,
-                            #9b4f96 33.33% 66.67%,
-                            #0038a8 66.67%
-                        );
-                    }
-                `);
-                break;
-            case 'genderfluid':
-                GM_addStyle(css`
-                    .navbar.fixed-top .navbar-brand .logo,
-                    #logoimage {
-                        background-image: linear-gradient(
-                            #f04e83 20%,
-                            #f3f3f3 20% 40%,
-                            #ca00c7 40% 60%,
-                            #000000 60% 80%,
-                            #0007a8 80%
-                        );
-                    }
-                `);
-                break;
-            case 'intersex':
-                GM_addStyle(css`
-                    .navbar.fixed-top .navbar-brand .logo,
-                    #logoimage {
-                        background-image: radial-gradient(
-                            circle at 32%, 
-                            #f3c500 8%, 
-                            #680088 8% 15%, 
-                            #f3c500 15%
-                        );
-                    }
-                `);
-                break;
-            case 'lesbian':
-                GM_addStyle(css`
-                    .navbar.fixed-top .navbar-brand .logo,
-                    #logoimage {
-                        background-image: linear-gradient(
-                            #c00000 20%,
-                            #f07724 20% 40%,
-                            #f3f3f3 40% 60%,
-                            #bb3586 60% 80%,
-                            #860035 80%
-                        );
-                    }
-                `);
-                break;
-            case 'enby':
-                GM_addStyle(css`
-                    .navbar.fixed-top .navbar-brand .logo,
-                    #logoimage {
-                        background-image: linear-gradient(
-                            #ece22c 25%,
-                            #f3f3f3 25% 50%,
-                            #7035b6 50% 75%,
-                            #000000 75%
-                        );
-                    }
-                `);
-                break;
-            case 'pan':
-                GM_addStyle(css`
-                    .navbar.fixed-top .navbar-brand .logo,
-                    #logoimage {
-                        background-image: linear-gradient(
-                            #f3006d 33.33%,
-                            #f0c500 33.33% 66.67%,
-                            #0097f0 66.67%
-                        );
-                    }
-                `);
-                break;
-            case 'gay':
-                GM_addStyle(css`
-                    .navbar.fixed-top .navbar-brand .logo,
-                    #logoimage {
-                        linear-gradient(
-                            #006642 20%,
-                            #6dc79b 20% 40%,
-                            #f3f3f3 40% 60%,
-                            #5086c2 60% 80%,
-                            #0f004b 80%
-                        );
-                    }
-                `);
-                break;
-            case 'trans':
-                GM_addStyle(css`
-                    .navbar.fixed-top .navbar-brand .logo,
-                    #logoimage {
-                        background-image: linear-gradient(
-                            #00b9ee 20%,
-                            #ee86d8 20% 40%,
-                            #f3f3f3 40% 60%,
-                            #ee86d8 60% 80%,
-                            #00b9ee 80%
-                        );
-                    }
-                `);
-                break;
-            default:
-                GM_addStyle(css`
-                    .navbar.fixed-top .navbar-brand .logo,
-                    #logoimage {
-                        background-image: linear-gradient(
-                            140deg,
-                            #fe0000 16.67%, 
-                            #fd8C00 16.67% 33.33%, 
-                            #ffd000 33.33% 50%, 
-                            #119f0b 50% 66.67%, 
-                            #457cdf 66.67% 83.33%, 
-                            #c22edc 83.33%
-                        );
-                    }
-                `);
-                break;
-        }
+        prideLogoStyle = css`
+            /* Fallback */
+            img[${prideLogoSelector}] {
+                background-image: linear-gradient(
+                    140deg,
+                    #fe0000 16.67%, 
+                    #fd8C00 16.67% 33.33%, 
+                    #ffd000 33.33% 50%, 
+                    #119f0b 50% 66.67%, 
+                    #457cdf 66.67% 83.33%, 
+                    #c22edc 83.33%
+                );
+            }
+
+            img[${prideLogoSelector}='rotated'] {
+                background-image: linear-gradient(
+                    140deg,
+                    #fe0000 25.83%,
+                    #fd8c00 25.83% 40.67%,
+                    #ffd000 40.67% 55.5%,
+                    #119f0b 55.5% 70.33%,
+                    #457cdf 70.33% 85.17%,
+                    #c22edc 85.17%
+                );
+            }
+
+            img[${prideLogoSelector}='horizontal'] {
+                background-image: linear-gradient(
+                    #fe0000 16.67%,
+                    #fd8c00 16.67% 33.33%,
+                    #ffd000 33.33% 50%,
+                    #119f0b 50% 66.67%,
+                    #457cdf 66.67% 83.33%,
+                    #c22edc 83.33%
+                );
+            }
+
+            img[${prideLogoSelector}='agender'] {
+                background-image: linear-gradient(
+                    #000000 14.29%,
+                    #a3aaaf 14.29% 28.57%,
+                    #f3f3f3 28.57% 44.57%,
+                    #9ee261 44.57% 57.14%,
+                    #f3f3f3 57.14% 71.43%,
+                    #a3aaaf 71.43% 85.71%,
+                    #000000 85.71%
+                );
+            }
+
+            img[${prideLogoSelector}='aro'] {
+                background-image: linear-gradient(
+                    #008800 20%,
+                    #6dc049 20% 40%,
+                    #f3f3f3 40% 60%,
+                    #868686 60% 80%,
+                    #000000 80%
+                );
+            }
+
+            img[${prideLogoSelector}='ace'] { {
+                background-image: linear-gradient(
+                    #000000 25%,
+                    #75005f 25% 50%,
+                    #f3f3f3 50% 75%,
+                    #868686 75%
+                );
+            }
+
+            img[${prideLogoSelector}='aroace'] { {
+                background-image: linear-gradient(
+                    #ce6600 20%,
+                    #dbb600 20% 40%,
+                    #f3f3f3 40% 60%,
+                    #3592ca 60% 80%,
+                    #000529 80%
+                );
+            }
+
+            img[${prideLogoSelector}='bi'] { {
+                background-image: linear-gradient(
+                    #d60270 33.33%,
+                    #9b4f96 33.33% 66.67%,
+                    #0038a8 66.67%
+                );
+            }
+
+            img[${prideLogoSelector}='genderfluid'] { {
+                background-image: linear-gradient(
+                    #f04e83 20%,
+                    #f3f3f3 20% 40%,
+                    #ca00c7 40% 60%,
+                    #000000 60% 80%,
+                    #0007a8 80%
+                );
+            }
+
+            img[${prideLogoSelector}='intersex'] { {
+                background-image: radial-gradient(
+                    circle at 32%, 
+                    #f3c500 8%, 
+                    #680088 8% 15%, 
+                    #f3c500 15%
+                );
+            }
+
+            img[${prideLogoSelector}='lesbian'] { {
+                background-image: linear-gradient(
+                    #c00000 20%,
+                    #f07724 20% 40%,
+                    #f3f3f3 40% 60%,
+                    #bb3586 60% 80%,
+                    #860035 80%
+                );
+            }
+
+            img[${prideLogoSelector}='enby'] { {
+                background-image: linear-gradient(
+                    #ece22c 25%,
+                    #f3f3f3 25% 50%,
+                    #7035b6 50% 75%,
+                    #000000 75%
+                );
+            }
+
+            img[${prideLogoSelector}='pan'] { {
+                background-image: linear-gradient(
+                    #f3006d 33.33%,
+                    #f0c500 33.33% 66.67%,
+                    #0097f0 66.67%
+                );
+            }
+
+            img[${prideLogoSelector}='gay'] { {
+                linear-gradient(
+                    #006642 20%,
+                    #6dc79b 20% 40%,
+                    #f3f3f3 40% 60%,
+                    #5086c2 60% 80%,
+                    #0f004b 80%
+                );
+            }
+
+            img[${prideLogoSelector}='trans'] { {
+                background-image: linear-gradient(
+                    #00b9ee 20%,
+                    #ee86d8 20% 40%,
+                    #f3f3f3 40% 60%,
+                    #ee86d8 60% 80%,
+                    #00b9ee 80%
+                );
+            }
+        `;
     });
 }
 // endregion
@@ -4915,10 +4861,13 @@ const updateDarkReaderMode = (live = false) => {
             sepia: getSetting('darkmode.sepia', live),
         };
         const fixes = {
-            css: `
-.eye {
-    background-color: white;
-}`,
+            css: css`
+                .eye {
+                    background-color: white;
+                }
+
+                ${prideLogoStyle}
+            `,
         };
         if (darkModeSetting === 'auto') DarkReader.auto(settings, fixes);
         else {
