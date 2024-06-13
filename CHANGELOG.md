@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.37.1](https://github.com/YorikHansen/better-moodle/compare/1.37.1...1.37.1) (2024-06-13)
+
+
+### Code Refactoring
+
+* **prideLogo:** Use linear-gradients instead of svgs [#212](https://github.com/YorikHansen/better-moodle/issues/212) ([#217](https://github.com/YorikHansen/better-moodle/issues/217)) ([c35eadf](https://github.com/YorikHansen/better-moodle/commit/c35eadf4fa221b285985e9505df083a877befeb1))
+
 ## [1.37.2](https://github.com/YorikHansen/better-moodle/compare/1.37.1...1.37.2) (2024-06-14)
 
 
