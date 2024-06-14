@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.37.1](https://github.com/YorikHansen/better-moodle/compare/1.37.1...1.37.1) (2024-06-14)
+
+
+### Bug Fixes
+
+* **prideLogo:** Fix logo beeing invisible ([3df17fa](https://github.com/YorikHansen/better-moodle/commit/3df17faacb6f7e78249e2e09ef27eb75f8fa541e))
+* **prideLogo:** Fix some flags not working at all ([f7374b5](https://github.com/YorikHansen/better-moodle/commit/f7374b5e81c6fabeb4cfebabcd8f1062a038b70d))
+
+
+### Code Refactoring
+
+* **prideLogo:** Use linear-gradients instead of svgs [#212](https://github.com/YorikHansen/better-moodle/issues/212) ([#217](https://github.com/YorikHansen/better-moodle/issues/217)) ([c35eadf](https://github.com/YorikHansen/better-moodle/commit/c35eadf4fa221b285985e9505df083a877befeb1))
+
 ## [1.37.4](https://github.com/YorikHansen/better-moodle/compare/1.37.3...1.37.4) (2024-06-14)
 
 
