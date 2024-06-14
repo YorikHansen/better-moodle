@@ -3089,7 +3089,7 @@ if (getSetting('general.fullwidth')) {
         }
     `);
 } else {
-    GM_addStyle(`
+    GM_addStyle(css`
 /* Don't use full width (Kiel overwrites the default Moodle CSS) */
 @media (min-width: 768px) {
     #topofscroll, .header-maxwidth {
@@ -3171,7 +3171,7 @@ if (getSetting('general.bookmarkManager')) {
         bookmarksBtn.append(bookmarksIcon);
 
         const dropdownClass = PREFIX('bookmarks-dropdown');
-        GM_addStyle(`
+        GM_addStyle(css`
             @media (max-width: 767.98px) {
                 .${dropdownClass} {
                     max-width: 100vw;
@@ -4836,6 +4836,8 @@ if (prideLogoSetting.value !== 'off') {
                 );
             }
         `;
+
+        GM_addStyle(prideLogoStyle);
     });
 }
 // endregion
