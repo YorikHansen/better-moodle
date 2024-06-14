@@ -4660,7 +4660,6 @@ if (prideLogoSetting.value !== 'off') {
         const logoImg =
             document.querySelector('.navbar.fixed-top .navbar-brand img') ??
             document.querySelector('#logoimage');
-        logoImg.classList.add('darkreader');
         const logoUrl = new URL(logoImg.src);
 
         GM_addStyle(css`
@@ -4744,7 +4743,7 @@ if (prideLogoSetting.value !== 'off') {
                 );
             }
 
-            img[${prideLogoSelector}='ace'] { {
+            img[${prideLogoSelector}='ace'] {
                 background-image: linear-gradient(
                     #000000 25%,
                     #75005f 25% 50%,
@@ -4753,7 +4752,7 @@ if (prideLogoSetting.value !== 'off') {
                 );
             }
 
-            img[${prideLogoSelector}='aroace'] { {
+            img[${prideLogoSelector}='aroace'] {
                 background-image: linear-gradient(
                     #ce6600 20%,
                     #dbb600 20% 40%,
@@ -4763,7 +4762,7 @@ if (prideLogoSetting.value !== 'off') {
                 );
             }
 
-            img[${prideLogoSelector}='bi'] { {
+            img[${prideLogoSelector}='bi'] {
                 background-image: linear-gradient(
                     #d60270 33.33%,
                     #9b4f96 33.33% 66.67%,
@@ -4771,7 +4770,7 @@ if (prideLogoSetting.value !== 'off') {
                 );
             }
 
-            img[${prideLogoSelector}='genderfluid'] { {
+            img[${prideLogoSelector}='genderfluid'] {
                 background-image: linear-gradient(
                     #f04e83 20%,
                     #f3f3f3 20% 40%,
@@ -4781,7 +4780,7 @@ if (prideLogoSetting.value !== 'off') {
                 );
             }
 
-            img[${prideLogoSelector}='intersex'] { {
+            img[${prideLogoSelector}='intersex'] {
                 background-image: radial-gradient(
                     circle at 32%, 
                     #f3c500 8%, 
@@ -4790,7 +4789,7 @@ if (prideLogoSetting.value !== 'off') {
                 );
             }
 
-            img[${prideLogoSelector}='lesbian'] { {
+            img[${prideLogoSelector}='lesbian'] {
                 background-image: linear-gradient(
                     #c00000 20%,
                     #f07724 20% 40%,
@@ -4800,7 +4799,7 @@ if (prideLogoSetting.value !== 'off') {
                 );
             }
 
-            img[${prideLogoSelector}='enby'] { {
+            img[${prideLogoSelector}='enby'] {
                 background-image: linear-gradient(
                     #ece22c 25%,
                     #f3f3f3 25% 50%,
@@ -4809,7 +4808,7 @@ if (prideLogoSetting.value !== 'off') {
                 );
             }
 
-            img[${prideLogoSelector}='pan'] { {
+            img[${prideLogoSelector}='pan'] {
                 background-image: linear-gradient(
                     #f3006d 33.33%,
                     #f0c500 33.33% 66.67%,
@@ -4817,7 +4816,7 @@ if (prideLogoSetting.value !== 'off') {
                 );
             }
 
-            img[${prideLogoSelector}='gay'] { {
+            img[${prideLogoSelector}='gay'] {
                 linear-gradient(
                     #006642 20%,
                     #6dc79b 20% 40%,
@@ -4827,7 +4826,7 @@ if (prideLogoSetting.value !== 'off') {
                 );
             }
 
-            img[${prideLogoSelector}='trans'] { {
+            img[${prideLogoSelector}='trans'] {
                 background-image: linear-gradient(
                     #00b9ee 20%,
                     #ee86d8 20% 40%,
