@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.37.4](https://github.com/YorikHansen/better-moodle/compare/1.37.3...1.37.4) (2024-06-14)
+
+
+### Fix
+
+* **prideLogo:** Fix logo beeing invisible ([3df17fa](https://github.com/YorikHansen/better-moodle/commit/3df17faacb6f7e78249e2e09ef27eb75f8fa541e))
+
 ## [1.37.3](https://github.com/YorikHansen/better-moodle/compare/1.37.2...1.37.3) (2024-06-14)
 
 
