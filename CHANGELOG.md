@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.37.1](https://github.com/YorikHansen/better-moodle/compare/1.37.1...1.37.1) (2024-06-14)
+
+
+### Bug Fixes
+
+* **prideLogo:** Fix some flags not working at all ([f7374b5](https://github.com/YorikHansen/better-moodle/commit/f7374b5e81c6fabeb4cfebabcd8f1062a038b70d))
+
+
+### Code Refactoring
+
+* **prideLogo:** Use linear-gradients instead of svgs [#212](https://github.com/YorikHansen/better-moodle/issues/212) ([#217](https://github.com/YorikHansen/better-moodle/issues/217)) ([c35eadf](https://github.com/YorikHansen/better-moodle/commit/c35eadf4fa221b285985e9505df083a877befeb1))
+
 ## [1.37.3](https://github.com/YorikHansen/better-moodle/compare/1.37.2...1.37.3) (2024-06-14)
 
 
