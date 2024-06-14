@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.37.3](https://github.com/YorikHansen/better-moodle/compare/1.37.2...1.37.3) (2024-06-14)
+
+
+### Fix
+
+* **prideLogo:** Fix some flags not working at all ([f7374b5](https://github.com/YorikHansen/better-moodle/commit/f7374b5e81c6fabeb4cfebabcd8f1062a038b70d))
+
 ## [1.37.2](https://github.com/YorikHansen/better-moodle/compare/1.37.1...1.37.2) (2024-06-14)
 
 
