@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.38.0](https://github.com/YorikHansen/better-moodle/compare/1.37.4...1.38.0) (2024-06-17)
+
+
+### Features
+
+* **quickRoleChange:** Make switching roles as easy as switching lang ([#215](https://github.com/jxn-30/better-moodle/issues/215)) ([6aac352](https://github.com/YorikHansen/better-moodle/commit/6aac35237c4033964f159d5553ac15ad99aae01f))
+
 ## [1.37.4](https://github.com/YorikHansen/better-moodle/compare/1.37.3...1.37.4) (2024-06-14)
 
 
