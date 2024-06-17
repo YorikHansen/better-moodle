@@ -3,7 +3,6 @@
 // @namespace       https://better-moodle.yorik.dev
 // @                x-release-please-start-version
 // @version         1.38.0
-// @version         1.37.4
 // @                x-release-please-end
 // @author          Jan (jxn_30), Yorik (YorikHansen)
 // @description:de  Verbessert Moodle durch coole Features und Designverbesserungen.
