@@ -4679,50 +4679,79 @@ if (typeof prideLogoSetting.value === 'boolean') {
 let prideLogoStyle = '';
 if (prideLogoSetting.value !== 'off') {
     const prideLogoSelector = `data-${PREFIX('pride-logo')}`;
+    const hasTransparencySelector = `${prideLogoSelector}-transparency`;
+    const prideLogoUrlVar = `--${PREFIX('pride-logo-url')}`;
     ready(() => {
-        const logoImg =
+        const logoImgElem =
             document.querySelector('.navbar.fixed-top .navbar-brand img') ??
             document.querySelector('#logoimage');
-        const logoUrl = new URL(logoImg.src);
+        const logoUrl = new URL(logoImgElem.src);
 
         GM_addStyle(css`
-            /* set image mask for any chosen flag style */
             img[${prideLogoSelector}] {
-                filter: brightness(0.8) contrast(1.5);
-
-                object-position: -99999px -99999px; /* hide original image */
-                mask:
-                    url(${logoUrl.href}) center/contain no-repeat exclude
-                        luminance,
-                    url(${logoUrl.href}) center/contain no-repeat add alpha;
-                mask-origin: content-box;
-            }
-
-            ${DARK_MODE_SELECTOR} img[${prideLogoSelector}] {
-                filter: saturate(2) !important;
+                ${prideLogoUrlVar}: url(${logoUrl.href});
             }
         `);
 
-        logoImg.setAttribute(
+        logoImgElem.setAttribute(
             prideLogoSelector,
             getSetting('general.prideLogo')
         );
+
+        const logoImg = new Image();
+        logoImg.src = logoUrl.href;
+
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = logoImg.width;
+        canvas.height = logoImg.height;
+        ctx.drawImage(logoImg, 0, 0);
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const hasTransparency = Array.from(imageData.data).some(
+            (value, index) => index % 4 === 3 && value !== 255
+        );
+
+        if (hasTransparency) {
+            logoImgElem.setAttribute(hasTransparencySelector, '');
+        }
     });
+
+    GM_addStyle(css`
+        /* set image mask for any chosen flag style */
+        img[${prideLogoSelector}] {
+            filter: brightness(0.8) contrast(1.5);
+
+            object-position: -99999px -99999px; /* hide original image */
+            mask:
+                var(${prideLogoUrlVar}) center/contain no-repeat exclude
+                    luminance,
+                var(${prideLogoUrlVar}) center/contain no-repeat add alpha;
+            mask-origin: content-box;
+        }
+
+        img[${prideLogoSelector}][${hasTransparencySelector}] {
+            mask: var(${prideLogoUrlVar}) center/contain no-repeat;
+        }
+
+        ${DARK_MODE_SELECTOR} img[${prideLogoSelector}] {
+            filter: saturate(2) !important;
+        }
+    `);
 
     // set the flag style for the chosen setting
     prideLogoStyle = css`
-            img[${prideLogoSelector}],  /* Fallback */
-            img[${prideLogoSelector}='rotated'] {
-                background-image: linear-gradient(
-                    140deg,
-                    #fe0000 25.83%,
-                    #fd8c00 25.83% 40.67%,
-                    #ffd000 40.67% 55.5%,
-                    #119f0b 55.5% 70.33%,
-                    #457cdf 70.33% 85.17%,
-                    #c22edc 85.17%
-                );
-            }
+        img[${prideLogoSelector}]:not(${prideLogoSelector}='off'),  /* Fallback */
+        img[${prideLogoSelector}='rotated'] {
+            background-image: linear-gradient(
+                140deg,
+                #fe0000 25.83%,
+                #fd8c00 25.83% 40.67%,
+                #ffd000 40.67% 55.5%,
+                #119f0b 55.5% 70.33%,
+                #457cdf 70.33% 85.17%,
+                #c22edc 85.17%
+            );
+        }
 
         img[${prideLogoSelector}='horizontal'] {
             background-image: linear-gradient(
