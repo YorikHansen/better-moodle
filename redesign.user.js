@@ -3112,12 +3112,13 @@ if (getSetting('general.fullwidth')) {
     `);
 } else {
     GM_addStyle(css`
-/* Don't use full width (Kiel overwrites the default Moodle CSS) */
-@media (min-width: 768px) {
-    #topofscroll, .header-maxwidth {
-        max-width: 830px !important;
-    }
-}
+        /* Don't use full width (Kiel overwrites the default Moodle CSS) */
+        @media (min-width: 768px) {
+            #topofscroll,
+            .header-maxwidth {
+                max-width: 830px !important;
+            }
+        }
     `);
 }
 // For both options: Fix Uni Kiel Login on mobile:
@@ -4706,8 +4707,10 @@ if (prideLogoSetting.value !== 'off') {
             prideLogoSelector,
             getSetting('general.prideLogo')
         );
-        // set the flag style for the chosen setting
-        prideLogoStyle = css`
+    });
+
+    // set the flag style for the chosen setting
+    prideLogoStyle = css`
             img[${prideLogoSelector}],  /* Fallback */
             img[${prideLogoSelector}='rotated'] {
                 background-image: linear-gradient(
