@@ -4740,7 +4740,7 @@ if (prideLogoSetting.value !== 'off') {
 
     // set the flag style for the chosen setting
     prideLogoStyle = css`
-        img[${prideLogoSelector}]:not(${prideLogoSelector}='off'),  /* Fallback */
+        img[${prideLogoSelector}]:not([${prideLogoSelector}='off']),  /* Fallback */
         img[${prideLogoSelector}='rotated'] {
             background-image: linear-gradient(
                 140deg,
