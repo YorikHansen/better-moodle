@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.38.2](https://github.com/YorikHansen/better-moodle/compare/1.38.1...1.38.2) (2024-06-23)
+
+
+### Bug Fixes
+
+* **prideLogo:** Fix logos with transparency looking weird ([e120c7c](https://github.com/YorikHansen/better-moodle/commit/e120c7cc641985e3e0eea4db327b1ecc476d4665))
+
 ## [1.38.1](https://github.com/YorikHansen/better-moodle/compare/1.38.0...1.38.1) (2024-06-23)
 
 
