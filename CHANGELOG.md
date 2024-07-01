@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.38.3](https://github.com/YorikHansen/better-moodle/compare/1.38.2...1.38.3) (2024-07-01)
+
+
+### Bug Fixes
+
+* **noDownload:** Remove `forcedownload` param on page load ([#249](https://github.com/YorikHansen/better-moodle/issues/249)) ([a34c1e2](https://github.com/YorikHansen/better-moodle/commit/a34c1e212a1cc61a976f7b1f01e4177696fca5ee))
+* **prideLogo:** Fix rotated Logo not showing ([6b1b3b3](https://github.com/YorikHansen/better-moodle/commit/6b1b3b3e8257a7134eec2f9320d6ae7174930692))
+
 ## [1.38.4](https://github.com/YorikHansen/better-moodle/compare/1.38.3...1.38.4) (2024-07-01)
 
 
