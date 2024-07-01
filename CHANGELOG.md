@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.38.4](https://github.com/YorikHansen/better-moodle/compare/1.38.3...1.38.4) (2024-07-01)
+
+
+### Bug Fixes
+
+* **noDownload:** Remove `forcedownload` param on page load ([#249](https://github.com/jxn-30/better-moodle/issues/249)) ([a34c1e2](https://github.com/YorikHansen/better-moodle/commit/a34c1e212a1cc61a976f7b1f01e4177696fca5ee))
+
 ## [1.38.3](https://github.com/YorikHansen/better-moodle/compare/1.38.2...1.38.3) (2024-06-23)
 
 
@@ -24,7 +31,7 @@
 ## [1.38.0](https://github.com/YorikHansen/better-moodle/compare/1.37.4...1.38.0) (2024-06-17)
 
 
-### Features
+### Bug Fixes
 
 * **quickRoleChange:** Make switching roles as easy as switching lang ([#215](https://github.com/jxn-30/better-moodle/issues/215)) ([6aac352](https://github.com/YorikHansen/better-moodle/commit/6aac35237c4033964f159d5553ac15ad99aae01f))
 
@@ -45,7 +52,7 @@
 ## [1.37.2](https://github.com/YorikHansen/better-moodle/compare/1.37.1...1.37.2) (2024-06-14)
 
 
-### Code Refactoring
+### Bug Fixes
 
 * **prideLogo:** Use linear-gradients instead of svgs [#212](https://github.com/jxn-30/better-moodle/issues/212) ([#217](https://github.com/jxn-30/better-moodle/issues/217)) ([c35eadf](https://github.com/YorikHansen/better-moodle/commit/c35eadf4fa221b285985e9505df083a877befeb1))
 
@@ -59,7 +66,7 @@
 ## [1.37.0](https://github.com/YorikHansen/better-moodle/compare/1.36.0...1.37.0) (2024-06-09)
 
 
-### Features
+### Bug Fixes
 
 * **expandedPrideLogo:** Adds more customization options to the moodle logo ([#208](https://github.com/jxn-30/better-moodle/issues/208)) ([bcd37f5](https://github.com/YorikHansen/better-moodle/commit/bcd37f52aed3402c5c7d59208c2695549f94c4b7))
 
@@ -77,7 +84,7 @@
 ## [1.35.0](https://github.com/YorikHansen/better-moodle/compare/1.34.1...1.35.0) (2024-06-01)
 
 
-### Features
+### Fix
 
 * **darkmode:** add a btn to close settings for preview ([0fa2a2d](https://github.com/YorikHansen/better-moodle/commit/0fa2a2dda7cbcfc33b4d8cc6684266f73cc4a842))
 * **settings:** closing settings via `x` button is equivalent to `cancel` ([b2b5c47](https://github.com/YorikHansen/better-moodle/commit/b2b5c47db4ea18b0776488acf487284d6627b4ae))
@@ -87,7 +94,7 @@
 ## [1.34.1](https://github.com/YorikHansen/better-moodle/compare/1.34.0...1.34.1) (2024-05-31)
 
 
-### Bug Fixes
+### Fix
 
 * **semesterzeiten:** fix progress bar ID not being unique ([8bddd9e](https://github.com/YorikHansen/better-moodle/commit/8bddd9ed6f6564533a5186f00853cf09b2061d67))
 * **semesterzeiten:** fix today date being wrongly positioned ([da48a83](https://github.com/YorikHansen/better-moodle/commit/da48a839fd92c04a0f8f2dd3c70e271122318da1))
@@ -95,7 +102,7 @@
 ## [1.34.0](https://github.com/YorikHansen/better-moodle/compare/1.33.0...1.34.0) (2024-05-29)
 
 
-### Features
+### Code Refactoring
 
 * **settings:** add option to highlight new settings ([#152](https://github.com/jxn-30/better-moodle/issues/152)) ([#196](https://github.com/jxn-30/better-moodle/issues/196)) ([552037e](https://github.com/YorikHansen/better-moodle/commit/552037eee095566437c1f3c594acd7036f1514ce))
 
@@ -108,7 +115,7 @@
 * **clock:** add a normal clock ([096e47a](https://github.com/YorikHansen/better-moodle/commit/096e47a0bf1c712f37e6ce685986d547c7b3dc9d))
 
 
-### Bug Fixes
+### Features
 
 * **settings:** remove accidental empty item ([9249382](https://github.com/YorikHansen/better-moodle/commit/9249382102f4824d695cb97467db69e1bc89b7b0))
 * **clock:** fix clock not showing at all ([c221eed](https://github.com/YorikHansen/better-moodle/commit/c221eedb8524e9fc9475ccb5e3b5467d0d0be65f))
@@ -252,6 +259,8 @@
 ## [1.27.3](https://github.com/YorikHansen/better-moodle/compare/1.27.2...1.27.3) (2024-04-20)
 
 
+## [1.27.2](https://github.com/YorikHansen/better-moodle/compare/1.27.1...1.27.2) (2024-04-19)
+
 ### Bug Fixes
 
 * **settings:** Add transparency to disabled slider settings ([#144](https://github.com/jxn-30/better-moodle/issues/144)) ([c4568ab](https://github.com/YorikHansen/better-moodle/commit/c4568ab97b62418d30727c9002048a2eb7c71f9d))
@@ -381,6 +390,7 @@
 
 ## [1.24.1](https://github.com/YorikHansen/better-moodle/compare/1.24.0...1.24.1) (2024-03-24)
 
+## [1.24.3](https://github.com/YorikHansen/better-moodle/compare/1.24.2...1.24.3) (2024-03-25)
 
 ### Bug Fixes
 
@@ -389,8 +399,9 @@
 
 ## [1.24.0](https://github.com/YorikHansen/better-moodle/compare/1.23.1...1.24.0) (2024-03-24)
 
+### Changes
 
-### Features
+* Namespace has changed. You may need to reinstall better-moodle
 
 * **dashboard:** add a star to indicate courses marked as favorite in sidebar ([5860766](https://github.com/YorikHansen/better-moodle/commit/58607668b5cac2a76efcda8428609b205186748c))
 * **dashboard:** add option to allow showing favourite courses on top in sidebar ([f64303d](https://github.com/YorikHansen/better-moodle/commit/f64303d8f35280204ed6bfdbae0ef297dd4223e3))
