@@ -2,7 +2,7 @@
 // @name            🎓️ CAU: better-moodle
 // @namespace       https://better-moodle.yorik.dev
 // @                x-release-please-start-version
-// @version         1.39.0
+// @version         1.39.1
 // @                x-release-please-end
 // @author          Jan (jxn_30), Yorik (YorikHansen)
 // @description:de  Verbessert Moodle durch coole Features und Designverbesserungen.
@@ -5242,7 +5242,7 @@ if (prideLogoSetting.value !== 'off') {
             );
         }
 
-        img[${prideLogoSelector}][${prideLogoSelector}='agender']) {
+        img[${prideLogoSelector}][${prideLogoSelector}='agender'] {
             ${prideLogoStripeSizeVar}: calc(var(${prideLogoGradientSizeVar}) / 7);
             background-image: linear-gradient(
                 var(${prideLogoGradientRotationVar}),
