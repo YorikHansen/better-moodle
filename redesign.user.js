@@ -2,7 +2,7 @@
 // @name            🎓️ CAU: better-moodle
 // @namespace       https://better-moodle.yorik.dev
 // @                x-release-please-start-version
-// @version         1.39.1
+// @version         1.39.2
 // @                x-release-please-end
 // @author          Jan (jxn_30), Yorik (YorikHansen)
 // @description:de  Verbessert Moodle durch coole Features und Designverbesserungen.
@@ -1556,8 +1556,12 @@ GM_addStyle(css`
         width: 100vw;
         margin-top: 0.7rem;
         margin-bottom: 0.7rem;
-        z-index: 100;
     }
+
+    .drawer-toggles .drawer-toggler {
+        z-index: 1050;
+    }
+
     #${PREFIX('drawer-toggles-right')}, #${PREFIX('drawer-toggles-left')} {
         display: flex;
         flex-direction: column;
@@ -1584,10 +1588,6 @@ GM_addStyle(css`
             bottom: calc(2.7rem + 36px);
             flex-direction: column-reverse;
         }
-    }
-
-    [data-flexitour='container'] {
-        z-index: 100 !important;
     }
 `);
 
@@ -5731,6 +5731,14 @@ const updateDarkReaderMode = (live = false) => {
                 }
 
                 ${prideLogoStyle}
+
+                /* fix for unreadable activities */
+                .activity-item.hiddenactivity .description .course-description-item, 
+                .activity-item.hiddenactivity .activityiconcontainer, 
+                .activity-item.hiddenactivity .badge,
+                .editing .activity-item:hover .activityiconcontainer {
+                    mix-blend-mode: hard-light !important;
+                }
             `,
         };
         if (darkModeSetting === 'auto') DarkReader.auto(settings, fixes);
