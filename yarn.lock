@@ -23,14 +23,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/config-array@npm:^0.17.1":
-  version: 0.17.1
-  resolution: "@eslint/config-array@npm:0.17.1"
+"@eslint/config-array@npm:^0.18.0":
+  version: 0.18.0
+  resolution: "@eslint/config-array@npm:0.18.0"
   dependencies:
     "@eslint/object-schema": "npm:^2.1.4"
     debug: "npm:^4.3.1"
     minimatch: "npm:^3.1.2"
-  checksum: 10c0/b986a0a96f2b42467578968ce3d4ae3b9284e587f8490f2dcdc44ff1b8d30580c62b221da6e58d07b09e156c3050e2dc38267f9370521d9cafc099c4e30154ef
+  checksum: 10c0/0234aeb3e6b052ad2402a647d0b4f8a6aa71524bafe1adad0b8db1dfe94d7f5f26d67c80f79bb37ac61361a1d4b14bb8fb475efe501de37263cf55eabb79868f
   languageName: node
   linkType: hard
 
@@ -51,10 +51,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:9.8.0":
-  version: 9.8.0
-  resolution: "@eslint/js@npm:9.8.0"
-  checksum: 10c0/42edaae6b020436410454579509dcb6a8cd5b260e9f18e037fd803ae28d35eb13663d4019f0ab8ba686a19d3c4a43b0e11394c148e23345377ab694da0e83262
+"@eslint/js@npm:9.9.1":
+  version: 9.9.1
+  resolution: "@eslint/js@npm:9.9.1"
+  checksum: 10c0/a3a91de2ce78469f7c4eee78c1eba77360706e1d0fa0ace2e19102079bcf237b851217c85ea501dc92c4c3719d60d9df966977abc8554d4c38e3638c1f53dcb2
   languageName: node
   linkType: hard
 
@@ -106,13 +106,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/eslint@npm:9.6.0":
-  version: 9.6.0
-  resolution: "@types/eslint@npm:9.6.0"
+"@types/eslint@npm:9.6.1":
+  version: 9.6.1
+  resolution: "@types/eslint@npm:9.6.1"
   dependencies:
     "@types/estree": "npm:*"
     "@types/json-schema": "npm:*"
-  checksum: 10c0/69301356bc73b85e381ae00931291de2e96d1cc49a112c592c74ee32b2f85412203dea6a333b4315fd9839bb14f364f265cbfe7743fc5a78492ee0326dd6a2c1
+  checksum: 10c0/69ba24fee600d1e4c5abe0df086c1a4d798abf13792d8cfab912d76817fe1a894359a1518557d21237fbaf6eda93c5ab9309143dee4c59ef54336d1b3570420e
   languageName: node
   linkType: hard
 
@@ -258,10 +258,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"darkreader@npm:4.9.87":
-  version: 4.9.87
-  resolution: "darkreader@npm:4.9.87"
-  checksum: 10c0/bb375305f770373228136ee3f29e3deb8ec7f269f4ca0cf4ac5f45ebdcf519ccdc8b0973af3d22931e39e0add085867a74be539b7f70e71e8f8163e86e084d79
+"darkreader@npm:4.9.89":
+  version: 4.9.89
+  resolution: "darkreader@npm:4.9.89"
+  dependencies:
+    malevic: "npm:0.20.2"
+  checksum: 10c0/76a58711d7d3fa40fd0ad055fb8f6f531178661dbec5f5d9899c06487e9f545ca4b1a32915426a740b7d050a43afc002f090d9abda5ffe7a9fccde3b2917fbf3
   languageName: node
   linkType: hard
 
@@ -302,14 +304,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-userscripts@npm:0.5.4":
-  version: 0.5.4
-  resolution: "eslint-plugin-userscripts@npm:0.5.4"
+"eslint-plugin-userscripts@npm:0.5.5":
+  version: 0.5.5
+  resolution: "eslint-plugin-userscripts@npm:0.5.5"
   dependencies:
     semver: "npm:^7.3.8"
   peerDependencies:
     eslint: ">=8.40.0 <11"
-  checksum: 10c0/94dcde848d59b90cadbc92466fb38ee07122bb45d70555cbc49a72561a594c5ca4905a9e173145b375421afe33206b022d41a5367999cdb360b3e9aa730db8cf
+  checksum: 10c0/6ad14e35bc7d0a6647cbf28d44dbcbc03cee5e8c06da3d21e3bf42147ee3bf21170e96bf3a6f7fb63f97f52963800424c2c641c68bd0b1dd9669d6deec2ee514
   languageName: node
   linkType: hard
 
@@ -337,15 +339,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:9.8.0":
-  version: 9.8.0
-  resolution: "eslint@npm:9.8.0"
+"eslint@npm:9.9.1":
+  version: 9.9.1
+  resolution: "eslint@npm:9.9.1"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.2.0"
     "@eslint-community/regexpp": "npm:^4.11.0"
-    "@eslint/config-array": "npm:^0.17.1"
+    "@eslint/config-array": "npm:^0.18.0"
     "@eslint/eslintrc": "npm:^3.1.0"
-    "@eslint/js": "npm:9.8.0"
+    "@eslint/js": "npm:9.9.1"
     "@humanwhocodes/module-importer": "npm:^1.0.1"
     "@humanwhocodes/retry": "npm:^0.3.0"
     "@nodelib/fs.walk": "npm:^1.2.8"
@@ -375,9 +377,14 @@ __metadata:
     optionator: "npm:^0.9.3"
     strip-ansi: "npm:^6.0.1"
     text-table: "npm:^0.2.0"
+  peerDependencies:
+    jiti: "*"
+  peerDependenciesMeta:
+    jiti:
+      optional: true
   bin:
     eslint: bin/eslint.js
-  checksum: 10c0/a2ee0cce1147565d011fe185733af482f34d5466f5df5f390d0ea2ecf78097883cf568ed6c771d687138609c63cd55cd1e3ff12de7393c03f54fcffcdd0f225d
+  checksum: 10c0/5e71efda7c0a14ee95436d5cdfed04ee61dfb1d89d7a32b50a424de2e680af82849628ea6581950c2e0726491f786a3cfd0032ce013c1c5093786e475cfdfb33
   languageName: node
   linkType: hard
 
@@ -521,9 +528,9 @@ __metadata:
   linkType: hard
 
 "ignore@npm:^5.2.0":
-  version: 5.3.1
-  resolution: "ignore@npm:5.3.1"
-  checksum: 10c0/703f7f45ffb2a27fb2c5a8db0c32e7dee66b33a225d28e8db4e1be6474795f606686a6e3bcc50e1aa12f2042db4c9d4a7d60af3250511de74620fbed052ea4cd
+  version: 5.3.2
+  resolution: "ignore@npm:5.3.2"
+  checksum: 10c0/f9f652c957983634ded1e7f02da3b559a0d4cc210fca3792cb67f1b153623c9c42efdc1c4121af171e295444459fc4a9201101fb041b1104a3c000bccb188337
   languageName: node
   linkType: hard
 
@@ -638,6 +645,13 @@ __metadata:
   version: 4.6.2
   resolution: "lodash.merge@npm:4.6.2"
   checksum: 10c0/402fa16a1edd7538de5b5903a90228aa48eb5533986ba7fa26606a49db2572bf414ff73a2c9f5d5fd36b31c46a5d5c7e1527749c07cbcf965ccff5fbdf32c506
+  languageName: node
+  linkType: hard
+
+"malevic@npm:0.20.2":
+  version: 0.20.2
+  resolution: "malevic@npm:0.20.2"
+  checksum: 10c0/cff8b3b724a5ac8e6688930997420374a06c1a34cac610a79e76ca53b654970f147ec55e5e2757cd3713940a56a1f7bfb82d64884fd26c88c79fec76a46c2ddf
   languageName: node
   linkType: hard
 
@@ -858,13 +872,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "uzl-better-moodle@workspace:."
   dependencies:
-    "@eslint/js": "npm:9.8.0"
-    "@types/eslint": "npm:9.6.0"
+    "@eslint/js": "npm:9.9.1"
+    "@types/eslint": "npm:9.6.1"
     "@types/tampermonkey": "npm:5.0.3"
-    darkreader: "npm:4.9.87"
-    eslint: "npm:9.8.0"
+    darkreader: "npm:4.9.89"
+    eslint: "npm:9.9.1"
     eslint-config-prettier: "npm:9.1.0"
-    eslint-plugin-userscripts: "npm:0.5.4"
+    eslint-plugin-userscripts: "npm:0.5.5"
     globals: "npm:15.9.0"
     prettier: "npm:3.3.3"
     userscript-meta: "npm:1.0.1"

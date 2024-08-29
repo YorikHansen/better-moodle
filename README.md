@@ -15,20 +15,14 @@
 -   [Better-Moodle ohne Userscript-Manager nutzen \[UzL\]][use-without-userscript-manager]
 -   [Verlauf der GitHub Stars](#verlauf-der-github-stars)
 
-Better-Moodle ist ein Userscript, um das Design vom [Informatik Moodle der Uni Kiel][kiel-moodle] zu verbessern und zusätzliche, coole Features hinzuzufügen. Es basiert auf [Better-Moodle der UzL][better-moodle-uzl] von [Jan](https://github.com/jxn-30).
+[//]: # 'TODO: More english translations'
 
-Wenn du dir spezielle Kiel-spezifische Features wünscht, kannst du gerne ein Issue oder einen Pull-Request öffnen. Richte dich ansonsten direkt an [Better-Moodle der UzL][better-moodle-uzl].
+|                                                                                                                                                                                                                                                                                                                   |                                              |
+|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------:|
+| Better-Moodle ist ein Userscript, um das Design vom [Informatik Moodle der Uni Kiel][kiel-moodle] zu verbessern und zusätzliche, coole Features hinzuzufügen. Es basiert auf [Better-Moodle der UzL][better-moodle-uzl] von [Jan](https://github.com/jxn-30).<br>Wenn du dir spezielle Kiel-spezifische Features wünscht, kannst du gerne ein Issue oder einen Pull-Request öffnen. Richte dich ansonsten direkt an [Better-Moodle der UzL][better-moodle-uzl].<br><br> 🇬🇧 Better-Moodle is an userscript to improve the design of the [Kiel Universities computer science Moodle][kiel-moodle] and add additional, cool features. It's based on [Better-Moodle of the UzL][better-moodle-uzl] by [Jan](https://github.com/jxn-30).<br>If you have any Kiel specific feature requests, feel free to open an issue or a pull request. Otherwise, please refer to the original [Better-Moodle of the UzL][better-moodle-uzl] for general feature requests. | ![The Better-Moodle logo](./img/moothel.png) |
+| Better-Moodle Maskottchen Moothel / Better-Moodle Mascot Moothel: [moothel.pet](https://moothel.pet)                                                                                                                                                                                                              |              Better-Moodle Logo              |
 
-
-<details>
-
-<summary>🇬🇧 Introduction</summary>
-
-🇬🇧 Better-Moodle is an userscript to improve the design of the [Kiel Universities computer science Moodle][kiel-moodle] and add additional, cool features. It's based on [Better-Moodle of the UzL][better-moodle-uzl] by [Jan](https://github.com/jxn-30).
-
-If you have any Kiel specific feature requests, feel free to open an issue or a pull request. Otherwise, please refer to the original [Better-Moodle of the UzL][better-moodle-uzl] for general feature requests.
-
-</details>
+_Bilder in dieser Beschreibung enthalten teilweise verschwommene Elemente, um den Datenschutz zu wahren._
 
 > **🇬🇧 English Version**
 >

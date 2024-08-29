@@ -2,14 +2,14 @@
 // @name            🎓️ CAU: better-moodle
 // @namespace       https://better-moodle.yorik.dev
 // @                x-release-please-start-version
-// @version         1.39.2
+// @version         1.40.0
 // @                x-release-please-end
 // @author          Jan (jxn_30), Yorik (YorikHansen)
+// @description     Improves Moodle by cool features and design improvements.
 // @description:de  Verbessert Moodle durch coole Features und Designverbesserungen.
-// @description:en  Improves Moodle by cool features and design improvements.
 // @homepage        https://github.com/YorikHansen/better-moodle
 // @homepageURL     https://github.com/YorikHansen/better-moodle
-// @icon            https://www.uni-kiel.de/favicon.ico
+// @icon            https://raw.githubusercontent.com/jxn-30/better-moodle/main/img/moothel.png
 // @updateURL       https://github.com/YorikHansen/better-moodle/releases/latest/download/better-moodle.meta.js
 // @downloadURL     https://github.com/YorikHansen/better-moodle/releases/latest/download/better-moodle.user.js
 // @match           https://elearn.informatik.uni-kiel.de/*
@@ -27,7 +27,7 @@
 // @connect         api.pirateweather.net
 // @connect         weather.visualcrossing.com
 // @connect         wttr.in
-// @require         https://unpkg.com/darkreader@4.9.87/darkreader.js#sha512=db6998940ba007c1cb2a05707928d0bb871078563194cb2825a4cb13f8f0d39550737a9496e5febf9ec23c53355eca144ccc999faa3c175ac8ffba48f1664aa2
+// @require         https://unpkg.com/darkreader@4.9.89/darkreader.js#sha512=15732894c8596b9ecd7360f88b3c41e84a04915f4dcc344eb008f10f9c3c419f6659223caa69db8df13c6dbf7a07d934f3f53afbff34b11b0cd1ed8614a79d0f
 // @connect         cloud.rz.uni-kiel.de
 // @connect         www.uni-kiel.de
 // ==/UserScript==
@@ -270,7 +270,13 @@ Das hilft, ihn schneller und effizienter zu beheben.
 
 ## Ich habe eine tolle Idee für ein neues Feature!
 
-Erstelle gerne ein Issue auf [GitHub]({{githubIssueFeature}}), reiche dort eine Contribution ein oder schreibe eine Mail an Yorik: [{{mailAdress}}]({{mailLinkFeature}})`,
+Erstelle gerne ein Issue auf [GitHub]({{githubIssueFeature}}), reiche dort eine Contribution ein oder schreibe eine Mail an Yorik: [{{mailAdress}}]({{mailLinkFeature}})
+
+## Wer ist denn dieses süße Mammut 🦣 da im Hintergrund der Einstellungen?
+
+Gut, dass du fragst! Das ist eine Zeichnung von Moothel, dem Better-Moodle Maskottchen. Um genau zu sein ist das sogar das Better-Moodle Logo!
+
+Übrigens: Moothel hat auch eine eigene Homepage: [moothel.pet](https://moothel.pet).`,
                 mails: {
                     help: {
                         subject: 'Ich benötige bitte Hilfe',
@@ -947,7 +953,13 @@ This helps to fix it faster and more efficiently.
 
 ## I have a great idea for a new feature!
 
-Feel free to create an issue on [GitHub]({{githubIssueFeature}}), submit a contribution there or write an email to Yorik: [{{mailAdress}}]({{mailLinkFeature}})`,
+Feel free to create an issue on [GitHub]({{githubIssueFeature}}), submit a contribution there or write an email to Yorik: [{{mailAdress}}]({{mailLinkFeature}})
+
+## Who is that cute mammoth 🦣 in the background of the settings?
+
+I'm glad you asked! That's a drawing of Moothel, the Better Moodle mascot. In fact, it's the Better Moodle logo!
+
+By the way: Moothel also has his own homepage: [moothel.pet](https://moothel.pet).`,
                 mails: {
                     help: {
                         subject: 'I need help please',
@@ -2026,7 +2038,7 @@ const addMarqueeItems = (() => {
 })();
 
 // that is the contact mail of Yorik
-const cntctAdr = 'bettermoodle@yorik.dev';
+const cntctAdr = 'yorik@better-moodle.dev';
 
 const getEmail = (subject = '', body = '') => {
     const url = new URL(`mailto:${cntctAdr}`);
@@ -8048,6 +8060,30 @@ ready(() => {
                 updateSetting.classList.add('justify-content-between');
                 updateSetting.append(versionSpan);
             }
+            // endregion
+
+            // region moothel background image
+            const moothelImg = document.createElement('img');
+            moothelImg.src = rawGithubPath('img/moothel.png');
+            moothelImg.id = PREFIX('moothel');
+            modal.header[0].before(moothelImg);
+            GM_addStyle(css`
+                #${moothelImg.id} {
+                    position: absolute;
+                    width: 90%;
+                    height: 90%;
+                    opacity: 0.1;
+                    top: 5%;
+                    left: 5%;
+                    object-fit: contain;
+                }
+
+                @media (prefers-contrast: more) {
+                    #${moothelImg.id} {
+                        display: none;
+                    }
+                }
+            `);
             // endregion
 
             const footerBtnGroup = document.createElement('div');
