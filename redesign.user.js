@@ -2,7 +2,7 @@
 // @name            🎓️ moodlemoot DACH: better-moodle
 // @namespace       https://mmd.better-moodle.dev
 // @                x-release-please-start-version
-// @version         1.40.0
+// @version         1.40.1
 // @                x-release-please-end
 // @author          Jan (jxn_30), Yorik (YorikHansen)
 // @description     Improves Moodle by cool features and design improvements.
@@ -7537,6 +7537,7 @@ ready(() => {
                     top: 5%;
                     left: 5%;
                     object-fit: contain;
+                    pointer-events: none;
                 }
 
                 @media (prefers-contrast: more) {
