@@ -1508,7 +1508,7 @@ const currentScriptVersion = [];
 const latestScriptVersion = [];
 /** @type {() => Promise<boolean>} */
 const updateAvailable = () =>
-    fetch('https://github.com/YorikHansen/better-moodle/blob/innovationspace_ph-karlsruhe_de/redesign.user.js')
+    fetch('https://api.github.com/repos/jxn-30/better-moodle/releases/latest')
         .then(res => res.json())
         .then(({ tag_name }) =>
             tag_name
@@ -3862,7 +3862,7 @@ if (getSetting('general.speiseplan')) {
 
             const speiseCell = row.insertCell();
             speiseCell.classList.add(speiseClass);
-            speiseCell.dataset.location = speise.mensa ? 'Mensa' : 'Cafeteria';
+            speiseCell.dataset.location = speise.category;
 
             const speiseEl = document.createElement('span');
             speiseEl.textContent = speise.name;
@@ -3920,7 +3920,7 @@ if (getSetting('general.speiseplan')) {
                 modal.getBody()[0].classList.add('mform');
 
                 const studiwerkLink = document.createElement('a');
-                studiwerkLink.href = 'https://openmensa.org/c/1098';
+                studiwerkLink.href = 'https://openmensa.org/c/1719';
                 studiwerkLink.textContent = $t('speiseplan.toStudiwerkPage');
                 studiwerkLink.target = '_blank';
                 studiwerkLink.classList.add('mr-auto');
@@ -4607,14 +4607,14 @@ if (getSetting('general.prideLogo') !== 'off') {
     const prideLogoGradientRotationVar = `--${PREFIX('pride-logo-gradient-rotation')}`;
     GM_addStyle(css`
         img[${prideLogoSelector}] {
-            ${prideLogoGradientStartVar}: 12%;
-            ${prideLogoGradientEndVar}: 87%;
+            ${prideLogoGradientStartVar}: 5%;
+            ${prideLogoGradientEndVar}: 98%;
             ${prideLogoGradientRotationVar}: 180deg;
         }
 
         img[${prideLogoSelector}][${prideLogoIsRotated}]:not([${prideLogoIsRotated}='false']) {
-            ${prideLogoGradientStartVar}: 22%;
-            ${prideLogoGradientEndVar}: 78%;
+            ${prideLogoGradientStartVar}: 11%;
+            ${prideLogoGradientEndVar}: 95%;
             ${prideLogoGradientRotationVar}: 135deg;
         }
     `);
