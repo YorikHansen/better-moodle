@@ -1,18 +1,18 @@
 // ==UserScript==
-// @name            🎓️ moodlemoot DACH: better-moodle
-// @namespace       https://mmd.better-moodle.dev
+// @name            🎓️ InnovationSpace Karlsruhe DACH: better-moodle
+// @namespace       https://karlsruhe.better-moodle.dev
 // @                x-release-please-start-version
 // @version         1.40.1
 // @                x-release-please-end
 // @author          Jan (jxn_30), Yorik (YorikHansen)
 // @description     Improves Moodle by cool features and design improvements.
 // @description:de  Verbessert Moodle durch coole Features und Designverbesserungen.
-// @homepage        https://github.com/jxn-30/better-moodle/tree/moodlemoot
-// @homepageURL     https://github.com/jxn-30/better-moodle/tree/moodlemoot
-// @icon            https://raw.githubusercontent.com/jxn-30/better-moodle/moodlemoot/img/moothel.png
-// @updateURL       https://github.com/jxn-30/better-moodle/raw/moodlemoot/redesign.user.js
-// @downloadURL     https://github.com/jxn-30/better-moodle/raw/moodlemoot/redesign.user.js
-// @match           https://moodlemootdach.org/*
+// @homepage        https://github.com/YorikHansen/better-moodle/tree/innovationspace_ph-karlsruhe_de
+// @homepageURL     https://github.com/YorikHansen/better-moodle/tree/innovationspace_ph-karlsruhe_de
+// @icon            https://raw.githubusercontent.com/YorikHansen/better-moodle/innovationspace_ph-karlsruhe_de/img/moothel.png
+// @updateURL       https://github.com/YorikHansen/better-moodle/raw/innovationspace_ph-karlsruhe_de/redesign.user.js
+// @downloadURL     https://github.com/YorikHansen/better-moodle/raw/innovationspace_ph-karlsruhe_de/redesign.user.js
+// @match           https://innovationspace.ph-karlsruhe.de/*
 // @run-at          document-body
 // @grant           GM_addStyle
 // @grant           GM_getValue
@@ -21,7 +21,7 @@
 // @grant           GM_addValueChangeListener
 // @grant           GM_info
 // @grant           GM_xmlhttpRequest
-// @connect         cvzi.github.io
+// @connect         mensa.atgo-dev.de
 // @connect         api.open-meteo.com
 // @connect         api.openweathermap.org
 // @connect         api.pirateweather.net
@@ -1508,7 +1508,7 @@ const currentScriptVersion = [];
 const latestScriptVersion = [];
 /** @type {() => Promise<boolean>} */
 const updateAvailable = () =>
-    fetch('https://api.github.com/repos/jxn-30/better-moodle/releases/latest')
+    fetch('https://github.com/YorikHansen/better-moodle/blob/innovationspace_ph-karlsruhe_de/redesign.user.js')
         .then(res => res.json())
         .then(({ tag_name }) =>
             tag_name
@@ -1607,9 +1607,9 @@ const mdToHtml = (md, headingStart = 1) => {
 
 const noExternalLinkIconClass = PREFIX('no-external-icon');
 
-const githubPath = path => `https://github.com/jxn-30/better-moodle${path}`;
+const githubPath = path => `https://github.com/YorikHansen/better-moodle${path}`;
 const rawGithubPath = path =>
-    `https://raw.githubusercontent.com/jxn-30/better-moodle/moodlemoot/${path}`;
+    `https://raw.githubusercontent.com/YorikHansen/better-moodle/innovationspace_ph-karlsruhe_de/${path}`;
 const githubLink = (path, icon = true, externalIcon = false) => {
     const link = document.createElement('a');
     link.href = githubPath(path);
@@ -1716,7 +1716,7 @@ const addMarqueeItems = (() => {
 
         #${navLink.id} > .${textSpanClass} > *::after {
             content: '${'\xa0'.repeat(11)}';
-            background-image: url('https://www.tuwien.at/favicon.ico');
+            background-image: url('https://innovationspace.ph-karlsruhe.de/pluginfile.php/1/theme_moove/favicon/1725549635/innovationspace.ico');
             background-repeat: no-repeat;
             background-position: center;
             background-size: contain;
@@ -2185,7 +2185,7 @@ const getSpeiseplan = async () => {
     const getDoc = () =>
         new Promise(resolve =>
             GM_xmlhttpRequest({
-                url: `https://cvzi.github.io/mensa/feed/mensenat_WiTUMensaFreihaus.xml`,
+                url: `https://mensa.atgo-dev.de/feed/adenauerring`,
                 onload: ({ responseXML }) => resolve(responseXML),
             })
         );
@@ -6114,9 +6114,9 @@ if (clockEnabled || fuzzyClockEnabled) {
 // region Feature: weatherDisplay
 if (getSetting('weatherDisplay.show')) {
     const city = {
-        name: 'wien',
-        lat: 48.2083,
-        lon: 16.3725,
+        name: 'karlsruhe',
+        lat: 49.01406,
+        lon: 8.40443,
     };
     const provider = getSetting('weatherDisplay.provider');
     const units = getSetting('weatherDisplay.units');
@@ -7568,7 +7568,7 @@ ready(() => {
 
             // region changelog
             const changelogBtn = githubLink(
-                '/blob/moodlemoot/CHANGELOG.md',
+                '/blob/innovationspace_ph-karlsruhe_de/CHANGELOG.md',
                 false
             );
             changelogBtn.classList.add('btn', 'btn-outline-primary');
@@ -7585,7 +7585,7 @@ ready(() => {
                     large: true,
                     scrollable: true,
                     title: `${
-                        githubLink('/blob/moodlemoot/CHANGELOG.md').outerHTML
+                        githubLink('/blob/innovationspace_ph-karlsruhe_de/CHANGELOG.md').outerHTML
                     } Better-Moodle:&nbsp;${$t('modals.changelog')}`,
                     body: getChangelogHtml(),
                 }).then(modal => modal.show());
