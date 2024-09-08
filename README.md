@@ -2,8 +2,6 @@
 
 [![Hier drücken, um zu installieren / Click here to install](https://img.shields.io/badge/Jetzt%20installieren%20%2F%20Install%20now-004B5A?style=for-the-badge)][installation]
 
-[![Aktuelle Version / Current Version](https://img.shields.io/github/v/release/jxn-30/better-moodle?label=Aktuellste%20Version%20/%20Current%20Version&color=004B5A&style=for-the-badge)][latest release]&nbsp;[![File size in bytes](https://img.shields.io/github/size/jxn-30/better-moodle/redesign.user.js?branch=main&style=for-the-badge&label=Gr%C3%B6%C3%9Fe%20%2F%20Size&color=004b5a)](https://github.com/jxn-30/better-moodle/blob/main/redesign.user.js)&nbsp;[![GitHub Downloads latest release](https://img.shields.io/github/downloads/jxn-30/better-moodle/latest/better-moodle.user.js?style=for-the-badge&label=Downloads%20latest%20version&color=004b5a)][latest release]
-
 -   [Installation](#installation)
 -   [Disclaimer](#disclaimer)
 -   [Update](#update)
@@ -18,7 +16,7 @@
 
 |                                                                                                                                                                                                                                                                                                                   |                                              |
 |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------:|
-| Better-Moodle ist ein Userscript, um das Design vom [UzL Moodle](https://moodle.uni-luebeck.de/) zu verbessern und zusätzliche, coole Features hinzuzufügen.<br><br> 🇬🇧 Better-Moodle is an userscript to improve the design of [UzL Moodle](https://moodle.uni-luebeck.de/) and add additional, cool features. | ![The Better-Moodle logo](./img/moothel.png) |
+| Better-Moodle ist ein Userscript, um das Design vom [Karlsruhe Innovation Space Moodle](https://innovationspace.ph-karlsruhe.de) zu verbessern und zusätzliche, coole Features hinzuzufügen.<br><br> 🇬🇧 Better-Moodle is an userscript to improve the design of [Karlsruhe Innovation Space Moodle](https://innovationspace.ph-karlsruhe.de) and add additional, cool features. | ![The Better-Moodle logo](./img/moothel.png) |
 | Better-Moodle Maskottchen Moothel / Better-Moodle Mascot Moothel: [moothel.pet](https://moothel.pet)                                                                                                                                                                                                              |              Better-Moodle Logo              |
 
 _Bilder in dieser Beschreibung enthalten teilweise verschwommene Elemente, um den Datenschutz zu wahren._
@@ -31,7 +29,7 @@ _Bilder in dieser Beschreibung enthalten teilweise verschwommene Elemente, um de
 
 ## Installation
 
-1. Userscript-Manager als Browser-Erweiterung installieren (z. B. [Tampermonkey](https://tampermonkey.net))
+1. Userscript-Manager als Browser-Erweiterung installieren (z. B. [Violentmonkey](https://violentmonkey.github.io/) oder [Tampermonkey](https://tampermonkey.net))
 2. Klicke [hier][installation], um Better-Moodle zu installieren
 3. Moodle einmal neu laden und ein besseres Moodle genießen 🎉
 4. Bei Bedarf über das Zahnräder-Icon oben rechts im Moodle, neben deinem Profilbild, Better-Moodle individualisieren
@@ -39,7 +37,7 @@ _Bilder in dieser Beschreibung enthalten teilweise verschwommene Elemente, um de
 <details>
 <summary>🇬🇧 Installation</summary>
 
-1. install an Userscript-Manager as a browser extension (e.g. [Tampermonkey](https://tampermonkey.net))
+1. install an Userscript-Manager as a browser extension (e.g. [Violentmonkey](https://violentmonkey.github.io/) or [Tampermonkey](https://tampermonkey.net))
 2. click [here][installation] to install Better-Moodle
 3. reload Moodle once and enjoy a better Moodle 🎉
 4. if required, customize Better-Moodle via the gears icon at the top right of Moodle, next to your profile picture
@@ -49,14 +47,14 @@ _Bilder in dieser Beschreibung enthalten teilweise verschwommene Elemente, um de
 
 Better-Moodle wurde privat von einem Fachschaftsmitglied entwickelt und ist kein offizielles Projekt der Uni. Es dient ausschließlich dazu, die individuelle Moodle-Nutzung zu verbessern, und sammelt keinerlei Daten. Die Nutzung geschieht natürlich dennoch auf eigene Verantwortung! ;)
 
-Bei der Verwendung von Userscript-Managern wie Tampermonkey wird ein externes Tool genutzt, für das wir nicht zuständig oder verantwortlich sind. Es wird zur Vorsicht bei der Installation weiterer Userscripts geraten.
+Bei der Verwendung von Userscript-Managern wie Violentmonkey oder Tampermonkey wird ein externes Tool genutzt, für das wir nicht zuständig oder verantwortlich sind. Es wird zur Vorsicht bei der Installation weiterer Userscripts geraten.
 
 <details>
 <summary>🇬🇧 Disclaimer</summary>
 
 Better-Moodle was developed privately by a member of FS MaIn and is not an official project of the university. Its sole purpose is to improve the individual use of Moodle and does not collect any data. Of course, you still use it at your own risk ;)
 
-When using userscript managers such as Tampermonkey, an external tool is used for which we are not responsible. Caution is advised when installing additional userscripts.
+When using userscript managers such as Violentmonkey or Tampermonkey, an external tool is used for which we are not responsible. Caution is advised when installing additional userscripts.
 
 </details>
 
@@ -74,8 +72,9 @@ Better-Moodle erhält regelmäßig Updates. Ein vollständiges Changelog ist in 
 
 Es gibt ganz viele, ganz tolle Menschen, die gerne programmieren und so breitet sich das Better-Moodle mit der Zeit auch auf anderen Hochschulen aus. Von diesen Hochschulen ist bekannt, dass Better-Moodle von ehrenamtlichen Studis entwickelt und getestet wird:
 
--   **Original: [Universität zu Lübeck (UzL)](https://github.com/jxn-30/better-moodle)** by [@jxn-30](https://github.com/jxn-30)
+-   Original: [Universität zu Lübeck (UzL)](https://github.com/jxn-30/better-moodle) by [@jxn-30](https://github.com/jxn-30)
 -   [CAU Kiel](https://github.com/YorikHansen/better-moodle) by [@YorikHansen](https://github.com/YorikHansen)
+-   **[Karlsruhe Innovation Space](https://github.com/YorikHansen/better-moodle/tree/innovationspace_ph-karlsruhe_de) by [@jxn-30](https://github.com/jxn-30) and [@YorikHansen](https://github.com/YorikHansen)**
 
 ## Features
 
@@ -228,13 +227,4 @@ Aktuell überarbeiten wir die Bilder in dieser Datei. Bis die neuen verfügbar s
 |                                                         |  ![Userscript (Light mode)](./img/dashboard/light_closed.png)  |  ![Userscript (Dark mode)](./img/dashboard/dark_closed.png)  |
 |     ![Default Design](./img/my_courses/default.png)     |     ![Userscript (Light mode)](./img/my_courses/light.png)     |     ![Userscript (Dark mode)](./img/my_courses/dark.png)     |
 
-## Verlauf der GitHub Stars
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=jxn-30%2Fbetter-moodle&type=Date&theme=dark" />
-  <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=jxn-30%2Fbetter-moodle&type=Date" />
-  <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=jxn-30%2Fbetter-moodle&type=Date" />
-</picture>
-
-[installation]: https://github.com/jxn-30/better-moodle/releases/latest/download/better-moodle.user.js
-[latest release]: https://github.com/jxn-30/better-moodle/releases/latest
+[installation]: https://github.com/YorikHansen/better-moodle/raw/innovationspace_ph-karlsruhe_de/redesign.user.js
