@@ -4664,7 +4664,8 @@ ${Array.from(shownBars)
                         }
                     }
 
-                    let [season, year] = semester.split(' ');
+                    let season = semester.split(' ')[0];
+                    const year = semester.split(' ')[1];
                     season = season === 'SoSe' ? 'summer' : 'winter';
 
                     semesters.push({
@@ -5166,8 +5167,6 @@ if (prideLogoSetting.value !== 'off') {
         }
     });
 
-    
-
     GM_addStyle(css`
         /* set image mask for any chosen flag style */
         img[${prideLogoSelector}]:not([${prideLogoSelector}='off']) {
@@ -5512,9 +5511,9 @@ if (prideLogoSetting.value !== 'off') {
         img[${prideLogoSelector}][${prideLogoSelector}='intersex'] {
             /* TODO: Generalize this */
             background-image: radial-gradient(
-                circle at 32%, 
-                #f3c500 8%, 
-                #680088 8% 15%, 
+                circle at 32%,
+                #f3c500 8%,
+                #680088 8% 15%,
                 #f3c500 15%
             );
         }
@@ -5719,7 +5718,7 @@ if (prideLogoSetting.value !== 'off') {
 
 // region Feature: Darkmode
 GM_addStyle(css`
-    /* make the UzL-Logo glow beautifully when using dark mode of darkreader */
+    /* make the Logo glow beautifully when using dark mode of darkreader */
     ${DARK_MODE_SELECTOR} .navbar.fixed-top .navbar-brand .logo,
     ${DARK_MODE_SELECTOR} #logoimage {
         filter: grayscale(1) contrast(200) invert(18%) sepia(93%)
@@ -5750,6 +5749,12 @@ const updateDarkReaderMode = (live = false) => {
                 .activity-item.hiddenactivity .badge,
                 .editing .activity-item:hover .activityiconcontainer {
                     mix-blend-mode: hard-light !important;
+                }
+
+                /* fix for state machine tests */
+                .coderunner_graphcanvas {
+                    background-color: transparent !important;
+                    filter: invert(1);
                 }
             `,
         };
