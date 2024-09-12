@@ -2,7 +2,7 @@
 // @name            🎓️ CAU: better-moodle
 // @namespace       https://better-moodle.yorik.dev
 // @                x-release-please-start-version
-// @version         1.41.1
+// @version         1.42.0
 // @                x-release-please-end
 // @author          Jan (jxn_30), Yorik (YorikHansen)
 // @description     Improves Moodle by cool features and design improvements.
@@ -29,7 +29,7 @@
 // @connect         api.pirateweather.net
 // @connect         weather.visualcrossing.com
 // @connect         wttr.in
-// @require         https://unpkg.com/darkreader@4.9.89/darkreader.js#sha512=15732894c8596b9ecd7360f88b3c41e84a04915f4dcc344eb008f10f9c3c419f6659223caa69db8df13c6dbf7a07d934f3f53afbff34b11b0cd1ed8614a79d0f
+// @require         https://unpkg.com/darkreader@4.9.92/darkreader.js#sha512=420e83f65829445bfaa38c8418c23054ece8b82e0129a594e420dd3f086c250d351fee9b29fa057a704ee6e288d77f81e1c3468cb54c8ccbb7f939a85065fc11
 // @connect         cloud.rz.uni-kiel.de
 // @connect         www.uni-kiel.de
 // ==/UserScript==
@@ -103,6 +103,13 @@ const TRANSLATIONS = {
             close: 'Schließen',
             description: 'Beschreibung',
             instruction: 'Handlungsempfehlung',
+            msgType: {
+                ack: 'Bestätigung',
+                alert: 'Warnung',
+                cancel: 'Entwarnung',
+                error: 'Fehler',
+                update: 'Aktualisierung',
+            },
             notFound: {
                 title: 'MELDUNG NICHT MEHR VORHANDEN',
                 description:
@@ -711,6 +718,11 @@ Viele Grüße
                         'ctrlEnter': 'Strg + Enter',
                     },
                 },
+                markdown: {
+                    name: 'Markdown in Mitteilungen',
+                    description:
+                        'Erlaubt die Verwendung von Markdown in Mitteilungen.',
+                },
             },
             nina: {
                 _title: 'NINA Warnungen',
@@ -907,6 +919,13 @@ Better-Moodle funktioniert bei allen angebotenen Anbiertern mit den jeweiligen k
             close: 'Close',
             description: 'Description',
             instruction: 'Instruction',
+            msgType: {
+                ack: 'Acknowledgement',
+                alert: 'Alert',
+                cancel: 'Cancel',
+                error: 'Error',
+                update: 'Update',
+            },
             notFound: {
                 title: 'MESSAGE NO LONGER AVAILABLE',
                 description:
@@ -1510,6 +1529,10 @@ Best regards
                         'ctrlEnter': 'Ctrl + Enter',
                     },
                 },
+                markdown: {
+                    name: 'Markdown in messages',
+                    description: 'Allows the use of Markdown in messages.',
+                },
             },
             nina: {
                 _title: 'NINA Warnings',
@@ -1903,13 +1926,14 @@ const updateAvailable = () =>
  * converts a Markdown text into HTML
  * @param {string} md
  * @param {number} [headingStart]
+ * @param {boolean} [escaped] whether to escape the HTML
  */
-const mdToHtml = (md, headingStart = 1) => {
+const mdToHtml = (md, headingStart = 1, escaped = true) => {
     let html = '';
 
     const escape = string => new Option(string).innerHTML;
     const inlineEscape = string =>
-        escape(string)
+        (escaped ? escape(string) : string)
             .replace(/!\[([^\]]*)]\(([^(]+)\)/g, '<img alt="$1" src="$2">') // image
             .replace(/\[([^\]]+)]\(([^(]+?)\)/g, '<a href="$2">$1</a>') // link
             .replace(/`([^`]+)`/g, '<code>$1</code>') // code
@@ -1931,7 +1955,11 @@ const mdToHtml = (md, headingStart = 1) => {
         .split(/\n\n+/)
         .forEach(b => {
             const firstChar = b[0];
-            const replacement = replacements[firstChar];
+            const secondChar = b[1];
+            const replacement =
+                firstChar === '1' || secondChar === ' ' ?
+                    replacements[firstChar]
+                :   undefined;
             let i;
             html +=
                 replacement ?
@@ -3567,6 +3595,7 @@ const SETTINGS = [
         'shiftEnter',
         'ctrlEnter',
     ]),
+    new BooleanSetting('messages.markdown', true),
     'nina',
     $t('settings.nina._description'),
     new BooleanSetting('nina.enabled', true),
@@ -7811,14 +7840,83 @@ if (messagesSendHotkey) {
 
             switch (messagesSendHotkey) {
                 case 'shiftEnter':
-                    if (e.shiftKey) sendBtn.click();
-                    e.preventDefault();
+                    if (e.shiftKey) {
+                        sendBtn.click();
+                        e.preventDefault();
+                    }
                     break;
                 case 'ctrlEnter':
-                    if (e.ctrlKey) sendBtn.click();
-                    e.preventDefault();
+                    if (e.ctrlKey) {
+                        sendBtn.click();
+                        e.preventDefault();
+                    }
                     break;
             }
+        });
+    });
+}
+// endregion
+
+// region Feature messages.markdown
+if (getSetting('messages.markdown')) {
+    const awaitMathJax = () =>
+        new Promise(resolve => {
+            const interval = setInterval(() => {
+                if (unsafeWindow.MathJax) {
+                    clearInterval(interval);
+                    resolve(unsafeWindow.MathJax);
+                }
+            }, 10);
+        });
+
+    const inputFieldRegion = PREFIX('send-message-txt');
+
+    const dummyField = document.createElement('textarea');
+    dummyField.dataset.region = 'send-message-txt';
+    dummyField.classList.add('d-none');
+
+    ready(() => {
+        const messageApp = document.querySelector('.message-app');
+        const sendBtn = messageApp.querySelector(
+            '[data-action="send-message"]'
+        );
+        const inputField = messageApp.querySelector(
+            'textarea[data-region="send-message-txt"]'
+        );
+
+        inputField.dataset.region = inputFieldRegion;
+        inputField.after(dummyField);
+
+        dummyField.addEventListener('focus', () => {
+            inputField.focus();
+        });
+        sendBtn.addEventListener('click', () => {
+            inputField.value = '';
+        });
+
+        awaitMathJax().then(MathJax => {
+            const parseMarkdown = inputElem => {
+                const raw = inputElem.value;
+
+                const dummy = document.createElement('span');
+                dummy.innerText = raw.replace(
+                    /(?<!\\)\$(.*?)(?<!\\)\$/g,
+                    '\\($1\\)'
+                );
+                MathJax.Hub.Queue(['Typeset', MathJax.Hub, dummy]);
+                const mathJaxed = dummy.innerHTML;
+
+                const markdowned = mdToHtml(`\n${mathJaxed}`, 1, false);
+
+                // Moodle does weird stuff with spaces (for 15 years...)
+                const spacecaped = markdowned.replaceAll('> <', '>&#32;<');
+
+                return raw.length > 0 ? spacecaped : '';
+            };
+            inputField.addEventListener('input', () => {
+                dummyField.value = parseMarkdown(inputField);
+            });
+            dummyField.value = parseMarkdown(inputField);
         });
     });
 }
@@ -8033,18 +8131,10 @@ const NINA = {
             onset,
             expires,
             status,
+            msgType,
         } = NINA.getWarning(id) ?? NINA.defaultValues;
 
-        const severityEmoji =
-            severityEmojis[severity ?? CommonAlertingProtocol.Severity.UNKNOWN];
-
-        const modalTitle = `<span data-toggle="tooltip" data-original-title="${$t(
-            'nina.severity.name'
-        )}: ${
-            provider === 'DWD' ?
-                $t(`nina.severityWeather.${severity}`)
-            :   $t(`nina.severity.${severity}`)
-        }">${severityEmoji}</span> ${
+        const modalTitle = `${NINA.getSeverityBadge(severity, msgType)} ${
             title
         } <span class="small"><span class="badge badge-pill badge-secondary">${$t(
             `nina.status.${status}`
@@ -8248,16 +8338,6 @@ const NINA = {
         return Object.keys(NINA.getActiveWarnings()).length > 0;
     },
     /**
-     * Checks if there are unseen warnings
-     *
-     * @returns {boolean} Whether there are unseen warnings
-     */
-    hasUnseenWarnings: () => {
-        return Object.keys(NINA.getActiveWarnings()).some(
-            id => !NINA.getActiveWarnings()[id][seenVar]
-        );
-    },
-    /**
      * Checks if there are active warnings that are in a mega alarm state
      *
      * @returns {boolean} Whether there are active warnings that are in a mega alarm state
@@ -8265,8 +8345,9 @@ const NINA = {
     inMegaAlarm: () =>
         getSetting('nina.megaAlarm') &&
         Object.values(NINA.getActiveWarnings()).some(
-            ({ provider, severity, [seenVar]: seen }) =>
+            ({ provider, severity, msgType, [seenVar]: seen }) =>
                 !seen &&
+                msgType === CommonAlertingProtocol.MsgType.ALERT &&
                 ((getSetting('nina.notification') &&
                     provider !== 'DWD' &&
                     provider !== 'LHP' &&
@@ -8281,6 +8362,28 @@ const NINA = {
                             0) ||
                     (provider === 'LHP' && getSetting('nina.floodWarnings')))
         ),
+    /**
+     * Returns the HTML for a severity badge
+     *
+     * @param {int} severity The severity
+     * @param {string} provider The provider
+     * @param {string} msgType The message type
+     * @returns {string} The HTML for a severity badge
+     */
+    getSeverityBadge: (severity, provider, msgType) =>
+        `<span data-original-title="${
+            msgType === CommonAlertingProtocol.MsgType.CANCEL ?
+                $t('nina.msgType.cancel')
+            :   `${$t('nina.severity.name')}: ${
+                    provider === 'DWD' ?
+                        $t(`nina.severityWeather.${severity}`)
+                    :   $t(`nina.severity.${severity}`)
+                }`
+        }"data-toggle="tooltip">${
+            msgType === CommonAlertingProtocol.MsgType.CANCEL ?
+                '🟢'
+            :   severityEmojis[severity]
+        }</span>`,
 };
 if (getSetting('nina.enabled')) {
     const ONE_SECOND = 1000;
@@ -8457,25 +8560,15 @@ if (getSetting('nina.enabled')) {
                                         description,
                                         severity,
                                         status,
+                                        msgType,
                                         provider,
                                         [seenVar]: seen,
                                     } = NINA.getWarning(id);
-                                    const severityEmoji =
-                                        severityEmojis[
-                                            severity ??
-                                                CommonAlertingProtocol.Severity
-                                                    .UNKNOWN
-                                        ];
-
-                                    const warnTitle = `<span data-toggle="tooltip" data-original-title="${$t(
-                                        'nina.severity.name'
-                                    )}: ${
-                                        provider === 'DWD' ?
-                                            $t(
-                                                `nina.severityWeather.${severity}`
-                                            )
-                                        :   $t(`nina.severity.${severity}`)
-                                    }">${severityEmoji}</span> ${
+                                    const warnTitle = `${NINA.getSeverityBadge(
+                                        severity,
+                                        provider,
+                                        msgType
+                                    )} ${
                                         title
                                     } <span class="small"><span class="badge badge-pill badge-secondary">${$t(
                                         `nina.status.${status}`
