@@ -2,7 +2,7 @@
 // @name            🎓️ CAU: better-moodle
 // @namespace       https://better-moodle.yorik.dev
 // @                x-release-please-start-version
-// @version         1.41.0
+// @version         1.41.1
 // @                x-release-please-end
 // @author          Jan (jxn_30), Yorik (YorikHansen)
 // @description     Improves Moodle by cool features and design improvements.
@@ -8201,7 +8201,7 @@ const NINA = {
         const activeWarnings = NINA.getActiveWarnings();
         activeWarnings[id] = warning;
         activeWarnings[id][keepUntilVar] = keepUntil;
-        activeWarnings[id][seenVar] = false;
+        activeWarnings[id][seenVar] ??= false;
         NINA.saveActiveWarnings(activeWarnings);
     },
     /**
