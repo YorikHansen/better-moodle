@@ -17,6 +17,7 @@
 // @grant           GM_addStyle
 // @grant           GM_getValue
 // @grant           GM_setValue
+// @grant           GM_deleteValue
 // @grant           GM_listValues
 // @grant           GM_addValueChangeListener
 // @grant           GM_info
@@ -480,11 +481,6 @@ Viele Grüße
                     description:
                         'Entfernt den seltsamen weißen Rand und sorgt dafür, dass die Seiten die volle Breite nutzen.',
                 },
-                externalLinks: {
-                    name: 'Externe Links',
-                    description:
-                        'Sorgt dafür, dass externe Links immer automatisch in einem neuen Tab geöffnet werden.',
-                },
                 truncatedTexts: {
                     name: 'Abgeschnittene Texte',
                     description:
@@ -704,6 +700,19 @@ Viele Grüße
                             'week': 'Wochenabschnitt',
                         },
                     },
+                },
+            },
+            externalLinks: {
+                _title: 'Externe Links',
+                newTab: {
+                    name: 'Neuer Tab',
+                    description:
+                        'Sorgt dafür, dass externe Links immer automatisch in einem neuen Tab geöffnet werden.',
+                },
+                showIcon: {
+                    name: 'Icon anzeigen',
+                    description:
+                        'Zeigt ein kleines Icon neben externen Links an, um sie besser erkennen zu können.',
                 },
             },
             messages: {
@@ -1297,11 +1306,6 @@ Best regards
                     description:
                         'Removes the weird white border and makes pages use the full width.',
                 },
-                externalLinks: {
-                    name: 'External links',
-                    description:
-                        'Ensures that external links are always automatically opened in a new tab.',
-                },
                 truncatedTexts: {
                     name: 'Truncated texts',
                     description:
@@ -1515,6 +1519,19 @@ Best regards
                             'week': 'Weektime',
                         },
                     },
+                },
+            },
+            externalLinks: {
+                _title: 'External Links',
+                newTab: {
+                    name: 'New Tab',
+                    description:
+                        'Ensures that external links are always automatically opened in a new tab.',
+                },
+                showIcon: {
+                    name: 'Show Icon',
+                    description:
+                        'Displays a small icon next to external links to make them easier to recognize.',
                 },
             },
             messages: {
@@ -3437,7 +3454,6 @@ const SETTINGS = [
         settings => !settings['general.highlightNewSettings'].inputValue
     ),
     new BooleanSetting('general.fullwidth', true),
-    new BooleanSetting('general.externalLinks', true),
     new BooleanSetting('general.truncatedTexts', true),
     new BooleanSetting('general.bookmarkManager', false),
     new BooleanSetting('general.noDownload', false),
@@ -3512,6 +3528,9 @@ const SETTINGS = [
         getCourseGroupingOptions()
     ),
     new BooleanSetting('dashboard.courseListFavouritesAtTop', true),
+    'externalLinks',
+    new BooleanSetting('externalLinks.newTab', true),
+    new BooleanSetting('externalLinks.showIcon', true),
     'myCourses',
     new SliderSetting('myCourses.boxesPerRow', 4, 1, 10),
     new BooleanSetting('myCourses.navbarDropdown', true),
@@ -3674,7 +3693,6 @@ const existingSettings = new Set([
     'general.updateNotification',
     'general.language',
     'general.fullwidth',
-    'general.externalLinks',
     'general.truncatedTexts',
     'general.bookmarkManager',
     'general.noDownload',
@@ -3692,6 +3710,7 @@ const existingSettings = new Set([
     'dashboard.~layoutPlaceholder',
     'dashboard.courseListFilter',
     'dashboard.courseListFavouritesAtTop',
+    'externalLinks.newTab',
     'myCourses.boxesPerRow',
     'myCourses.navbarDropdown',
     'myCourses.navbarDropdownFilter',
@@ -3875,9 +3894,16 @@ if (window.location.pathname.startsWith('/login/')) {
 
 // endregion
 
-// region Feature: general.externalLinks
+// region Feature: externalLinks.newTab
 // add target="_blank" to all external links
-if (getSetting('general.externalLinks')) {
+// TODO: remove, only backwards compatibility
+const oldExternalLinksKey = getSettingKey('general.externalLinks');
+const oldExternalLinksSetting = GM_getValue(oldExternalLinksKey);
+if (oldExternalLinksSetting !== undefined) {
+    settingsById['externalLinks.newTab'].value = oldExternalLinksSetting;
+    GM_deleteValue(oldExternalLinksKey);
+}
+if (getSetting('externalLinks.newTab')) {
     document.addEventListener('click', e => {
         const target = e.target;
         if (!(target instanceof HTMLAnchorElement) || target.target) return;
@@ -3887,6 +3913,21 @@ if (getSetting('general.externalLinks')) {
             target.target = '_blank';
         }
     });
+}
+// endregion
+
+// region Feature: externalLinks.showIcon
+// add an external link icon to all external links
+if (getSetting('externalLinks.showIcon')) {
+    GM_addStyle(css`
+        body.dir-ltr a:not([href^="https://elearn.informatik.uni-kiel.de"])[href^="http://"]::after, 
+        body.dir-ltr a:not([href^="https://elearn.informatik.uni-kiel.de/"])[href^="https://"]::after
+        {
+            font-family: 'FontAwesome';
+            content: '' !important; /* fa-external-link */
+            padding-left: 0.25rem;
+        }
+    `);
 }
 // endregion
 
