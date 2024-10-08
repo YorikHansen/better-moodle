@@ -2,7 +2,7 @@
 // @name            🎓️ CAU: better-moodle
 // @namespace       https://better-moodle.yorik.dev
 // @                x-release-please-start-version
-// @version         1.42.0
+// @version         1.42.1
 // @                x-release-please-end
 // @author          Jan (jxn_30), Yorik (YorikHansen)
 // @description     Improves Moodle by cool features and design improvements.
@@ -29,7 +29,7 @@
 // @connect         api.pirateweather.net
 // @connect         weather.visualcrossing.com
 // @connect         wttr.in
-// @require         https://unpkg.com/darkreader@4.9.92/darkreader.js#sha512=420e83f65829445bfaa38c8418c23054ece8b82e0129a594e420dd3f086c250d351fee9b29fa057a704ee6e288d77f81e1c3468cb54c8ccbb7f939a85065fc11
+// @require         https://unpkg.com/darkreader@4.9.95/darkreader.js#sha512=dfcae8a9b19a0c681972a336b2d71a218df5ed2cc952810ffe037fd132519ddd1b3a97725ecb8861d9731a2405e6ad8086f40606d38fbe3033f14d8a7ecae43a
 // @connect         cloud.rz.uni-kiel.de
 // @connect         www.uni-kiel.de
 // ==/UserScript==
@@ -6075,11 +6075,15 @@ const updateDarkReaderMode = (live = false) => {
 
                 ${prideLogoStyle}
 
-                /* fix for unreadable activities */
+                /* Replace mix-blend-mode: multiply with mix-blend-mode: hard-light */
                 .activity-item.hiddenactivity .description .course-description-item, 
                 .activity-item.hiddenactivity .activityiconcontainer, 
                 .activity-item.hiddenactivity .badge,
-                .editing .activity-item:hover .activityiconcontainer {
+                .editing .activity-item:hover .activityiconcontainer,
+                .editing .activity-item:hover .description .course-description-item, 
+                .editing .activity-item:hover .activityiconcontainer, 
+                .editing .activity-item:hover .badge,
+                .path-mod .automatic-completion-conditions .badge {
                     mix-blend-mode: hard-light !important;
                 }
 
@@ -7877,6 +7881,8 @@ if (getSetting('messages.markdown')) {
 
     ready(() => {
         const messageApp = document.querySelector('.message-app');
+        if (!messageApp) return;
+
         const sendBtn = messageApp.querySelector(
             '[data-action="send-message"]'
         );
@@ -7899,7 +7905,7 @@ if (getSetting('messages.markdown')) {
                 const raw = inputElem.value;
 
                 const dummy = document.createElement('span');
-                dummy.innerText = raw.replace(
+                dummy.innerHTML = raw.replace(
                     /(?<!\\)\$(.*?)(?<!\\)\$/g,
                     '\\($1\\)'
                 );
@@ -8134,7 +8140,7 @@ const NINA = {
             msgType,
         } = NINA.getWarning(id) ?? NINA.defaultValues;
 
-        const modalTitle = `${NINA.getSeverityBadge(severity, msgType)} ${
+        const modalTitle = `${NINA.getSeverityBadge(severity, provider, msgType)} ${
             title
         } <span class="small"><span class="badge badge-pill badge-secondary">${$t(
             `nina.status.${status}`
