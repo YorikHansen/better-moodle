@@ -2,7 +2,7 @@
 // @name            🎓️ CAU: better-moodle
 // @namespace       https://better-moodle.yorik.dev
 // @                x-release-please-start-version
-// @version         1.42.1
+// @version         1.42.2
 // @                x-release-please-end
 // @author          Jan (jxn_30), Yorik (YorikHansen)
 // @description     Improves Moodle by cool features and design improvements.
@@ -29,7 +29,7 @@
 // @connect         api.pirateweather.net
 // @connect         weather.visualcrossing.com
 // @connect         wttr.in
-// @require         https://unpkg.com/darkreader@4.9.95/darkreader.js#sha512=dfcae8a9b19a0c681972a336b2d71a218df5ed2cc952810ffe037fd132519ddd1b3a97725ecb8861d9731a2405e6ad8086f40606d38fbe3033f14d8a7ecae43a
+// @require         https://unpkg.com/darkreader@4.9.100/darkreader.js#sha512=56b4a190704304a04e3fc652021b207f4df9b3b1a8fb1dc294d6429aa0c1b4936c548abd35df3c2955103c5f91ca8bde0d6f8a2efd8dcff61ae3e7aa1e6d7ab6
 // @connect         cloud.rz.uni-kiel.de
 // @connect         www.uni-kiel.de
 // ==/UserScript==
@@ -2721,6 +2721,14 @@ const getSpeiseplan = async () => {
             abk: filter.querySelector('span.abk')?.textContent?.trim() ?? '',
             ...(imgUrl ? { img: imgUrl.href } : {}),
         };
+        // this is an inverted filter, so we need to find the matching text. Currently, Alcohol is the only case for this and at least there using the title of another alcohol bottle works
+        if (filter.dataset.ex === '1' && imgUrl) {
+            const alternativeTitle = mensaplanDoc.querySelector(
+                `:not(.filterbutton) > img[src="${imgUrl.pathname}"]`
+            )?.title;
+            if (alternativeTitle)
+                filters[type][filter.dataset.wert].title = alternativeTitle;
+        }
     });
     Object.freeze(filters);
 
@@ -2814,6 +2822,13 @@ GM_addStyle(css`
     /* avoid overflow of #usernavigation navigation bar */
     #usernavigation {
         max-width: calc(100% - 1rem); /* 1rem is the padding of the navbar */
+
+        /* 
+         * Argh, Kiel Universities Moodle Team started messing with the navbar. 
+         * This will (hopefully) be fixed in v2 (🥺)
+         */
+        overflow-x: auto;
+        overflow-y: hidden;
     }
 
     /* remove "external link" icon for specific classes (discouraged but sometimes it doesn't look good) */

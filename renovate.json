@@ -3,7 +3,7 @@
     "assignees": ["jxn-30"],
     "baseBranches": ["main", "v2"],
     "dependencyDashboard": true,
-    "dependencyDashboardFooter": "PRs will be created on weekdays before 3am (CEST) for any dependencies.",
+    "dependencyDashboardFooter": "Node.js and yarn updates are scheduled to the first day of the month. PRs will be created on mondays, wednesdays and fridays before 3am (CEST) for any other dependencies. Lockfile maintenance is scheduled for saturdays.",
     "dependencyDashboardHeader": "# ℹ️ Renovate Dependency-Dashboard ℹ\nScheduled and currently open dependency updates are listed here\n",
     "dependencyDashboardLabels": ["dependencies"],
     "dependencyDashboardTitle": "⬆ℹ️ Renovate Dependency-Dashboard ℹ️",
@@ -16,10 +16,27 @@
     },
     "packageRules": [
         {
-            "groupName": "ESLint",
+            "groupName": "All non-major dependencies",
             "lockFileMaintenance": { "enabled": true },
+            "groupSlug": "all-minor-patch",
+            "matchPackageNames": ["*"],
+            "matchUpdateTypes": ["minor", "patch"]
+        },
+        {
+            "extends": ["schedule:monthly"],
+            "groupName": "yarn",
+            "lockFileMaintenance": { "enabled": true },
+            "matchDepNames": ["yarn"],
             "matchManagers": ["npm"],
-            "matchDepNames": ["@eslint/js", "eslint"],
+            "rangeStrategy": "pin",
+            "separateMajorMinor": false
+        },
+        {
+            "extends": ["schedule:monthly"],
+            "groupName": "node.js",
+            "lockFileMaintenance": { "enabled": true },
+            "matchDepNames": ["node"],
+            "matchManagers": ["npm", "nvm"],
             "rangeStrategy": "pin",
             "separateMajorMinor": false
         }
@@ -27,6 +44,6 @@
     "postUpdateOptions": ["yarnDedupeHighest"],
     "rangeStrategy": "pin",
     "reviewers": ["jxn-30"],
-    "schedule": ["before 3am every weekday"],
+    "schedule": ["before 3am on Monday, Wednesday and Friday"],
     "timezone": "Europe/Berlin"
 }

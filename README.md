@@ -12,7 +12,6 @@
 -   [Features \[UzL\]](#features)
 -   [FAQ \[UzL\]][faq]
 -   [Alte Bilder und Impressionen \[UzL\]][impressions]
--   [Better-Moodle ohne Userscript-Manager nutzen \[UzL\]][use-without-userscript-manager]
 -   [Verlauf der GitHub Stars](#verlauf-der-github-stars)
 
 [//]: # 'TODO: More english translations'
@@ -34,6 +33,8 @@ _Bilder in dieser Beschreibung enthalten teilweise verschwommene Elemente, um de
 
 1. Userscript-Manager als Browser-Erweiterung installieren (z. B. [Violentmonkey](https://violentmonkey.github.io/))
 2. Klicke [hier][installation], um Better-Moodle zu installieren
+    1. In Chromium basierten Browsern (Google Chrome, Edge, Opera, etc.) muss der Entwicklermodus aktiviert werden. Siehe hierzu [Tampermonkey FAQ Q209](https://www.tampermonkey.net/faq.php?locale=de#Q209)
+    2. Alternativ kann auch einfach das freie INternet unterstützt werden, indem Firefox genutzt wird.
 3. Moodle einmal neu laden und ein besseres Moodle genießen 🎉
 4. Bei Bedarf über das Zahnräder-Icon oben rechts im Moodle, neben deinem Profilbild, Better-Moodle individualisieren
 
@@ -42,6 +43,8 @@ _Bilder in dieser Beschreibung enthalten teilweise verschwommene Elemente, um de
 
 1. install an Userscript-Manager as a browser extension (e.g. [Violentmonkey](https://violentmonkey.github.io/))
 2. click [here][installation] to install Better-Moodle
+    1. In Chromium based browsers (Google Chrome, Edge, Opera, etc.), developer mode needs to be enabled. See [Tampermonkey FAQ Q209](https://www.tampermonkey.net/faq.php#Q209) to see how to do so.
+    2. Alternatively support the free internet and just use Firefox
 3. reload Moodle once and enjoy a better Moodle 🎉
 4. if required, customize Better-Moodle via the gears icon at the top right of Moodle, next to your profile picture
  </details>
@@ -88,8 +91,8 @@ Better-Moodle receives regular updates. A complete changelog can be found in the
 
 Es gibt ganz viele, ganz tolle Menschen, die gerne programmieren und so breitet sich das Better-Moodle mit der Zeit auch auf anderen Hochschulen aus. Von diesen Hochschulen ist bekannt, dass Better-Moodle von ehrenamtlichen Studis entwickelt und getestet wird:
 
--   Original: [Universität zu Lübeck (UzL)](https://github.com/jxn-30/better-moodle) by [@jxn-30](https://github.com/jxn-30)
--   **[Uni Kiel (CAU)](https://github.com/YorikHansen/better-moodle)** by [@YorikHansen](https://github.com/YorikHansen)
+- Original: [Universität zu Lübeck (UzL)](https://github.com/jxn-30/better-moodle) by [@jxn-30](https://github.com/jxn-30)
+- **[Uni Kiel (CAU)](https://github.com/YorikHansen/better-moodle)** by [@YorikHansen](https://github.com/YorikHansen)
 
 <details>
 <summary>🇬🇧 Universities</summary>
