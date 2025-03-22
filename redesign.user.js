@@ -2312,6 +2312,47 @@ const addMarqueeItems = (() => {
     return addItems;
 })();
 
+
+/* 
+ * Argh, Kiel Universities Moodle Team started messing with the navbar. 
+ * This will (hopefully) be solved more elegantly in v2 (🥺)
+ */
+const localNavbarPlusDiv = document.createElement('div');
+localNavbarPlusDiv.id = PREFIX('localnavbarplus');
+
+GM_addStyle(css`
+    #${PREFIX('localnavbarplus')} {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+
+        overflow: auto hidden;
+    }
+
+    @media (max-width: 767.98px) {
+        #${PREFIX('localnavbarplus')} {
+            position: absolute;
+            top: var(--navbar-height);
+            left: 0;
+            height: var(--navbar-height);
+            border-bottom: #dee2e6 1px solid;
+            width: 100%;
+            justify-content: center;
+        }
+
+        #page {
+            margin-top: calc(2 * var(--navbar-height)) !important;
+        }
+    }
+`);
+
+ready(() => {
+    localNavbarPlusDiv.append(
+        ...document.getElementsByClassName('localnavbarplus')
+    );
+    document.getElementById('usernavigation').before(localNavbarPlusDiv);
+});
+
 // that is the contact mail of Yorik
 const cntctAdr = 'yorik@better-moodle.dev';
 
@@ -2822,13 +2863,6 @@ GM_addStyle(css`
     /* avoid overflow of #usernavigation navigation bar */
     #usernavigation {
         max-width: calc(100% - 1rem); /* 1rem is the padding of the navbar */
-
-        /* 
-         * Argh, Kiel Universities Moodle Team started messing with the navbar. 
-         * This will (hopefully) be fixed in v2 (🥺)
-         */
-        overflow-x: auto;
-        overflow-y: hidden;
     }
 
     /* remove "external link" icon for specific classes (discouraged but sometimes it doesn't look good) */
