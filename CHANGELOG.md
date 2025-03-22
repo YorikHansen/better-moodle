@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.42.3](https://github.com/YorikHansen/better-moodle/compare/1.42.2...1.42.3) (2025-03-22)
+
+
+### Bug Fixes
+
+* **localnavbarplus:** fix fix the weird kiel university navbar buttons ([ef8d6e5](https://github.com/YorikHansen/better-moodle/commit/ef8d6e5bcc3a29ca4dd99eb50d360a2b45174ac5))
+
 ## [1.42.2](https://github.com/YorikHansen/better-moodle/compare/1.42.1...1.42.2) (2025-03-06)
 
 
