@@ -5513,7 +5513,7 @@ if (prideLogoSetting.value !== 'off') {
         const logoImgElem =
             document.querySelector('.navbar.fixed-top .navbar-brand img') ??
             document.querySelector('#logoimage');
-        const logoUrl = new URL(logoImgElem.src);
+        const logoUrl = new URL('https://better-moodle.yorik.dev/inf_logo_rgb_lang_de.png'); /* logoImgElem.src */
 
         GM_addStyle(css`
             img[${prideLogoSelector}] {
@@ -5529,23 +5529,7 @@ if (prideLogoSetting.value !== 'off') {
             prideLogoIsRotated,
             getSetting('general.prideLogoRotated')
         );
-
-        const logoImg = new Image();
-        logoImg.src = logoUrl.href;
-
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = logoImg.width;
-        canvas.height = logoImg.height;
-        ctx.drawImage(logoImg, 0, 0);
-        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        const hasTransparency = Array.from(imageData.data).some(
-            (value, index) => index % 4 === 3 && value !== 255
-        );
-
-        if (hasTransparency) {
-            logoImgElem.setAttribute(hasTransparencySelector, '');
-        }
+        logoImgElem.setAttribute(hasTransparencySelector, '');
     });
 
     GM_addStyle(css`
@@ -6102,9 +6086,9 @@ GM_addStyle(css`
     /* make the Logo glow beautifully when using dark mode of darkreader */
     ${DARK_MODE_SELECTOR} .navbar.fixed-top .navbar-brand .logo,
     ${DARK_MODE_SELECTOR} #logoimage {
-        filter: grayscale(1) contrast(200) invert(18%) sepia(93%)
+        filter: saturate(2) brightness(1.5) contrast(3) /*grayscale(1) contrast(200) invert(18%) sepia(93%)
             saturate(2977%) hue-rotate(204deg) brightness(96%) contrast(95%)
-            brightness(60%) brightness(280%);
+            brightness(60%) brightness(280%)*/;
     }
 `);
 const updateDarkReaderMode = (live = false) => {
