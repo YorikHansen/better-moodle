@@ -29,7 +29,7 @@
 // @connect         api.pirateweather.net
 // @connect         weather.visualcrossing.com
 // @connect         wttr.in
-// @require         https://unpkg.com/darkreader@4.9.100/darkreader.js#sha512=56b4a190704304a04e3fc652021b207f4df9b3b1a8fb1dc294d6429aa0c1b4936c548abd35df3c2955103c5f91ca8bde0d6f8a2efd8dcff61ae3e7aa1e6d7ab6
+// @require         https://unpkg.com/darkreader@4.9.105/darkreader.js#sha512=2b7f8f0cb074b0f1ca650f8feb81e345232a9f973257481dc0f56e8fcabb44f052e591f9039b684490c4e650bb71024f365fa085539a4213ad21bd7f15d28e93
 // @connect         cloud.rz.uni-kiel.de
 // @connect         www.uni-kiel.de
 // ==/UserScript==
@@ -6270,6 +6270,12 @@ GM_addStyle(css`
             margin-left: var(--margin);
             margin-right: var(--margin);
         }
+        .block-myoverview .card-grid[data-region='card-deck'] > .col {
+            --width: calc(100% / ${myCoursesBoxesPerRow});
+            min-width: var(--width) !important;
+            width: var(--width) !important;
+            max-width: var(--width) !important;
+        }
     }
 `);
 // endregion
@@ -6801,7 +6807,7 @@ ready(async () => {
 if (getSetting('courses.imgMaxWidth')) {
     GM_addStyle(css`
         /* prevent images from overflowing */
-        #page-content .course-content img {
+        #region-main img:not(.activityicon):not(.icon) {
             max-width: 100%;
         }
     `);
@@ -6816,7 +6822,7 @@ if (getSetting('courses.imageZoom')) {
     let copyImage;
 
     GM_addStyle(css`
-        #page-content .course-content img {
+        #region-main img:not(.activityicon):not(.icon) {
             cursor: zoom-in;
         }
 
@@ -6848,6 +6854,9 @@ if (getSetting('courses.imageZoom')) {
             transform: scale(0);
             transition: transform 0.2s ease-in-out;
             will-change: transform;
+            /* need to unset width and height during zoomed */
+            width: unset !important;
+            height: unset !important;
         }
     `);
 
@@ -6861,6 +6870,8 @@ if (getSetting('courses.imageZoom')) {
     const zoomImage = e => {
         const target = e.target;
         if (!(target instanceof HTMLImageElement)) return;
+
+        if (getComputedStyle(target).cursor !== 'zoom-in') return;
 
         e.preventDefault();
 
@@ -6900,7 +6911,7 @@ if (getSetting('courses.imageZoom')) {
 
     ready(() =>
         document
-            .querySelector('#page-content .course-content')
+            .querySelector('#region-main')
             ?.addEventListener('click', zoomImage)
     );
 }
