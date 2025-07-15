@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.42.4](https://github.com/YorikHansen/better-moodle/compare/1.42.3...1.42.4) (2025-07-15)
+
+### Changes to the Userscript
+
+The rewrite project is almost ready for being published. We've already published a release candidate [2.0.0-rc04](https://github.com/jxn-30/better-moodle/releases/tag/v2.0.0-rc4), you may install the V2-preview version from there but be aware that you will probably end up with multiple versions of Better-Moodle installed. If you want to give feedback to this V2-preview, feel free to write us a mail to moin@better-moodle.dev (or talk to us if you see us on the campus).
+For anyone else: V2 will be great and you will get the new version seamless one it's published!
+
+### Bug Fixes
+
+* **prideLogo:** Fix pride logo looking super weird (since the ifi added their own pride logo :3) ([ba87718](https://github.com/YorikHansen/better-moodle/commit/ba877182101556e7c0f29b9b78044d45f2ec2943))
+
 ## [1.42.3](https://github.com/YorikHansen/better-moodle/compare/1.42.2...1.42.3) (2025-03-22)
 
 
