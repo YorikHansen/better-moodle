@@ -2,16 +2,16 @@
 // @name            🎓️ CAU: better-moodle
 // @namespace       https://better-moodle.yorik.dev
 // @                x-release-please-start-version
-// @version         1.42.4
+// @version         1.42.5
 // @                x-release-please-end
 // @author          Jan (jxn_30), Yorik (YorikHansen)
 // @description     Improves Moodle by cool features and design improvements.
 // @description:de  Verbessert Moodle durch coole Features und Designverbesserungen.
-// @homepage        https://github.com/YorikHansen/better-moodle
-// @homepageURL     https://github.com/YorikHansen/better-moodle
-// @icon            https://raw.githubusercontent.com/jxn-30/better-moodle/main/img/moothel.png
-// @updateURL       https://github.com/YorikHansen/better-moodle/releases/latest/download/better-moodle.meta.js
-// @downloadURL     https://github.com/YorikHansen/better-moodle/releases/latest/download/better-moodle.user.js
+// @icon            https://icons.better-moodle.dev/cau.png
+// @homepage        https://github.com/jxn-30/better-moodle/
+// @homepageURL     https://github.com/jxn-30/better-moodle/
+// @downloadURL     https://github.com/jxn-30/better-moodle/releases/latest/download/better-moodle-cau.user.js
+// @updateURL       https://github.com/jxn-30/better-moodle/releases/latest/download/better-moodle-cau.meta.js
 // @match           https://elearn.informatik.uni-kiel.de/*
 // @run-at          document-body
 // @grant           GM_addStyle
